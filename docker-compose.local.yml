@@ -1,0 +1,43 @@
+# Para EXPERIMENTAR no seu computador (Windows, Mac ou Linux com Docker Desktop).
+# Não usa domínio, HTTPS nem e-mail de verdade: os e-mails viram arquivos .html na pasta emails-teste.
+#   docker compose -f docker-compose.local.yml up --build
+# Depois abra http://localhost:5080  (para parar: Ctrl + C; para apagar os dados: docker compose -f docker-compose.local.yml down -v)
+services:
+  banco:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: plataforma
+      POSTGRES_USER: plataforma
+      POSTGRES_PASSWORD: so-para-teste-local
+    volumes:
+      - dados_local:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U plataforma -d plataforma"]
+      interval: 3s
+      retries: 20
+
+  sistema:
+    build: .
+    ports:
+      - "5080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Banco: "Host=banco;Database=plataforma;Username=plataforma;Password=so-para-teste-local"
+      Site__UrlPublica: "http://localhost:5080"
+      Rede__AtrasDeProxy: "false"
+      Plataforma__AdminInicial: "admin@teste.com"
+      Email__PastaTeste: /app/emails-teste
+      # Chaves FALSAS, só para os testes automáticos (testes/testar_api.py) funcionarem no seu computador
+      Vendas__Kiwify__Token: tokenkiwify
+      Vendas__Hotmart__Hottok: hottokteste
+      Vendas__MercadoPago__AccessToken: TEST-falso
+      Vendas__MercadoPago__SegredoWebhook: segredomp
+      Seguranca__LimiteLoginPorMinuto: "1000"
+    volumes:
+      - ./emails-teste:/app/emails-teste
+    depends_on:
+      banco:
+        condition: service_healthy
+
+volumes:
+  dados_local:

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--
+  PROJETO 2 — Linha do Tempo
+  Enunciado, resultado esperado e dicas em camadas. Sem código pronto: o aluno constrói do zero.
+  As caixas "Pronto quando" guardam o progresso (js/trilha.js, prefixo "projeto:").
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/trilha.js" defer></script>
+  <title>Projeto 2: Linha do Tempo — Catálogo do HTML</title>
+  <meta name="description" content="A história de uma cidade, família ou escola numa linha do tempo que funciona no celular. Só HTML e CSS.">
+</head>
+<body class="pagina-trilha" data-prefixo="projeto:">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html" aria-current="page">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <nav aria-label="Você está em" class="migalhas">
+          <ol>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li aria-current="page">Projeto 2</li>
+          </ol>
+        </nav>
+        <p class="heroi-antetitulo">Projeto 2 de 12 · Etapa 2 · 2 a 3 semanas · individual</p>
+        <h1 class="heroi-titulo">Linha do Tempo</h1>
+        <p class="heroi-texto">O museu da cidade quer contar a história de Barbacena (ou de uma família, de um time, de uma escola: você escolhe) numa página que funcione bem no celular, porque é pelo celular que os visitantes vão abrir, lendo um QR Code na entrada.</p>
+      </div>
+    </section>
+
+    <div class="container trilha-corpo">
+      <nav class="trilha-mapa" aria-label="Projetos disponíveis"><ol><li><a href="projeto-1.html" data-passo="p1" data-total="4"><span class="mapa-num">1</span><span class="mapa-nome">Caixa Rápido</span></a></li><li><a href="projeto-2.html" data-passo="p2" data-total="6" aria-current="step"><span class="mapa-num">2</span><span class="mapa-nome">Linha do Tempo</span></a></li><li><a href="projeto-3.html" data-passo="p3" data-total="5"><span class="mapa-num">3</span><span class="mapa-nome">Portfólio pessoal</span></a></li><li><a href="projeto-4.html" data-passo="p4" data-total="6"><span class="mapa-num">4</span><span class="mapa-nome">Quadro Kanban</span></a></li></ol></nav>
+      <p><span class="selo">Inspirado no AM Vynla (histórias e linha do tempo)</span> <span class="selo">HTML, CSS, GitHub Pages</span> <span class="selo">Módulo 2</span></p>
+
+<section class="trilha-secao" id="resultado">
+  <h2>1. O resultado esperado</h2>
+  <p>É aqui que você precisa chegar. Não existe código para copiar: você constrói do zero e confere cada linha da tabela no seu projeto.</p>
+  <div class="resultado-esperado"><p class="resultado-pendente">O vídeo do resultado esperado está sendo gravado. Enquanto isso, a tabela de casos de teste abaixo mostra exatamente o que o seu projeto precisa fazer.</p></div>
+  <h3>Casos de teste</h3>
+  <p>Faça exatamente estas entradas. A saída do seu projeto precisa ser igual, número por número.</p>
+  <div class="tabela-rolagem"><table class="tabela casos"><thead><tr><th scope="col">#</th><th scope="col">Teste</th><th scope="col">Resultado esperado</th></tr></thead><tbody><tr><td>1</td><td>Validador do W3C (validator.w3.org) com o seu endereço</td><td>Nenhum erro</td></tr><tr><td>2</td><td>Lighthouse no modo celular</td><td>Acessibilidade 90 ou mais e Desempenho 90 ou mais</td></tr><tr><td>3</td><td>Janela com 360 px de largura (F12, modo celular)</td><td>Uma coluna, linha à esquerda, sem rolagem para o lado</td></tr><tr><td>4</td><td>Janela com 1280 px</td><td>Os acontecimentos alternam de lado</td></tr><tr><td>5</td><td>Só a tecla Tab, do topo até o menu</td><td>O foco aparece em todos os links do menu</td></tr><tr><td>6</td><td>Verificador do projeto</td><td>Nenhum item vermelho</td></tr><tr><td>7</td><td>Mandar o link no WhatsApp</td><td>Aparecem título, descrição e imagem</td></tr><tr><td>8</td><td>Desligar o CSS (F12, ou abrir sem o estilo)</td><td>A página continua legível, na ordem certa</td></tr></tbody></table></div>
+</section>
+
+<section class="trilha-secao" id="antes">
+  <h2>2. Antes de começar</h2>
+  <p><strong>O que você vai praticar:</strong> HTML semântico, CSS responsivo com mobile first, variáveis CSS, imagens leves e publicação com a prévia certa no WhatsApp.</p>
+  <aside class="doc-nota trilha-teoria">
+  <p class="doc-nota-titulo">O que estudar antes (ou durante)</p>
+  <p>Tudo o que este projeto usa está explicado na Documentação:</p>
+  <ul><li><a href="doc-html.html#semantica">Semântica: a tag certa para cada coisa</a></li><li><a href="doc-html.html#textos-links">Textos, links e imagens</a></li><li><a href="doc-css.html#caixa">Modelo de caixa</a></li><li><a href="doc-css.html#position">Position</a></li><li><a href="doc-css.html#responsivo">Responsivo e @media</a></li><li><a href="doc-css.html#variaveis">Variáveis CSS</a></li><li><a href="passo-9-pages.html">Passo 9: publicar no GitHub Pages</a></li></ul>
+</aside>
+  
+</section>
+
+<section class="trilha-secao" id="requisitos">
+  <h2>3. O que o sistema precisa fazer</h2>
+  <h3>Requisitos</h3>
+  <ol><li>RF01 — Pelo menos 10 acontecimentos, cada um com data, título, texto curto e foto.</li><li>RF02 — Um menu que leva a cada período (décadas ou fases) pela âncora.</li><li>RF03 — No celular, a linha do tempo é uma coluna com a linha à esquerda; no computador, os acontecimentos alternam de lado.</li><li>RF04 — Um acontecimento em destaque, visualmente diferente dos outros.</li><li>RF05 — Rodapé com as fontes de cada informação e de cada foto.</li><li>RF06 — Publicada no GitHub Pages, com o link e a imagem aparecendo certos ao compartilhar no WhatsApp.</li></ol>
+  <h3>Regras de negócio</h3>
+  <ul><li>RN01 — Só HTML e CSS. Nenhuma linha de JavaScript.</li><li>RN02 — HTML semântico: a linha do tempo é uma lista ordenada, cada acontecimento um artigo, cada data uma tag de data com o valor que as máquinas leem.</li><li>RN03 — Cada foto com texto alternativo, largura e altura, e no máximo 300 KB.</li><li>RN04 — Cores e espaços em variáveis CSS. Nenhuma cor repetida fora delas.</li></ul>
+  
+</section>
+
+<section class="trilha-secao" id="marcos">
+  <h2>4. Construa em 4 marcos</h2>
+  <p>Não tente fazer tudo de uma vez. Termine um marco, confira que funciona, faça um commit e só então passe para o próximo.</p>
+  <div class="marco" id="marco-1">
+  <h3>Marco 1: O conteúdo inteiro em HTML puro</h3>
+  <p><strong>Funciona quando:</strong> a página, ainda sem nenhum CSS, é lida de cima a baixo como um documento, com todos os acontecimentos na ordem.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Uma linha do tempo é uma sequência em que a ordem importa. Qual lista do HTML diz "a ordem importa"? E qual tag diz "isto é uma data" para o Google e para o leitor de tela?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>Uma lista ordenada <code>&lt;ol&gt;</code>, com um <code>&lt;article&gt;</code> em cada item e a data em <code>&lt;time datetime="1791-08-14"&gt;</code>. Escreva tudo antes de qualquer CSS: se a página faz sentido assim, a estrutura está certa.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-html.html#semantica">Semântica</a></li><li><a href="doc-html.html#estrutura">Estrutura da página</a></li><li><a href="doc-html.html#textos-links">Imagens e o atributo alt</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-2">
+  <h3>Marco 2: A versão de celular</h3>
+  <p><strong>Funciona quando:</strong> em 360 px a linha do tempo é uma coluna, com a linha vertical à esquerda e um marcador em cada acontecimento.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>A linha vertical é conteúdo ou decoração? Então ela deve existir no HTML ou ser desenhada pelo CSS?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>Decoração é CSS. A linha pode ser a borda esquerda da lista; o marcador de cada item, um <code>::before</code> com <code>position: absolute</code> dentro de um item com <code>position: relative</code>.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-css.html#caixa">Borda, padding e margin</a></li><li><a href="doc-css.html#position">Position relative e absolute</a></li><li><a href="doc-css.html#variaveis">Variáveis CSS</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-3">
+  <h3>Marco 3: A versão de computador</h3>
+  <p><strong>Funciona quando:</strong> a partir de uma largura que você escolheu, os acontecimentos alternam de lado, e o destaque continua diferente.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Você escreveu o CSS do celular primeiro. A partir de qual largura o layout deve mudar? E como escolher "um item sim, outro não" sem pôr uma classe em cada um?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>Mobile first: o <code>@media (min-width: ...)</code> só acrescenta o que muda no computador. <code>:nth-child(even)</code> escolhe os itens pares. Grid com duas colunas ou margens resolvem a alternância.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-css.html#responsivo">Responsivo e @media</a></li><li><a href="doc-css.html#seletores">Seletores, incluindo :nth-child</a></li><li><a href="doc-css.html#grid">Grid</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-4">
+  <h3>Marco 4: Fotos leves, prévia no WhatsApp e publicação</h3>
+  <p><strong>Funciona quando:</strong> cada foto pesa menos de 300 KB, a página está no GitHub Pages e o link mostra a prévia.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Quanto pesa cada foto? E em que tamanho ela aparece na tela? Faz sentido enviar uma foto de 4000 px para aparecer com 600?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>Redimensione cada foto para a largura em que ela aparece e salve em WebP ou JPG (qualidade perto de 80). Coloque <code>width</code> e <code>height</code>. Para a prévia, as metatags <code>og:title</code>, <code>og:description</code> e <code>og:image</code>, esta com o endereço completo (https://...).</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="passo-9-pages.html">Passo 9: publicar e caprichar no link compartilhado</a></li><li><a href="doc-html.html#textos-links">Imagens</a></li></ul></div></details>
+  </div>
+</div>
+</section>
+
+<section class="trilha-secao" id="pensar">
+  <h2>5. Perguntas para pensar antes de programar</h2>
+  <p>Responda no papel (ou no README). Elas apontam as armadilhas do projeto antes de você cair nelas. As respostas não estão aqui de propósito: é o que o projeto ensina.</p>
+  <ul><li>Se o CSS não carregar, a página ainda faz sentido? O que isso diz sobre o seu HTML?</li><li>A linha vertical é conteúdo ou decoração? Onde ela deve ser desenhada, no HTML ou no CSS?</li><li>Qual seletor escolhe "um item sim, outro não" sem colocar uma classe em cada um?</li></ul>
+  <div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> no celular aparece rolagem para o lado.</p>
+  <p>Algo está mais largo que a tela: uma imagem sem <code>max-width: 100%</code> ou uma largura fixa em <code>px</code>. No F12, passe o mouse pelos elementos até achar o que passa da borda.</p>
+</div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> a imagem não aparece na prévia do WhatsApp.</p>
+  <p>O <code>og:image</code> precisa do endereço completo, começando com https. O WhatsApp também guarda a prévia antiga: teste com o link seguido de <code>?v=2</code>.</p>
+</div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> todos os acontecimentos ficam do mesmo lado.</p>
+  <p>O <code>:nth-child</code> precisa estar no elemento que se repete como filho da lista (o <code>li</code>), não no <code>article</code> de dentro, que é sempre o primeiro filho do seu <code>li</code>.</p>
+</div>
+  <aside class="trilha-ia">
+  <p class="trilha-ia-titulo">E a IA, neste passo?</p>
+  <p><strong>Pode:</strong> pedir para revisar a semântica e a acessibilidade do seu HTML pronto, ou explicar por que um seletor não pegou o elemento que você queria.</p>
+  <p><strong>Não:</strong> pedir o CSS da linha do tempo. Montar esse layout é o que o projeto ensina.</p>
+  <p>Por quê, e prompts prontos para usar do jeito certo: <a href="ia.html">Usar IA do jeito certo</a>.</p>
+</aside>
+</section>
+
+<section class="trilha-secao" id="entrega">
+  <h2>6. Entrega</h2>
+  <ul><li>Repositório no GitHub, com commits ao longo do trabalho (um por marco, pelo menos).</li><li>README com o que o projeto faz, como rodar, as decisões que você tomou e o que ficou de fora.</li><li>Link publicado no GitHub Pages.</li><li>Vídeo de até 2 minutos mostrando os casos de teste funcionando.</li></ul>
+  <p>A avaliação é a mesma nos 12 projetos: funciona como pedido (50%), qualidade do código (20%), documentação (15%) e explicação oral (15%). Detalhes em <a href="projetos.html#avaliacao">Como os projetos funcionam</a>.</p>
+  <div class="voce-tenta">
+  <p class="voce-tenta-titulo">Você tenta</p>
+  <p><strong>Desafio extra:</strong> uma versão para impressão (<code>@media print</code>) em uma coluna, sem menu, com o endereço de cada fonte escrito ao lado do link.</p>
+</div>
+</section>
+      <section class="pronto-quando" aria-labelledby="pronto-titulo">
+  <h2 id="pronto-titulo">Pronto quando</h2>
+  <p>Marque cada critério de aceite só depois de conferir. O progresso fica salvo e aparece no mapa dos projetos.</p>
+  <ul data-total="6">
+    <li><label><input type="checkbox" data-progresso="passo-p2-1"> O validador do W3C não mostra nenhum erro.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p2-2"> Lighthouse no celular: Acessibilidade 90 ou mais e Desempenho 90 ou mais.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p2-3"> Em 360 px não existe rolagem para o lado; em 1280 px os itens alternam de lado.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p2-4"> Navegando só com Tab, o foco aparece em todo link do menu.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p2-5"> O Verificador do projeto não mostra nenhum item vermelho.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p2-6"> O link compartilhado mostra título, descrição e imagem.</label></li>
+  </ul>
+</section>
+      <nav class="passo-nav" aria-label="Navegação entre projetos">
+        <a class="passo-ant" href="projeto-1.html"><span>Projeto anterior</span>1. Caixa Rápido</a>
+        <a class="passo-prox" href="projeto-3.html"><span>Próximo projeto</span>3. Portfólio pessoal</a>
+      </nav>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

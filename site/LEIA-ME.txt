@@ -1,0 +1,208 @@
+CATÁLOGO DO HTML — LEIA ANTES DE COMEÇAR
+Prof. Alan Mateus
+=====================================================================
+
+O QUE TEM AQUI
+--------------
+Um site para aprender a criar sites e sistemas. As partes:
+  - Passo a passo: do computador vazio ao seu site no ar (COMECE AQUI).
+  - Documentação: a teoria de HTML, CSS e JavaScript, o guia de uso de
+    IA e o roteiro de estudos até a primeira vaga de desenvolvedor.
+  - Códigos: o HTML, o CSS e o JavaScript de 53 partes de site, prontos
+    para copiar, com a explicação de cada palavra.
+  - Catálogo (index.html): todos os elementos funcionando numa página,
+    com o HTML, o CSS e o JavaScript comentados (30 partes de JS).
+  - Verificador: confere a pasta do projeto do aluno.
+  - Dicionário: o que é cada tag, propriedade e comando.
+
+  pagina-completa/
+  ├── index.html        o Catálogo: todos os elementos funcionando
+  ├── documentacao.html  a Documentação: módulos, do HTML ao sistema completo
+  ├── doc-html.html, doc-css.html, doc-js.html   módulo 2 (sintaxe e semântica)
+  ├── dicionario.html   todas as palavras explicadas, com busca
+  ├── ia.html           onde usar IA, onde usar com cuidado e onde não usar
+  ├── passo-a-passo.html   COMECE AQUI: a trilha em 10 passos, do computador vazio ao site no ar
+  ├── passo-1-preparar.html ... passo-10-atualizar.html   os 10 passos
+  ├── verificador.html  confere a pasta do projeto do aluno
+  ├── codigos.html      todos os códigos prontos, com busca
+  ├── sobre.html        como o site está organizado (e exemplo de segunda página)
+  ├── css/
+  │   └── estilo.css    toda a aparência (cores, tamanhos, layout)
+  ├── js/
+  │   ├── script.js         todo o comportamento (cliques, animações...)
+  │   ├── codigos-dados.js  os códigos dos painéis (gerado, não edite)
+  │   ├── dicionario-dados.js as explicações de cada palavra (gerado, não edite)
+  │   ├── analisador.js     separa o código em palavras e acha a explicação
+  │   ├── entenda.js        o "Entenda este código" dos painéis
+  │   ├── documentacao.js   exemplos clicáveis, experimentos e referência
+  │   ├── painel-codigos.js monta os painéis "Ver código"
+  │   ├── trilha.js         copiar comandos e progresso da trilha
+  │   └── verificador.js    a análise do Verificador
+  ├── img/              fotos e ícone
+  ├── midia/            vídeo, áudio e legenda
+  ├── docs/             PDF usado nos exemplos de link e download
+  ├── demos/            uma página de demo para cada código pronto
+  ├── trechos/          os códigos prontos, um por pasta (fonte dos painéis)
+  └── ferramentas/      gerar-codigos.py (só para o professor)
+
+IMPORTANTE: não mude os arquivos de pasta nem troque os nomes.
+As páginas encontram o CSS, o JS e as imagens pelo CAMINHO. Se você
+mover estilo.css para fora da pasta css/, a página perde o estilo.
+
+
+COMO ABRIR
+----------
+Jeito 1 (mais simples): dois cliques no index.html.
+  Quase tudo funciona. Só a legenda do vídeo não aparece, porque o
+  navegador bloqueia arquivos .vtt abertos direto do computador.
+
+Jeito 2 (recomendado): pelo VS Code com a extensão Live Server.
+  1. Abra a PASTA pagina-completa no VS Code (Arquivo > Abrir Pasta).
+  2. Clique com o botão direito no index.html > "Open with Live Server".
+  Tudo funciona, e a página recarrega sozinha quando você salva.
+
+O vídeo do YouTube, o mapa e as fontes precisam de internet.
+Sem internet, a página continua funcionando, com uma fonte reserva.
+
+
+COMO OS TRÊS ARQUIVOS SE CONECTAM
+---------------------------------
+O HTML é o arquivo principal. Ele chama os outros dois com duas linhas
+dentro do <head>:
+
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+
+  - href e src são CAMINHOS, a partir da pasta onde está o HTML.
+    "css/estilo.css" = entre na pasta css e pegue estilo.css.
+  - O CSS vai no <head> para a página já nascer com estilo.
+  - O "defer" no script faz o JavaScript esperar o HTML inteiro ser
+    lido. Sem ele, o JS procura botões que ainda não existem e dá erro.
+    (A alternativa é colocar o <script> no final do <body>, sem defer.)
+  - Dentro do .css e do .js NÃO se escreve <style> nem <script>.
+
+
+QUANDO ALGO NÃO FUNCIONA
+------------------------
+1. Aperte F12 e olhe a aba Console. O erro diz o arquivo e a linha.
+2. Página sem estilo nenhum? Caminho do CSS errado. Confira no F12,
+   aba Rede (Network): o arquivo aparece com 404.
+3. "Cannot read properties of null"? O JavaScript não achou um
+   elemento: id escrito errado ou script sem defer.
+4. Mudou o arquivo e nada mudou? Salvou? Então aperte Ctrl + F5.
+5. Nomes de arquivos: minúsculas, sem espaço e sem acento.
+
+
+OS BOTÕES "VER CÓDIGO"
+----------------------
+Cada funcionalidade do Catálogo tem um botão "Ver código" com três abas:
+HTML, CSS e JavaScript. É o código completo daquela funcionalidade, e só
+dele, pronto para colar num projeto em branco. Cada aba diz em qual
+arquivo colar e tem um botão Copiar. A página codigos.html reúne todos
+os códigos, agrupados e com busca.
+
+Para o aluno montar o próprio site:
+  1. Copie o código "Estrutura de um projeto novo" (o primeiro da lista).
+  2. Escolha as funcionalidades e cole as três abas de cada uma.
+  3. Troque textos, fotos e cores.
+
+Para o professor editar ou criar um código:
+  1. Edite os arquivos em trechos/<nome>/ (codigo.html, codigo.css, codigo.js)
+     e, se for novo, acrescente-o em trechos/indice.json.
+  2. No terminal, dentro desta pasta:  python ferramentas/gerar-codigos.py
+  3. Para um painel novo no Catálogo, coloque no HTML:
+     <div class="codigo" data-codigo="nome"></div>
+
+
+A TRILHA "PASSO A PASSO"
+------------------------
+Comece por passo-a-passo.html. São 10 passos (de 12 a 14 aulas), do
+computador vazio ao site publicado no GitHub Pages pelo terminal:
+   1 Preparar o computador   6 CSS (e @media para o celular)
+   2 Terminal sem medo       7 JavaScript
+   3 Criar o projeto         8 Verificar (F12, Verificador, validador)
+   4 Guardar no GitHub       9 GitHub Pages pelo terminal
+   5 HTML                   10 Atualizar o site publicado
+O GitHub entra cedo (Passo 4) para o trabalho nunca ficar preso a um
+computador do laboratório: os passos 5 a 8 terminam com git push.
+Os passos 5, 6 e 7 indicam o capítulo da Documentação e dizem onde a IA
+pode ajudar e onde não.
+
+Cada comando tem botão Copiar e "o que deve aparecer" na tela. As caixas
+"Pronto quando" ficam salvas no navegador (só naquele computador), e a
+página inicial da trilha mostra o progresso.
+
+O jeito mais simples de ativar o GitHub Pages pelo terminal é o GitHub
+CLI (gh). Onde não der para instalar, cada passo mostra também o
+caminho pelo site.
+
+A DOCUMENTAÇÃO E O "ENTENDA ESTE CÓDIGO"
+---------------------------------------
+Todo código do site (painéis "Ver código" e exemplos da Documentação)
+fica colorido e clicável. Clicar numa palavra mostra o que ela é, quando
+usar, como usar e onde escrever. Cada painel tem a lista "Entenda este
+código" com TODAS as palavras daquele código, separadas em:
+  - palavras da linguagem (tags, atributos, propriedades, comandos...);
+  - nomes criados por você (classes, ids, variáveis, funções...), com as
+    linhas do HTML, do CSS e do JS em que cada nome aparece;
+  - sinais (; { } ( ) . e comentários).
+
+As páginas doc-html, doc-css e doc-js explicam a sintaxe e a semântica
+de cada linguagem, com experimentos (modelo de caixa, flexbox, grid,
+position, seletores, especificidade, console de JavaScript e árvore do
+HTML) e, no fim, a referência das palavras usadas no site.
+
+Para o professor: as explicações ficam em trechos/dicionario.json.
+Depois de editar, rode  python ferramentas/gerar-codigos.py
+A página dicionario.html lista, no fim, as palavras dos códigos que
+ainda não têm explicação (útil quando você cria um código novo).
+
+A página documentacao.html organiza tudo em 17 módulos, mais um
+opcional (o módulo 2, HTML, CSS e JavaScript, é o que já está pronto),
+um roteiro de 10 etapas até a primeira vaga fullstack, as habilidades
+além do código e os estudos paralelos. Os módulos que ainda não existem
+aparecem como "Em construção". A página ia.html mostra onde usar IA,
+onde usar com cuidado e onde ela prejudica o aprendizado.
+
+
+O VERIFICADOR
+-------------
+verificador.html: o aluno escolhe a pasta do site e a página confere
+caminhos (com maiúsculas), <head>, h1, alt, ids repetidos, links #,
+tags sem fechar, <style> dentro do CSS, chaves, url() do CSS, erro de
+sintaxe do JS e ids que o JS procura e não existem. Os arquivos não
+saem do computador do aluno.
+
+
+OS PROJETOS
+-----------
+projetos.html mostra os 12 projetos da formação, cada um ligado a um
+sistema AM. Os projetos 1 a 4 já têm página completa (projeto-1.html a
+projeto-4.html): resultado esperado, o que estudar antes, requisitos,
+marcos com "Pronto quando", dicas em camadas (nunca código), casos de
+teste, erros comuns, uso de IA e entrega. Os outros aparecem como
+"Libera após o módulo X". Para pôr o vídeo do resultado ou mudar um
+projeto: veja midia-projetos/LEIA-ME.txt e rode
+  python ferramentas/gerar-projetos.py   (Python 3.12 ou mais novo)
+
+
+CONTAS, PLANOS E VENDAS
+-----------------------
+Login, tipos de usuário, painel do administrador, planos e a liberação
+do conteúdo pago funcionam só com o servidor da pasta plataforma/
+(C# + PostgreSQL). Aberto direto do computador ou no GitHub Pages, o
+site continua funcionando como antes, mas sem contas e SEM proteger o
+conteúdo pago. Tudo sobre colocar no ar e vender: plataforma/LEIA-ME.md
+
+COMO ESTUDAR ESTE MATERIAL
+--------------------------
+- Deixe o VS Code e o navegador lado a lado.
+- Leia uma seção da página e procure o mesmo trecho no código.
+- Procure nos comentários as palavras "TESTE" e "POR QUÊ".
+  TESTE = uma mudança para você fazer e ver o que acontece.
+- O script.js tem 30 partes (PARTE 1 a PARTE 30). Os exemplos numerados
+  na página (1 a 22) usam o mesmo número da PARTE. As partes 23 a 30
+  (relógio, contador, mostrar senha, validação...) aparecem sem número,
+  nos formulários e no rodapé; a lista completa está no começo do
+  script.js.
+- Para desfazer um estrago, apague a pasta e extraia o .zip de novo.

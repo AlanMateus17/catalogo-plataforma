@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+  PLATAFORMA — Planos
+  Página da plataforma (login, conta, planos ou painel). O comportamento está em js/;
+  quem protege os dados de verdade é o servidor (pasta src/ do projeto da plataforma).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/planos.js" defer></script>
+  <title>Planos — Catálogo do HTML</title>
+  <meta name="description" content="Planos da formação do Catálogo do HTML: do primeiro site à primeira vaga, com teste grátis de 7 dias e garantia.">
+</head>
+<body class="pagina-planos">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <p class="heroi-antetitulo">Planos</p>
+        <h1 class="heroi-titulo">Da primeira página à primeira vaga</h1>
+        <p class="heroi-texto">Estude com um roteiro, pratique com 12 projetos ligados a sistemas reais e saiba sempre onde a IA ajuda e onde atrapalha.</p>
+      </div>
+    </section>
+    <div class="container trilha-corpo">
+      <p class="aviso aviso-bloqueado" id="aviso-bloqueado" hidden tabindex="-1" role="status"></p>
+
+      <section class="trilha-secao" aria-labelledby="t-teste">
+        <h2 id="t-teste">Experimente antes de pagar</h2>
+        <p>Crie uma conta grátis e use o <strong>teste de 7 dias</strong>: todos os módulos e projetos liberados, sem cartão e sem cobrança automática no fim.</p>
+        <p><a class="botao botao-primario" id="cta-teste" href="cadastro.html">Começar o teste grátis</a></p>
+      </section>
+
+      <section class="trilha-secao" aria-labelledby="t-planos">
+        <h2 id="t-planos">Escolha o seu plano</h2>
+        <div class="planos-grade" id="planos"><p>Carregando os planos...</p></div>
+      </section>
+
+      <section class="trilha-secao" aria-labelledby="t-confianca">
+        <h2 id="t-confianca">Compra segura</h2>
+        <div class="faixa-confianca">
+          <div><strong>Garantia de 7 dias</strong>Não gostou? Peça o dinheiro de volta em até 7 dias, sem explicar o motivo.</div>
+          <div><strong>Seu cartão não passa por aqui</strong>O pagamento é feito na Kiwify, na Hotmart ou no Mercado Pago. O site nunca vê nem guarda os dados do cartão.</div>
+          <div><strong>Liberação automática</strong>Pagamento aprovado, acesso liberado na hora, pelo e-mail da compra.</div>
+          <div><strong>Conta protegida</strong>Senha guardada com <em>hash</em>, bloqueio contra tentativas e verificação em duas etapas.</div>
+        </div>
+        <p><a href="compra-segura.html">Como funciona o pagamento, a liberação e o reembolso</a></p>
+      </section>
+
+      <section class="trilha-secao" aria-labelledby="t-comparar">
+        <h2 id="t-comparar">O que é grátis e o que é da formação</h2>
+        <div class="tabela-rolagem"><table class="tabela comparativo">
+  <thead><tr><th scope="col">O que tem</th><th scope="col">Sem conta</th><th scope="col">Conta grátis</th><th scope="col">Formação</th></tr></thead>
+  <tbody><tr><th scope="row">Catálogo, Códigos prontos, Dicionário e Verificador</th><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Guia de IA: onde usar e onde não usar</th><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Passo a passo: passos 1 a 4</th><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Passo a passo: passos 5 a 10 (até o site no ar)</th><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Projeto 1 completo, com resultado esperado</th><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Módulo 2: capítulo de HTML</th><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Progresso salvo na conta, em qualquer computador</th><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Módulo 2: capítulos de CSS e JavaScript</th><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Projetos 2 a 12, com dicas em camadas</th><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr>
+<tr><th scope="row">Módulos novos, conforme forem lançados</th><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="nao">— <span class="visualmente-escondido">não incluído</span></span></td><td><span class="sim">✓ <span class="visualmente-escondido">incluído</span></span></td></tr></tbody>
+</table></div>
+      </section>
+
+      <section class="trilha-secao" aria-labelledby="t-hoje">
+        <h2 id="t-hoje">O que já está pronto e o que está em produção</h2>
+        <p>A formação é lançada em módulos. Para você saber exatamente o que está comprando:</p>
+        <ul>
+          <li><strong>Pronto hoje:</strong> a trilha Passo a passo (10 passos, do computador vazio ao site no ar), o módulo 2 (HTML, CSS e JavaScript), o guia de uso de IA, o roteiro até a primeira vaga e os projetos 1 a 4.</li>
+          <li><strong>Em produção:</strong> os outros módulos (lógica, Git em equipe, JavaScript assíncrono, React e Next.js, C# e .NET, banco de dados, APIs, testes, deploy) e os projetos 5 a 12, que são liberados junto com os módulos de que dependem. A lista completa está na <a href="documentacao.html">Documentação</a>.</li>
+          <li>Quem tem plano ativo recebe cada módulo novo sem pagar a mais.</li>
+        </ul>
+      </section>
+
+      <section class="trilha-secao" aria-labelledby="t-escolas">
+        <h2 id="t-escolas">Para escolas e turmas</h2>
+        <p>Licença por turma, com um código de acesso para cada aluno e acompanhamento pelo professor. Fale com a gente pelo contato abaixo.</p>
+      </section>
+
+      <section class="trilha-secao" aria-labelledby="t-prof">
+        <h2 id="t-prof">Quem faz a formação</h2>
+        <p><strong>Prof. Alan Mateus</strong> dá aulas de programação no ensino técnico em Informática e em Desenvolvimento de Sistemas, numa escola de Ensino Médio em Tempo Integral em Barbacena (MG), e é formado em Análise e Desenvolvimento de Sistemas. Este site nasceu das aulas: cada passo foi testado com turmas de verdade.</p>
+      </section>
+
+      <section class="trilha-secao" aria-labelledby="t-faq">
+        <h2 id="t-faq">Perguntas frequentes</h2>
+        <div class="acordeao">
+          <details><summary>Preciso saber alguma coisa antes de começar?</summary><p>Não. A trilha Passo a passo começa no computador vazio: instalar os programas, abrir o terminal e criar a primeira página. Comece por ela, que é grátis.</p></details><details><summary>Por quanto tempo tenho acesso?</summary><p>Pelo tempo do plano que você escolher: enquanto a assinatura mensal estiver ativa, ou pelos dias do plano anual e do pacote de projetos. A data aparece em Minha conta.</p></details><details><summary>Posso cancelar a assinatura?</summary><p>Sim, quando quiser, na plataforma em que você comprou (Kiwify ou Hotmart). Não há multa: o acesso continua até o fim do período já pago.</p></details><details><summary>Como funciona a garantia?</summary><p>Você tem 7 dias depois da compra para desistir, sem precisar explicar o motivo, e recebe o valor de volta (é um direito previsto no Código de Defesa do Consumidor para compras pela internet). Peça pela plataforma em que comprou ou pelo contato abaixo.</p></details><details><summary>Paguei e o acesso não apareceu. E agora?</summary><p>Pix e cartão liberam em poucos minutos; boleto, em até 3 dias úteis. Confira se você criou a conta com o mesmo e-mail da compra: a liberação é feita pelo e-mail. Se não resolver, fale com a gente e mande o e-mail usado na compra.</p></details><details><summary>Menor de 18 anos pode comprar?</summary><p>A compra deve ser feita por um responsável maior de idade. A conta de estudo pode ser do aluno.</p></details><details><summary>Tem certificado?</summary><p>Ainda não. O certificado com código de verificação está nos planos da plataforma e vai valer também para quem já concluiu os projetos.</p></details><details><summary>Minha escola quer usar com uma turma.</summary><p>Temos licença para turmas com códigos de acesso individuais. Fale com a gente pelo contato abaixo.</p></details>
+        </div>
+      </section>
+
+      <section class="trilha-secao" id="contato" aria-labelledby="t-contato">
+        <h2 id="t-contato">Contato</h2>
+        <p>E-mail: <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>. Respondemos em até 2 dias úteis.</p>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

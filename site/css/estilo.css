@@ -1,0 +1,3976 @@
+/*
+  =====================================================================
+  estilo.css — A APARÊNCIA DO CATÁLOGO DO HTML
+  =====================================================================
+
+  COMO ESTE ARQUIVO CHEGA NA PÁGINA
+  O index.html tem, dentro do <head>:
+      <link rel="stylesheet" href="css/estilo.css">
+  Não precisa escrever <style> aqui dentro: o arquivo inteiro já é CSS.
+
+  COMO UMA REGRA DE CSS É ESCRITA
+
+      seletor {
+        propriedade: valor;
+        propriedade: valor;
+      }
+
+    seletor     -> QUEM vai ser estilizado
+    propriedade -> O QUE vai mudar (cor, tamanho, margem...)
+    valor       -> COMO vai ficar
+    Cada linha termina com ponto e vírgula. As chaves abrem e fecham o bloco.
+
+  OS SELETORES MAIS USADOS
+    p            -> todas as tags <p>
+    .botao       -> todos os elementos com class="botao"   (ponto = classe)
+    #cabecalho   -> o elemento com id="cabecalho"          (cerquilha = id)
+    .menu a      -> os <a> que estão DENTRO de .menu        (espaço = "dentro de")
+    a:hover      -> o <a> quando o mouse está em cima       (dois pontos = estado)
+    p::before    -> um "pedaço extra" criado antes do <p>   (dois dois-pontos = pseudo-elemento)
+    [hidden]     -> elementos que têm o atributo hidden     (colchetes = atributo)
+
+  O "C" DE CSS: CASCATA
+    Quando duas regras mandam coisas diferentes para o mesmo elemento, ganha:
+      1. a mais ESPECÍFICA  (id vence classe, classe vence tag)
+      2. se empatar, a que vem DEPOIS no arquivo
+    Por isso a ordem deste arquivo vai do mais geral (tags) ao mais específico (componentes).
+
+  POR QUÊ usamos CLASSES quase sempre (e não id nem tag):
+    - tag pega TODOS os elementos daquele tipo, o que é amplo demais;
+    - id é forte demais e só pode existir UMA vez na página;
+    - classe é reutilizável e tem força média. Deixamos os ids para o JavaScript.
+
+  ÍNDICE (use Ctrl + F e procure o número, ex.: "== 14")
+    == 01 Variáveis e tema escuro
+    == 02 Reset
+    == 03 Base (tags)
+    == 04 Utilitários
+    == 05 Cabeçalho e menu
+    == 06 Herói
+    == 07 Seções e caixas de dica
+    == 08 Textos e listas
+    == 09 Links
+    == 10 Imagens e galeria
+    == 11 Áudio e vídeo
+    == 12 Iframes
+    == 13 Tabelas
+    == 14 Formulários e botões
+    == 15 Layout: esqueleto, cards, acordeão
+    == 16 Exemplos de JavaScript
+    == 17 Modal e galeria ampliada
+    == 18 Toast e voltar ao topo
+    == 19 Rodapé
+    == 20 Página Sobre
+    == 21 Animações
+    == 22 Responsivo (celular)
+    == 23 Acessibilidade: menos movimento
+    == 24 Impressão
+    == 25 Painéis "Ver código" (ferramenta do Catálogo)
+    == 26 Trilha passo a passo e Verificador (ferramenta do Catálogo)
+    == 27 "Entenda este código" e Documentação
+    == 28 Plataforma: conta, planos, projetos e painel (ferramenta do site)
+*/
+
+
+/* =====================================================================
+   == 01 VARIÁVEIS E TEMA ESCURO
+   =====================================================================
+   Variáveis do CSS (custom properties) começam com dois hífens: --nome.
+   :root é o elemento <html>, o mais alto da página. Variáveis criadas nele
+   valem para a página toda. Para USAR, escreva var(--nome).
+
+   POR QUÊ usar variáveis: a cor principal aparece em dezenas de lugares.
+   Se ela estiver escrita numa variável, você muda UMA linha e o site todo muda.
+   TESTE: troque --cor-destaque para #e63946 e veja os destaques ficarem vermelhos.
+*/
+:root {
+  /* Cores da marca */
+  --cor-tinta: #12324a;        /* azul-petróleo escuro: cabeçalho, botões principais */
+  --cor-verde: #2a9d8f;        /* verde-água: detalhes e sucesso */
+  --cor-destaque: #ffb703;     /* amarelo: realces, foco, marca-texto */
+  --cor-erro: #c62839;         /* vermelho: erros */
+  --cor-alerta: #b86e00;       /* laranja escuro: atenção */
+
+  /* Cores de superfície e texto (mudam no tema escuro) */
+  --cor-fundo: #f4f7fa;
+  --cor-superficie: #ffffff;
+  --cor-superficie-2: #eaf0f5;
+  --cor-texto: #1b2a38;
+  --cor-texto-suave: #4f5f6f;
+  --cor-borda: #cfd9e3;
+  --cor-link: #0d6a86;
+  --cor-titulo: #12324a;
+  --cor-codigo-fundo: #0f2233;
+  --cor-codigo-texto: #e6f1f8;
+  --cor-confira-fundo: #fff3c4;    /* caixas "Confira" da trilha */
+  --cor-confira-texto: #3d2e00;
+  --cor-erro-fundo: #fdf0f1;       /* caixas "Erro comum" */
+  --cor-ok-fundo: #e3f6ef;         /* "Pronto quando" completo */
+  --cor-terminal: #0b141d;         /* fundo das caixas de terminal */
+
+  /* Fontes. A lista depois da vírgula é o PLANO B: se a primeira não carregar, usa a próxima. */
+  --fonte-texto: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --fonte-titulo: "Fraunces", Georgia, "Times New Roman", serif;
+  --fonte-codigo: "JetBrains Mono", Consolas, "Courier New", monospace;
+
+  /* Espaçamentos em rem. 1rem = tamanho da letra do <html> (normalmente 16px).
+     POR QUÊ rem e não px: se a pessoa aumentar a letra do navegador, tudo cresce junto. */
+  --espaco-1: 0.25rem;
+  --espaco-2: 0.5rem;
+  --espaco-3: 1rem;
+  --espaco-4: 1.5rem;
+  --espaco-5: 2.5rem;
+  --espaco-6: 4rem;
+
+  --raio: 10px;               /* arredondamento dos cantos */
+  --raio-pequeno: 6px;
+  --sombra: 0 2px 4px rgba(18, 50, 74, 0.06), 0 8px 24px rgba(18, 50, 74, 0.08);
+  --largura-max: 1120px;      /* largura máxima do conteúdo */
+  --altura-cabecalho: 72px;
+  --transicao: 0.2s ease;     /* duração e ritmo padrão das transições */
+}
+
+/*
+  TEMA ESCURO
+  O JavaScript coloca data-tema="escuro" na tag <html> quando você clica no botão.
+  Este seletor [data-tema="escuro"] só vale quando o atributo existe.
+  Aqui NÃO repetimos regra nenhuma: só trocamos o valor das variáveis.
+  Como o resto do arquivo usa var(--cor-...), tudo muda de cor sozinho.
+*/
+[data-tema="escuro"] {
+  --cor-fundo: #0c1720;
+  --cor-superficie: #13222f;
+  --cor-superficie-2: #18293a;
+  --cor-texto: #e4ecf2;
+  --cor-texto-suave: #a4b4c3;
+  --cor-borda: #2a4056;
+  --cor-link: #7fd0e6;
+  --cor-titulo: #f1f6fa;
+  --cor-codigo-fundo: #07121b;
+  --cor-confira-fundo: #3a3212;
+  --cor-confira-texto: #fbecb8;
+  --cor-erro-fundo: #2e1a1e;
+  --cor-ok-fundo: #12302a;
+  --cor-terminal: #03080d;
+  --sombra: 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  /* color-scheme avisa ao navegador para desenhar barras de rolagem e campos no modo escuro */
+  color-scheme: dark;
+}
+
+
+/* =====================================================================
+   == 02 RESET
+   Os navegadores trazem estilos próprios (margens, tamanhos) que variam entre eles.
+   O reset zera o básico para todo navegador começar igual.
+   ===================================================================== */
+
+/*
+  box-sizing: border-box -> a LARGURA inclui o padding e a borda.
+  POR QUÊ: sem isso, uma caixa com width: 300px e padding: 20px fica com 340px, e o layout quebra.
+  O * seleciona TODOS os elementos; ::before e ::after são os pseudo-elementos.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Tira as margens padrão desses elementos. Nós colocamos as margens que quisermos depois. */
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+/* Rolagem suave ao clicar num link âncora (#secao) */
+html {
+  scroll-behavior: smooth;
+  /* Ao rolar até uma âncora, deixa espaço para o cabeçalho fixo não cobrir o título */
+  scroll-padding-top: calc(var(--altura-cabecalho) + 1rem);
+}
+
+
+/* =====================================================================
+   == 03 BASE: ESTILO DAS TAGS
+   Aqui o seletor é o NOME DA TAG, então vale para todas as do tipo.
+   ===================================================================== */
+body {
+  font-family: var(--fonte-texto);
+  font-size: 1.0625rem;       /* 17px: um pouco maior que o padrão, mais confortável */
+  line-height: 1.65;          /* altura da linha: 1.65 vezes o tamanho da letra. Sem unidade = proporcional */
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  /* Suaviza a troca de cores quando o tema muda */
+  transition: background-color var(--transicao), color var(--transicao);
+  /* Deixa as letras mais nítidas no Mac */
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+  TÍTULOS
+  clamp(mínimo, ideal, máximo) cria um tamanho que CRESCE com a tela, mas com limites.
+  vw = 1% da largura da tela. Assim o h1 é menor no celular e maior no computador,
+  sem precisar de media query.
+*/
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fonte-titulo);
+  color: var(--cor-titulo);
+  line-height: 1.2;
+  font-weight: 600;
+}
+h1 { font-size: clamp(2.2rem, 5vw + 1rem, 4rem); font-weight: 800; }
+h2 { font-size: clamp(1.7rem, 2.5vw + 1rem, 2.4rem); }
+h3 { font-size: 1.35rem; margin-top: var(--espaco-5); margin-bottom: var(--espaco-3); }
+h4 { font-size: 1.12rem; margin-bottom: var(--espaco-2); }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.9rem; }
+
+/* Espaço entre parágrafos. max-width em "ch" (largura de um caractere) evita linhas longas demais. */
+p {
+  margin-bottom: var(--espaco-3);
+  max-width: 72ch;
+}
+
+/*
+  LINKS E SEUS ESTADOS. A ordem importa: link, visited, hover, focus-visible, active.
+  :hover         -> mouse em cima
+  :focus-visible -> focado pelo TECLADO (Tab)
+  :active        -> no momento do clique
+*/
+a {
+  color: var(--cor-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;          /* afasta o sublinhado do texto */
+  transition: color var(--transicao);
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/*
+  FOCO VISÍVEL. NUNCA apague o contorno de foco sem colocar outro no lugar.
+  POR QUÊ: quem navega pelo teclado precisa ver onde está, como quem usa mouse vê a setinha.
+  :focus-visible só aparece no teclado, e não no clique do mouse.
+*/
+:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Imagens nunca ficam maiores que a caixa onde estão */
+img, video, svg, canvas, iframe {
+  max-width: 100%;
+  display: block;         /* tira o espacinho estranho que aparece embaixo das imagens */
+}
+img, video {
+  height: auto;           /* mantém a proporção quando a largura diminui */
+}
+
+/* Código dentro do texto */
+code, kbd, samp, var {
+  font-family: var(--fonte-codigo);
+  font-size: 0.88em;       /* em = relativo à letra do elemento pai */
+}
+code {
+  background-color: var(--cor-superficie-2);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+}
+/* kbd com cara de tecla: a borda de baixo mais grossa imita o relevo */
+kbd {
+  display: inline-block;
+  padding: 0.05em 0.45em;
+  border: 1px solid var(--cor-borda);
+  border-bottom-width: 3px;
+  border-radius: 5px;
+  background-color: var(--cor-superficie);
+  line-height: 1.4;
+}
+var { font-style: italic; color: var(--cor-verde); }
+samp { color: var(--cor-verde); }
+
+mark {
+  background-color: var(--cor-destaque);
+  color: #1b2a38;
+  padding: 0 0.2em;
+  border-radius: 2px;
+}
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;            /* muda o ponteiro do mouse para uma interrogação */
+}
+del { color: var(--cor-erro); }
+ins { color: var(--cor-verde); text-decoration-color: currentColor; }
+q { font-style: italic; }
+dfn { font-weight: 700; font-style: normal; }
+
+hr {
+  border: 0;
+  height: 2px;
+  margin: var(--espaco-5) 0;
+  /* Gradiente: começa em uma cor e termina em outra. Aqui, some nas pontas. */
+  background: linear-gradient(to right, transparent, var(--cor-borda), transparent);
+}
+
+/* ::selection = a cor do texto quando você SELECIONA com o mouse. TESTE: selecione algo. */
+::selection {
+  background-color: var(--cor-destaque);
+  color: #12324a;
+}
+
+
+/* =====================================================================
+   == 04 UTILITÁRIOS: classes pequenas, reaproveitadas em vários lugares
+   ===================================================================== */
+
+/*
+  .container centraliza o conteúdo e limita a largura.
+  margin-inline: auto -> margens da esquerda e da direita automáticas = centralizado.
+  padding-inline      -> espaço nas laterais, para o texto não encostar na borda do celular.
+*/
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--espaco-4);
+}
+
+/*
+  Esconde da TELA, mas o leitor de tela continua lendo.
+  POR QUÊ não usar display: none: display: none esconde de TODO MUNDO, inclusive do leitor de tela.
+*/
+.visualmente-escondido {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+  O link "Pular para o conteúdo" fica fora da tela (top negativo)
+  e desce quando recebe foco pelo Tab.
+*/
+.pular-para-conteudo {
+  position: absolute;
+  top: -100px;
+  left: var(--espaco-3);
+  z-index: 1000;
+  padding: var(--espaco-2) var(--espaco-3);
+  background-color: var(--cor-destaque);
+  color: #12324a;
+  font-weight: 700;
+  border-radius: var(--raio-pequeno);
+  transition: top var(--transicao);
+}
+.pular-para-conteudo:focus {
+  top: var(--espaco-3);
+}
+
+.aviso-noscript {
+  margin: 0;
+  max-width: none;
+  padding: var(--espaco-3);
+  background-color: var(--cor-destaque);
+  color: #12324a;
+  text-align: center;
+}
+
+/*
+  GRADES COM CSS GRID
+  display: grid transforma a caixa numa grade.
+  grid-template-columns define as colunas:
+    repeat(2, 1fr) = 2 colunas iguais. fr = "fração" do espaço que sobra.
+  gap = espaço entre as células.
+  No celular (seção 22) elas viram uma coluna só.
+*/
+.grade-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espaco-5);
+  align-items: start;       /* alinha as células pelo topo */
+}
+.grade-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espaco-4);
+}
+/*
+  ARMADILHA DO GRID: por padrão, uma coluna "1fr" NÃO encolhe menos que o conteúdo dela.
+  Um bloco de código largo (<pre>) estica a coluna e a página ganha rolagem para o lado no celular.
+  min-width: 0 libera a coluna para encolher, e o <pre> passa a rolar só dentro dele.
+*/
+.grade-2 > *,
+.grade-3 > * {
+  min-width: 0;
+}
+
+.legenda-pequena {
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+
+/* =====================================================================
+   == 05 CABEÇALHO E MENU
+   ===================================================================== */
+
+/*
+  position: sticky -> o cabeçalho rola junto até chegar no topo e então GRUDA lá.
+  top: 0          -> gruda na distância 0 do topo.
+  z-index         -> ordem de empilhamento: número maior fica POR CIMA dos menores.
+  backdrop-filter -> desfoca o que passa por trás (efeito vidro fosco).
+*/
+.cabecalho {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(18, 50, 74, 0.96);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  transition: box-shadow var(--transicao), padding var(--transicao);
+}
+
+/*
+  O JavaScript coloca a classe .encolhido quando você rola a página (script.js, parte 3).
+  O CSS só diz COMO fica. É a divisão de trabalho: JS decide QUANDO, CSS decide COMO.
+*/
+.cabecalho.encolhido {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+.cabecalho.encolhido .cabecalho-conteudo {
+  min-height: 56px;
+}
+.cabecalho.encolhido .logo-icone {
+  width: 32px;
+  height: 32px;
+}
+
+/*
+  FLEXBOX: display: flex coloca os filhos LADO A LADO, em linha.
+    justify-content -> distribui no eixo principal (horizontal)
+    align-items     -> alinha no eixo cruzado (vertical)
+    gap             -> espaço entre os itens
+*/
+.cabecalho-conteudo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-4);
+  min-height: var(--altura-cabecalho);
+  transition: min-height var(--transicao);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  color: #ffffff;
+  text-decoration: none;
+  flex-shrink: 0;           /* o logo nunca é espremido */
+}
+.logo-icone {
+  color: var(--cor-destaque);   /* o fill="currentColor" do SVG pega esta cor */
+  transition: width var(--transicao), height var(--transicao);
+}
+.logo-traco {
+  fill: none;
+  stroke: var(--cor-tinta);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.logo-texto {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 1.05;
+}
+
+/* margin-left: auto empurra o menu para a direita, ocupando o espaço que sobra */
+.menu {
+  margin-left: auto;
+}
+.menu-lista {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-1);
+  list-style: none;          /* tira as bolinhas da lista */
+  margin: 0;
+  padding: 0;
+}
+.menu-lista a {
+  display: block;
+  padding: var(--espaco-2) 0.7rem;
+  color: #dbe7f0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-radius: var(--raio-pequeno);
+  transition: background-color var(--transicao), color var(--transicao);
+}
+.menu-lista a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/*
+  LINK ATIVO: o JavaScript coloca .ativo no link da seção que está na tela (parte 29).
+  [aria-current="page"] destaca o link da página atual (usado no sobre.html).
+  ::after cria uma linha amarela embaixo do link, sem precisar de outro elemento no HTML.
+*/
+.menu-lista a.ativo,
+.menu-lista a[aria-current="page"] {
+  color: #ffffff;
+  position: relative;
+}
+.menu-lista a.ativo::after,
+.menu-lista a[aria-current="page"]::after {
+  content: "";                /* pseudo-elementos só aparecem se tiverem content */
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 2px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: var(--cor-destaque);
+}
+
+/*
+  SUBMENU
+  position: relative no pai + position: absolute no filho:
+  o filho se posiciona em relação ao PAI, e não à página.
+  Começa invisível (opacity 0 e visibility hidden) e aparece no :hover ou :focus-within.
+  :focus-within = "algum elemento DENTRO de mim está com foco". Faz o submenu abrir pelo Tab.
+*/
+.tem-submenu {
+  position: relative;
+}
+.tem-submenu > a::after {
+  content: " ▾";
+  font-size: 0.8em;
+}
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  list-style: none;
+  margin: 0;
+  padding: var(--espaco-2);
+  background-color: var(--cor-tinta);
+  border-radius: var(--raio);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity var(--transicao), transform var(--transicao), visibility var(--transicao);
+}
+.tem-submenu:hover .submenu,
+.tem-submenu:focus-within .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Botão hambúrguer: escondido no computador. Aparece na seção 22 (celular). */
+.btn-menu {
+  display: none;
+  margin-left: auto;
+  width: 44px;               /* 44px: tamanho mínimo confortável para o dedo */
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raio-pequeno);
+  background: transparent;
+  cursor: pointer;
+}
+/*
+  As três linhas do hambúrguer: UMA linha é o próprio span,
+  e as outras duas são o ::before e o ::after dele.
+*/
+.btn-menu-linhas,
+.btn-menu-linhas::before,
+.btn-menu-linhas::after {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  margin-inline: auto;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: transform var(--transicao), background-color var(--transicao);
+}
+.btn-menu-linhas { position: relative; }
+.btn-menu-linhas::before,
+.btn-menu-linhas::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.btn-menu-linhas::before { top: -7px; }
+.btn-menu-linhas::after { top: 7px; }
+
+/*
+  Quando o menu está aberto, o JS coloca aria-expanded="true" no botão.
+  O CSS usa esse atributo para transformar as três linhas num X.
+*/
+.btn-menu[aria-expanded="true"] .btn-menu-linhas { background-color: transparent; }
+.btn-menu[aria-expanded="true"] .btn-menu-linhas::before { transform: translateY(7px) rotate(45deg); }
+.btn-menu[aria-expanded="true"] .btn-menu-linhas::after { transform: translateY(-7px) rotate(-45deg); }
+
+.btn-tema {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding: var(--espaco-2) var(--espaco-3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;       /* número enorme = cantos totalmente redondos (pílula) */
+  background: transparent;
+  color: #ffffff;
+  font: inherit;              /* botões não herdam a fonte sozinhos; inherit força */
+  font-size: 0.9rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color var(--transicao);
+}
+.btn-tema:hover { background-color: rgba(255, 255, 255, 0.12); }
+.btn-tema-icone {
+  font-size: 1.2rem;
+  transition: transform 0.4s ease;
+}
+/* No tema escuro o ícone gira meia volta */
+[data-tema="escuro"] .btn-tema-icone { transform: rotate(180deg); }
+
+/*
+  BARRA DE PROGRESSO DA ROLAGEM
+  position: fixed -> presa na TELA, e não na página. Não sai do lugar quando rola.
+  O JavaScript muda o "width" de 0% a 100% (parte 4).
+*/
+.barra-progresso {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(to right, var(--cor-verde), var(--cor-destaque));
+}
+
+
+/* =====================================================================
+   == 06 HERÓI (a primeira área da página)
+   ===================================================================== */
+.heroi {
+  position: relative;
+  overflow: hidden;          /* esconde o que sair da caixa (as formas decorativas) */
+  padding-block: var(--espaco-6) calc(var(--espaco-6) + 1rem);
+  background-color: var(--cor-tinta);
+  color: #dbe7f0;
+  /*
+    Várias imagens de fundo separadas por vírgula, empilhadas.
+    Aqui são GRADIENTES (desenhados pelo navegador, sem arquivo de imagem):
+    - radial-gradient: círculo que se espalha do centro
+    - linear-gradient repetido: um quadriculado bem clarinho, de "papel de caderno"
+  */
+  background-image:
+    radial-gradient(circle at 85% 20%, rgba(42, 157, 143, 0.45), transparent 45%),
+    radial-gradient(circle at 10% 90%, rgba(255, 183, 3, 0.18), transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
+}
+.heroi-conteudo {
+  position: relative;       /* fica acima das decorações */
+}
+.heroi-antetitulo {
+  font-family: var(--fonte-codigo);
+  font-size: 0.9rem;
+  color: var(--cor-destaque);
+  margin-bottom: var(--espaco-3);
+}
+.heroi-titulo {
+  color: #ffffff;
+  max-width: 16ch;
+  margin-bottom: var(--espaco-4);
+  letter-spacing: -0.02em;   /* aproxima um pouco as letras dos títulos grandes */
+}
+/* As tags <html> e </html> em volta do título: o destaque visual da página */
+.heroi-tag {
+  display: block;
+  font-family: var(--fonte-codigo);
+  font-size: 0.32em;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--cor-destaque);
+  opacity: 0.9;
+}
+.heroi-tag:first-child { margin-bottom: 0.3em; }
+.heroi-tag:last-child { margin-top: 0.4em; }
+
+.heroi-texto {
+  font-size: 1.15rem;
+  max-width: 60ch;
+  margin-bottom: var(--espaco-4);
+}
+.heroi-texto code {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+.heroi-texto strong { color: #ffffff; }
+
+/* flex-wrap: wrap -> se não couber lado a lado, os botões vão para a linha de baixo */
+.heroi-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+  margin-bottom: var(--espaco-4);
+}
+.heroi .botao-contorno {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.heroi-relogio {
+  font-size: 0.95rem;
+  margin: 0;
+}
+.heroi-relogio time {
+  font-family: var(--fonte-codigo);
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;   /* todos os números com a mesma largura: o relógio não "treme" */
+}
+
+
+/* =====================================================================
+   == 07 SEÇÕES E CAIXAS DE DICA
+   ===================================================================== */
+
+/* padding-block = padding em cima e embaixo */
+.secao {
+  padding-block: var(--espaco-6);
+}
+/* Seções alternadas com fundo diferente, para separar visualmente */
+.secao-alternada {
+  background-color: var(--cor-superficie-2);
+}
+
+.secao-titulo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-3);
+  margin-bottom: var(--espaco-3);
+}
+/*
+  ::before com content: "#" coloca um símbolo antes de todo título de seção,
+  sem escrever nada no HTML. O símbolo é só decoração.
+*/
+.secao-titulo::before {
+  content: "#";
+  font-family: var(--fonte-codigo);
+  font-weight: 400;
+  color: var(--cor-verde);
+}
+.secao-intro {
+  font-size: 1.12rem;
+  color: var(--cor-texto-suave);
+  margin-bottom: var(--espaco-4);
+}
+
+/* Bloco de código com fundo escuro */
+.bloco-codigo {
+  margin: 0 0 var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-4);
+  background-color: var(--cor-codigo-fundo);
+  color: var(--cor-codigo-texto);
+  border-radius: var(--raio);
+  overflow-x: auto;          /* se o código for largo, aparece rolagem SÓ nesta caixa */
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.bloco-codigo code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/*
+  Caixa de dica: a borda da esquerda mais grossa chama atenção.
+  border-left sobrescreve só o lado esquerdo da borda.
+*/
+.dica {
+  margin-block: var(--espaco-4);
+  padding: var(--espaco-3) var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-left: 6px solid var(--cor-destaque);
+  border-radius: var(--raio-pequeno);
+  max-width: 80ch;
+}
+
+.lista-erros li {
+  margin-bottom: var(--espaco-2);
+  max-width: 80ch;
+}
+/* ::marker = a bolinha ou número da lista. Dá para mudar a cor dela. */
+.lista-erros li::marker {
+  color: var(--cor-erro);
+}
+
+
+/* =====================================================================
+   == 08 TEXTOS E LISTAS
+   ===================================================================== */
+.demo-titulos {
+  padding: var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 1px dashed var(--cor-borda);    /* borda tracejada = "área de demonstração" */
+  border-radius: var(--raio);
+}
+.demo-titulos > * {         /* > = só os filhos DIRETOS */
+  margin: 0 0 var(--espaco-2);
+}
+
+.texto-destaque {
+  background-color: var(--cor-verde);
+  color: #ffffff;
+  padding: 0 0.3em;
+  border-radius: 3px;
+}
+
+/* Citação longa com aspas gigantes decorativas feitas com ::before */
+.citacao {
+  position: relative;
+  margin-block: var(--espaco-5);
+  padding: var(--espaco-4) var(--espaco-4) var(--espaco-4) var(--espaco-6);
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+.citacao::before {
+  content: "“";
+  position: absolute;
+  top: -0.1em;
+  left: 0.2em;
+  font-family: var(--fonte-titulo);
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--cor-destaque);
+}
+.citacao blockquote {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+  line-height: 1.45;
+}
+.citacao blockquote p { margin: 0; }
+.citacao figcaption {
+  margin-top: var(--espaco-3);
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+}
+
+address {
+  font-style: normal;        /* o navegador deixa address em itálico; aqui desfazemos */
+  padding-left: var(--espaco-3);
+  border-left: 3px solid var(--cor-verde);
+}
+
+/* Lista de definição: o termo em negrito e a descrição com recuo */
+dt { font-weight: 700; }
+dd {
+  margin: 0 0 var(--espaco-3) var(--espaco-3);
+  color: var(--cor-texto-suave);
+}
+
+/* Listas aninhadas: a lista de dentro com bolinha vazada */
+ul ul { list-style-type: circle; }
+
+
+/* =====================================================================
+   == 09 LINKS
+   ===================================================================== */
+.lista-links {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--espaco-2);
+  max-width: 760px;
+}
+/*
+  Cada item: o link à esquerda, a etiqueta à direita.
+  justify-content: space-between empurra os dois para as pontas.
+*/
+.lista-links li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding: var(--espaco-2) var(--espaco-3);
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+}
+.link-tipo {
+  font-family: var(--fonte-codigo);
+  font-size: 0.78rem;
+  color: var(--cor-texto-suave);
+}
+
+/*
+  Seletor de atributo com "começa com" (^=): pega todo link cujo href começa com "http".
+  ::after adiciona uma setinha depois de todo link EXTERNO, automaticamente.
+*/
+.lista-links a[href^="http"]::after {
+  content: " ↗";
+  font-size: 0.85em;
+}
+/* "termina com" ($=): links que apontam para arquivos .pdf ganham uma etiqueta */
+.lista-links a[href$=".pdf"]::before {
+  content: "PDF ";
+  font-family: var(--fonte-codigo);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.1em 0.35em;
+  margin-right: 0.3em;
+  border-radius: 3px;
+  background-color: var(--cor-erro);
+  color: #ffffff;
+  vertical-align: 2px;
+}
+
+/* Imagem como link: dá zoom quando o mouse passa */
+.link-imagem {
+  display: inline-block;
+  border-radius: var(--raio);
+  overflow: hidden;           /* a imagem aumentada não vaza do canto arredondado */
+}
+.link-imagem img {
+  transition: transform 0.3s ease;
+}
+.link-imagem:hover img {
+  transform: scale(1.06);     /* scale = aumenta; 1.06 = 6% maior */
+}
+
+
+/* =====================================================================
+   == 10 IMAGENS E GALERIA
+   ===================================================================== */
+.img-responsiva {
+  width: 100%;
+  height: auto;
+}
+.img-arredondada {
+  border-radius: var(--raio);
+}
+.img-media {
+  max-width: 600px;
+}
+.figura {
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+.figura figcaption {
+  padding: var(--espaco-2) var(--espaco-3);
+  font-size: 0.92rem;
+  color: var(--cor-texto-suave);
+}
+
+/* O CSS pinta as formas do SVG, igual pinta um elemento HTML. "fill" = cor de preenchimento. */
+.svg-demo {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+.svg-forma-1 { fill: var(--cor-verde); }
+.svg-forma-2 { fill: var(--cor-destaque); }
+.svg-forma-3 { fill: var(--cor-erro); }
+/* transição no SVG: passe o mouse sobre as formas */
+.svg-demo * {
+  transition: opacity var(--transicao);
+}
+.svg-demo:hover *:not(:hover) {       /* :not() = "que NÃO seja" */
+  opacity: 0.35;
+}
+
+.img-mapa {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  margin-bottom: var(--espaco-2);
+}
+
+/*
+  GALERIA EM GRADE AUTOMÁTICA
+  repeat(auto-fill, minmax(220px, 1fr)):
+    "coloque quantas colunas couberem, cada uma com NO MÍNIMO 220px e dividindo o que sobrar".
+  Resultado: 3 colunas no computador, 2 no tablet, 1 no celular, SEM media query.
+*/
+.galeria {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--espaco-3);
+}
+.galeria-item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--raio);
+  overflow: hidden;
+  cursor: zoom-in;           /* cursor de lupa: avisa que dá para ampliar */
+  background: none;
+}
+/*
+  aspect-ratio: 3 / 2 -> a caixa tem sempre proporção 3 por 2.
+  object-fit: cover   -> a imagem PREENCHE a caixa, cortando as sobras, sem esticar.
+  TESTE: troque cover por contain e veja a diferença.
+*/
+.galeria-item img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+.galeria-item:hover img,
+.galeria-item:focus-visible img {
+  transform: scale(1.08);
+  filter: saturate(1.3);     /* filter: efeitos como no Instagram (brilho, contraste, desfoque) */
+}
+
+
+/* =====================================================================
+   == 11 ÁUDIO E VÍDEO
+   ===================================================================== */
+.video {
+  width: 100%;
+  height: auto;
+  border-radius: var(--raio);
+  background-color: #000000;
+}
+.audio {
+  width: 100%;
+  margin-bottom: var(--espaco-3);
+}
+.player {
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  padding: var(--espaco-2);
+  box-shadow: var(--sombra);
+}
+.player-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding-top: var(--espaco-2);
+}
+.player-controles progress {
+  flex: 1;                   /* flex: 1 = ocupa todo o espaço que sobrar na linha */
+  min-width: 80px;
+}
+.player-tempo {
+  font-family: var(--fonte-codigo);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* =====================================================================
+   == 12 IFRAMES
+   ===================================================================== */
+/*
+  O iframe não sabe a proporção do vídeo. aspect-ratio: 16 / 9 resolve:
+  a largura acompanha a tela e a altura se ajusta sozinha.
+*/
+.incorporado iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+.iframe-pdf {
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+
+
+/* =====================================================================
+   == 13 TABELAS
+   ===================================================================== */
+.tabela-rolagem {
+  overflow-x: auto;          /* no celular a tabela rola para o lado em vez de quebrar a página */
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+/*
+  border-collapse: collapse -> as bordas das células viram UMA linha só,
+  em vez de duas linhas duplas (uma de cada célula).
+*/
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--cor-superficie);
+  font-variant-numeric: tabular-nums;
+}
+.tabela caption {
+  padding: var(--espaco-3);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: left;
+  color: var(--cor-titulo);
+  background-color: var(--cor-superficie);
+}
+.tabela th,
+.tabela td {
+  padding: var(--espaco-2) var(--espaco-3);
+  border-bottom: 1px solid var(--cor-borda);
+  text-align: left;
+}
+.tabela thead th {
+  background-color: var(--cor-tinta);
+  color: #ffffff;
+  font-weight: 700;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+/* Colunas de números alinhadas à direita (fica mais fácil comparar) */
+.tabela tbody td:nth-child(2),
+.tabela tbody td:nth-child(3),
+.tabela tbody td:nth-child(4) {
+  text-align: right;
+}
+/*
+  LINHAS ZEBRADAS com :nth-child(even) -> pega as linhas PARES (2ª, 4ª...).
+  "odd" pegaria as ímpares. Também aceita fórmulas: :nth-child(3n) = de 3 em 3.
+*/
+.tabela tbody tr:nth-child(even) {
+  background-color: var(--cor-superficie-2);
+}
+.tabela tbody tr:hover {
+  background-color: rgba(255, 183, 3, 0.15);
+}
+.tabela tfoot {
+  font-weight: 700;
+}
+.tabela tfoot td,
+.tabela tfoot th {
+  border-top: 2px solid var(--cor-tinta);
+  border-bottom: 0;
+}
+.tabela-compacta {
+  max-width: 620px;
+  margin-bottom: var(--espaco-4);
+  box-shadow: var(--sombra);
+  border-radius: var(--raio);
+  overflow: hidden;
+}
+
+/* Etiquetas coloridas de situação */
+.etiqueta {
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.etiqueta-ok { background-color: #d5f2ea; color: #0d5c50; }
+.etiqueta-alerta { background-color: #ffefc7; color: #7a4a00; }
+.etiqueta-erro { background-color: #fbdde0; color: #8c1624; }
+
+
+/* =====================================================================
+   == 14 FORMULÁRIOS E BOTÕES
+   ===================================================================== */
+.formulario {
+  display: grid;
+  gap: var(--espaco-4);
+}
+fieldset {
+  margin: 0;
+  padding: var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+legend {
+  padding-inline: var(--espaco-2);
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--cor-titulo);
+}
+
+/* Grade de campos que se adapta sozinha (mesma técnica da galeria) */
+.grade-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--espaco-3) var(--espaco-4);   /* primeiro valor: entre linhas; segundo: entre colunas */
+}
+
+/* Cada campo: label em cima, input embaixo. flex-direction: column empilha. */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+}
+.campo label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.ajuda {
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+}
+
+/*
+  Seletor de atributo: estiliza vários tipos de input de uma vez.
+  :not([type="checkbox"]) e :not([type="radio"]) deixam de fora os que não parecem caixa de texto.
+*/
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
+select,
+textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+textarea {
+  resize: vertical;          /* deixa o usuário aumentar só a altura */
+  min-height: 100px;
+}
+
+/* ::placeholder = o texto cinza de exemplo */
+::placeholder {
+  color: var(--cor-texto-suave);
+  opacity: 0.8;
+}
+
+/* Campo em foco: borda colorida e um "brilho" em volta feito com box-shadow */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;             /* tiramos o contorno padrão PORQUE colocamos outro logo abaixo */
+  border-color: var(--cor-verde);
+  box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.25);
+}
+
+/*
+  VALIDAÇÃO VISUAL
+  :user-invalid -> campo inválido DEPOIS que o usuário mexeu nele.
+  POR QUÊ não usar :invalid: ele marca os campos obrigatórios de vermelho
+  logo ao abrir a página, antes de a pessoa digitar qualquer coisa.
+*/
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+  border-color: var(--cor-erro);
+}
+input:user-valid:not([type="checkbox"]):not([type="radio"]),
+select:user-valid {
+  border-color: var(--cor-verde);
+}
+
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;       /* cursor de "proibido" */
+}
+
+/*
+  accent-color pinta checkbox, radio, range e progress com a cor do site
+  numa linha só, sem precisar redesenhar esses campos.
+*/
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+progress {
+  accent-color: var(--cor-verde);
+}
+input[type="checkbox"],
+input[type="radio"] {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+input[type="range"] { width: 100%; }
+input[type="color"] {
+  width: 64px;
+  height: 40px;
+  padding: 2px;
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-fundo);
+  cursor: pointer;
+}
+input[type="file"] { font: inherit; font-size: 0.9rem; }
+
+/* Grupo de radio/checkbox lado a lado */
+.grupo-opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2) var(--espaco-4);
+  margin-top: var(--espaco-3);
+  padding: var(--espaco-3);
+  background-color: var(--cor-fundo);
+}
+.grupo-opcoes legend { font-size: 1rem; }
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  cursor: pointer;
+}
+.opcao-termos { margin-top: var(--espaco-3); }
+
+/* O botão "Mostrar senha" grudado no campo */
+.campo-com-botao {
+  display: flex;
+  gap: var(--espaco-2);
+}
+.campo-com-botao input { flex: 1; }
+
+.form-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+}
+
+output {
+  font-family: var(--fonte-codigo);
+  font-weight: 600;
+  color: var(--cor-verde);
+}
+
+.resultado-form {
+  margin-top: var(--espaco-4);
+  padding: var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 2px solid var(--cor-verde);
+  border-radius: var(--raio);
+}
+.resultado-form dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;   /* 1ª coluna do tamanho do texto, 2ª com o resto */
+  gap: var(--espaco-1) var(--espaco-3);
+}
+.resultado-form dd { margin: 0; color: var(--cor-texto); }
+
+.indicadores progress,
+.indicadores meter {
+  width: 100%;
+  height: 1.2rem;
+}
+
+/*
+  BOTÕES
+  Uma classe base (.botao) + classes de variação (.botao-primario, .botao-contorno...).
+  POR QUÊ: o que é comum fica num lugar só; cada variação só muda o que é diferente.
+  No HTML: class="botao botao-primario" (duas classes, separadas por espaço).
+*/
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  padding: 0.7rem 1.3rem;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: var(--cor-tinta);
+  border: 2px solid transparent;
+  border-radius: var(--raio-pequeno);
+  cursor: pointer;          /* mãozinha: avisa que é clicável */
+  transition: transform var(--transicao), background-color var(--transicao), box-shadow var(--transicao);
+}
+[data-tema="escuro"] .botao { background-color: var(--cor-verde); color: #06201c; }
+
+.botao:hover {
+  transform: translateY(-2px);          /* sobe 2px: dá sensação de "levantar" */
+  box-shadow: 0 6px 16px rgba(18, 50, 74, 0.25);
+}
+.botao:active {
+  transform: translateY(0);             /* ao clicar, "afunda" de volta */
+  box-shadow: none;
+}
+.botao-primario {
+  background-color: var(--cor-destaque);
+  color: #12324a;
+}
+[data-tema="escuro"] .botao-primario { background-color: var(--cor-destaque); color: #12324a; }
+
+.botao-contorno {
+  background-color: transparent;
+  color: var(--cor-titulo);
+  border-color: currentColor;           /* currentColor = a mesma cor do texto */
+}
+[data-tema="escuro"] .botao-contorno { background-color: transparent; color: var(--cor-titulo); }
+
+.botao-texto {
+  background: none;
+  color: var(--cor-link);
+  text-decoration: underline;
+}
+[data-tema="escuro"] .botao-texto { background: none; color: var(--cor-link); }
+.botao-texto:hover { box-shadow: none; }
+
+.botao-pequeno {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.92rem;
+}
+/* :disabled -> botão com o atributo disabled */
+.botao:disabled,
+.botao-desabilitado {
+  background-color: var(--cor-borda);
+  color: var(--cor-texto-suave);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* =====================================================================
+   == 15 LAYOUT: ESQUELETO, CARDS, ACORDEÃO
+   ===================================================================== */
+
+/*
+  GRID COM ÁREAS NOMEADAS
+  grid-template-areas desenha o layout com PALAVRAS, como um mapa.
+  Cada "texto" é uma linha; cada palavra é uma coluna.
+  Depois, cada elemento diz em qual área fica com grid-area.
+  TESTE: troque "aside" e "main" de lugar nas linhas do meio.
+*/
+.esqueleto {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas:
+    "header header header"
+    "nav    main   aside"
+    "footer footer footer";
+  gap: var(--espaco-2);
+  max-width: 720px;
+  font-family: var(--fonte-codigo);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.esqueleto > div {
+  padding: var(--espaco-3);
+  border-radius: var(--raio-pequeno);
+  color: #ffffff;
+}
+.esq-header { grid-area: header; background-color: var(--cor-tinta); }
+.esq-nav    { grid-area: nav;    background-color: var(--cor-verde); }
+.esq-main   { grid-area: main;   background-color: #3b6a8c; display: grid; gap: var(--espaco-2); }
+.esq-aside  { grid-area: aside;  background-color: #7a5c99; }
+.esq-footer { grid-area: footer; background-color: #2b3a47; }
+.esq-section, .esq-article {
+  padding: var(--espaco-2);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+/* CARDS: grade automática, cada card com no mínimo 260px */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--espaco-4);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(18, 50, 74, 0.18);
+}
+.card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.card-corpo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;                  /* o corpo estica, e o rodapé do card fica sempre embaixo */
+  padding: var(--espaco-4);
+}
+.card-titulo { margin-bottom: var(--espaco-1); }
+.card-meta {
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+.card-rodape {
+  margin-top: auto;         /* margin-top: auto empurra para o fim da coluna flex */
+}
+.card-link {
+  font-weight: 700;
+}
+
+/* ACORDEÃO com <details>: estilizamos o <summary> para parecer um botão */
+.acordeao {
+  display: grid;
+  gap: var(--espaco-2);
+  max-width: 760px;
+}
+.acordeao details {
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+}
+.acordeao summary {
+  padding: var(--espaco-3);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;         /* tira o triângulo padrão... */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.acordeao summary::-webkit-details-marker { display: none; }   /* ...também no Safari */
+/* ...e coloca o nosso próprio sinal de + */
+.acordeao summary::after {
+  content: "+";
+  font-family: var(--fonte-codigo);
+  font-size: 1.3rem;
+  color: var(--cor-verde);
+  transition: transform var(--transicao);
+}
+/* [open] = quando o details está aberto, o + gira e vira um × */
+.acordeao details[open] summary::after {
+  transform: rotate(45deg);
+}
+.acordeao details p {
+  padding: 0 var(--espaco-3) var(--espaco-3);
+  margin: 0;
+}
+
+
+/* =====================================================================
+   == 16 EXEMPLOS DE JAVASCRIPT
+   ===================================================================== */
+.exemplos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--espaco-4);
+}
+.exemplo {
+  padding: var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+/*
+  grid-column: 1 / -1 -> o elemento ocupa da PRIMEIRA até a ÚLTIMA coluna (a linha inteira).
+  -1 significa "a última linha da grade", seja quantas colunas houver.
+*/
+.exemplo-largo {
+  grid-column: 1 / -1;
+}
+.exemplo-titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  margin-top: 0;
+}
+/* O número do exemplo dentro de um círculo */
+.exemplo-num {
+  display: inline-grid;
+  place-items: center;      /* centraliza nos dois eixos, atalho do grid */
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;       /* 50% = círculo perfeito */
+  background-color: var(--cor-destaque);
+  color: #12324a;
+  font-family: var(--fonte-codigo);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* 6 — Curtir */
+.btn-curtir {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  padding: 0.6rem 1.2rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  border: 2px solid var(--cor-borda);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all var(--transicao);
+}
+.coracao {
+  color: var(--cor-texto-suave);
+  font-size: 1.3rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+/* Quando o JS coloca a classe .curtido, tudo muda de cor e o coração "pula" */
+.btn-curtir.curtido {
+  border-color: var(--cor-erro);
+  color: var(--cor-erro);
+}
+.btn-curtir.curtido .coracao {
+  color: var(--cor-erro);
+  animation: pulsar 0.4s ease;     /* a animação é definida na seção 21 */
+}
+
+/* 7 — Contador */
+.contador {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+.contador-valor {
+  min-width: 3ch;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--cor-titulo);
+}
+.contador-valor.negativo { color: var(--cor-erro); }
+
+/* 9 — Cor */
+.linha-cor {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+.amostra-cor {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  height: 64px;
+  border-radius: var(--raio-pequeno);
+  background-color: #ffb703;
+  transition: background-color 0.1s linear;
+}
+.amostra-cor code {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #12324a;
+}
+
+/* 10 — Tamanho da letra */
+.texto-tamanho {
+  margin: var(--espaco-3) 0 0;
+  font-family: var(--fonte-titulo);
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--cor-titulo);
+}
+
+/* 11 — Frase */
+.frase {
+  margin: 0 0 var(--espaco-3);
+  padding: var(--espaco-3);
+  min-height: 5.5rem;
+  background-color: var(--cor-fundo);
+  border-left: 4px solid var(--cor-verde);
+  border-radius: var(--raio-pequeno);
+  font-style: italic;
+}
+.frase.trocando { animation: aparecer 0.4s ease; }
+
+/* 12 — Tecla */
+.tecla-info {
+  margin: var(--espaco-2) 0 0;
+  font-family: var(--fonte-codigo);
+  font-size: 0.9rem;
+}
+
+/* 13 — Filtro */
+.lista-filtro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  list-style: none;
+  padding: 0;
+  margin: var(--espaco-3) 0 var(--espaco-2);
+}
+.lista-filtro li {
+  padding: 0.25rem 0.8rem;
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  font-size: 0.92rem;
+}
+/*
+  [hidden] { display: none !important }
+  POR QUÊ: se alguma regra der "display: flex" num elemento, o atributo hidden deixa de funcionar.
+  !important força esta regra a vencer sempre. Use !important raramente; este é um dos poucos casos.
+*/
+[hidden] {
+  display: none !important;
+}
+
+/* 14 — Tarefas */
+.form-tarefa {
+  display: flex;
+  gap: var(--espaco-2);
+  margin-bottom: var(--espaco-3);
+  max-width: 560px;
+}
+.lista-tarefas {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--espaco-2);
+  max-width: 560px;
+}
+.tarefa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  padding: var(--espaco-2) var(--espaco-3);
+  border-bottom: 1px solid var(--cor-borda);
+  animation: aparecer 0.25s ease;
+}
+.tarefa-label {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  cursor: pointer;
+}
+/*
+  :has() = "que TEM dentro de si". Aqui: a tarefa que tem um checkbox marcado (:checked)
+  fica riscada, SEM JavaScript nenhum. É um dos seletores mais novos do CSS.
+*/
+.tarefa:has(.tarefa-check:checked) .tarefa-texto {
+  text-decoration: line-through;
+  color: var(--cor-texto-suave);
+}
+.tarefa-remover {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--cor-texto-suave);
+  cursor: pointer;
+}
+.tarefa-remover:hover {
+  background-color: var(--cor-erro);
+  color: #ffffff;
+}
+
+/* 15 — Abas */
+.abas {
+  display: flex;
+  gap: var(--espaco-1);
+  border-bottom: 2px solid var(--cor-borda);
+  overflow-x: auto;
+}
+.aba {
+  padding: var(--espaco-2) var(--espaco-4);
+  font: inherit;
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;      /* a borda da aba cobre a borda cinza de baixo */
+  cursor: pointer;
+}
+.aba:hover { color: var(--cor-titulo); }
+.aba[aria-selected="true"] {
+  color: var(--cor-titulo);
+  border-bottom-color: var(--cor-destaque);
+}
+.painel {
+  padding: var(--espaco-3) 0 0;
+}
+.painel:not([hidden]) { animation: aparecer 0.3s ease; }
+
+/* 19 — Carrossel */
+.carrossel {
+  position: relative;
+  overflow: hidden;         /* esconde os slides que estão fora da área visível */
+  border-radius: var(--raio);
+  max-width: 800px;
+  background-color: #000000;
+}
+/*
+  O trilho é uma fila de slides lado a lado (flex).
+  O JS muda o transform: translateX(-100%) mostra o 2º slide, -200% o 3º...
+  A transition faz o movimento ser suave.
+*/
+.carrossel-trilho {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.slide {
+  flex: 0 0 100%;           /* não cresce, não encolhe, ocupa 100% da largura */
+  position: relative;
+  margin: 0;
+}
+.slide img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.slide figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--espaco-5) var(--espaco-4) var(--espaco-5);
+  color: #ffffff;
+  font-weight: 700;
+  /* degradê escuro embaixo: deixa o texto branco legível sobre qualquer foto */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+.carrossel-seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);   /* truque para centralizar na vertical */
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #12324a;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--transicao);
+}
+.carrossel-seta:hover { background-color: #ffffff; }
+.carrossel-anterior { left: var(--espaco-3); }
+.carrossel-proximo { right: var(--espaco-3); }
+.carrossel-pontos {
+  position: absolute;
+  bottom: var(--espaco-3);
+  right: var(--espaco-4);
+  display: flex;
+  gap: var(--espaco-2);
+}
+.carrossel-ponto {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.carrossel-ponto[aria-current="true"] {
+  background-color: #ffffff;
+}
+
+/* 20 — Copiar */
+.linha-copiar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+.linha-copiar code {
+  flex: 1;
+  padding: var(--espaco-2);
+  word-break: break-all;    /* quebra o texto longo em qualquer ponto, em vez de vazar */
+}
+
+/* 21 — Canvas */
+.quadro {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 3;
+  background-color: #ffffff;
+  border: 2px dashed var(--cor-borda);
+  border-radius: var(--raio);
+  cursor: crosshair;        /* cursor em forma de mira */
+  touch-action: none;       /* no celular, arrastar o dedo desenha em vez de rolar a página */
+}
+.quadro-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-3);
+  margin-top: var(--espaco-2);
+}
+.quadro-controles input[type="range"] { width: 140px; }
+
+/* 22 — IMC */
+.form-imc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--espaco-3);
+}
+.form-imc .campo { width: 160px; }
+.resultado-imc {
+  margin-top: var(--espaco-3);
+  font-weight: 700;
+}
+.resultado-imc.ok { color: var(--cor-verde); }
+.resultado-imc.atencao { color: var(--cor-alerta); }
+[data-tema="escuro"] .resultado-imc.atencao { color: var(--cor-destaque); }
+
+
+/* =====================================================================
+   == 17 MODAL E GALERIA AMPLIADA
+   ===================================================================== */
+.modal {
+  max-width: 480px;
+  width: calc(100% - 2rem);
+  padding: var(--espaco-5);
+  border: 0;
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+/* [open] = o dialog está aberto; aí ele ganha a animação de entrada */
+.modal[open] { animation: subir 0.3s ease; }
+.modal h2 { font-size: 1.5rem; margin-bottom: var(--espaco-3); }
+
+/* ::backdrop = o fundo escuro atrás de um <dialog> aberto com showModal() */
+.modal::backdrop,
+.lightbox::backdrop {
+  background-color: rgba(8, 20, 30, 0.75);
+  backdrop-filter: blur(3px);
+}
+
+.lightbox {
+  width: min(1000px, 94vw);    /* min() escolhe o MENOR dos valores */
+  max-width: none;
+  max-height: 94vh;            /* vh = 1% da ALTURA da tela */
+  padding: 0;
+  border: 0;
+  border-radius: var(--raio);
+  background-color: #000000;
+  overflow: visible;
+}
+.lightbox[open] { animation: aparecer 0.25s ease; }
+.lightbox-figura { margin: 0; }
+.lightbox-figura img {
+  width: 100%;
+  max-height: 84vh;
+  object-fit: contain;
+  border-radius: var(--raio) var(--raio) 0 0;
+}
+.lightbox-figura figcaption {
+  padding: var(--espaco-2) var(--espaco-3);
+  color: #ffffff;
+  text-align: center;
+}
+.lightbox-btn,
+.lightbox-fechar {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #12324a;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-btn { top: 45%; }
+.lightbox-anterior { left: var(--espaco-3); }
+.lightbox-proximo { right: var(--espaco-3); }
+.lightbox-fechar {
+  top: var(--espaco-3);
+  right: var(--espaco-3);
+  font-size: 1.2rem;
+}
+
+
+/* =====================================================================
+   == 18 TOAST E VOLTAR AO TOPO
+   ===================================================================== */
+
+/*
+  TOAST (aviso rápido): fixo embaixo, no centro.
+  Começa invisível e 20px mais abaixo. Quando o JS coloca .visivel, ele sobe e aparece.
+  left: 50% + translateX(-50%) = centraliza na horizontal um elemento com position fixed.
+*/
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--espaco-4);
+  z-index: 300;
+  padding: var(--espaco-3) var(--espaco-4);
+  max-width: calc(100% - 2rem);
+  background-color: var(--cor-tinta);
+  color: #ffffff;
+  border-radius: var(--raio);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;     /* invisível e também "não clicável" */
+  transform: translate(-50%, 20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.toast.visivel {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+[data-tema="escuro"] .toast { background-color: var(--cor-verde); color: #06201c; }
+
+.voltar-topo {
+  position: fixed;
+  right: var(--espaco-4);
+  bottom: var(--espaco-4);
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--cor-destaque);
+  color: #12324a;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--sombra);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.6);
+  transition: opacity var(--transicao), transform var(--transicao), visibility var(--transicao);
+}
+.voltar-topo.visivel {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+
+/* =====================================================================
+   == 19 RODAPÉ
+   ===================================================================== */
+.rodape {
+  padding-top: var(--espaco-5);
+  background-color: var(--cor-tinta);
+  color: #c5d4e0;
+}
+.rodape-grade {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;    /* a primeira coluna tem o dobro das outras */
+  gap: var(--espaco-5);
+  padding-bottom: var(--espaco-5);
+}
+.rodape-logo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: var(--espaco-2);
+}
+.rodape-titulo {
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  color: var(--cor-destaque);
+  margin-bottom: var(--espaco-2);
+}
+.rodape ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--espaco-1);
+}
+.rodape a { color: #ffffff; }
+.rodape-direitos {
+  max-width: none;
+  margin: 0;
+  padding: var(--espaco-3);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+/* =====================================================================
+   == 20 PÁGINA SOBRE
+   ===================================================================== */
+.heroi-curto {
+  padding-block: var(--espaco-5);
+}
+/* Migalhas de pão: separador "/" criado com ::before, a partir do 2º item */
+.migalhas ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--espaco-3);
+  font-size: 0.9rem;
+}
+.migalhas li + li::before {    /* + = o li que vem LOGO DEPOIS de outro li */
+  content: "/";
+  margin-inline: var(--espaco-2);
+  opacity: 0.6;
+}
+.migalhas a { color: var(--cor-destaque); }
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-4);
+  max-width: 720px;
+  padding: var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+.perfil h3 { margin-top: 0; }
+.perfil-foto {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 4px solid var(--cor-destaque);
+}
+
+
+/* =====================================================================
+   == 21 ANIMAÇÕES
+   =====================================================================
+   TRANSITION x ANIMATION
+     transition -> anima a MUDANÇA entre dois estados (ex.: normal -> hover). Precisa de um gatilho.
+     animation  -> roda uma sequência de passos definida em @keyframes. Pode rodar sozinha, repetir etc.
+
+   @keyframes nome { de { ... } para { ... } }
+   Depois, no elemento: animation: nome duração ritmo;
+*/
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes subir {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+/* Porcentagens = etapas da animação */
+@keyframes pulsar {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+/*
+  REVELAR AO ROLAR (script.js, parte 28)
+  O JS coloca a classe .js no <html> assim que roda. Só ENTÃO os elementos .revelar ficam escondidos.
+  POR QUÊ: se o JavaScript falhar ou estiver desligado, a classe .js não existe
+  e o conteúdo continua visível. Nunca esconda conteúdo dependendo só do JS.
+*/
+.js .revelar {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js .revelar.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =====================================================================
+   == 22 RESPONSIVO (CELULAR E TABLET)
+   =====================================================================
+   MEDIA QUERY: "aplique estas regras SOMENTE SE a condição for verdadeira".
+   @media (max-width: 900px) -> telas com ATÉ 900px de largura.
+
+   As regras aqui dentro SOBRESCREVEM as de cima, porque vêm depois no arquivo (cascata!).
+   TESTE: aperte F12 e clique no ícone de celular (Ctrl + Shift + M) para simular telas.
+*/
+@media (max-width: 900px) {
+  /* O botão hambúrguer aparece... */
+  .btn-menu {
+    display: grid;
+    place-items: center;
+    order: 3;                /* order muda a ORDEM visual dos itens flex, sem mexer no HTML */
+    margin-left: 0;          /* quem empurra para a direita agora é o botão de tema */
+  }
+  .btn-tema { margin-left: auto; }
+  .btn-tema-texto { display: none; }    /* no celular fica só o ícone */
+
+  /* ...e o menu vira uma gaveta que cai embaixo do cabeçalho */
+  .menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+  .menu-lista {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--espaco-2) var(--espaco-4) var(--espaco-4);
+    background-color: var(--cor-tinta);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.3);
+    max-height: calc(100vh - var(--altura-cabecalho));
+    overflow-y: auto;
+    display: none;           /* fechado */
+  }
+  /* O JS coloca a classe .aberto na lista quando o hambúrguer é clicado */
+  .menu-lista.aberto {
+    display: flex;
+    animation: aparecer 0.2s ease;
+  }
+  .menu-lista a {
+    padding: var(--espaco-3) var(--espaco-2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .menu-lista a.ativo::after { display: none; }
+  .menu-lista a.ativo { color: var(--cor-destaque); }
+
+  /* No celular o submenu fica sempre visível, com recuo */
+  .submenu {
+    position: static;        /* static = volta ao fluxo normal da página */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    padding: 0 0 0 var(--espaco-4);
+    background: none;
+  }
+  .tem-submenu > a::after { content: ""; }
+
+  .rodape-grade { grid-template-columns: 1fr 1fr; }
+  .rodape-grade > :first-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --espaco-6: 3rem;        /* até as variáveis podem mudar numa media query */
+  }
+  .container { padding-inline: var(--espaco-3); }
+  .grade-2,
+  .grade-3 {
+    grid-template-columns: 1fr;      /* uma coluna só */
+  }
+  .esqueleto {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "aside"
+      "footer";
+  }
+  .citacao { padding-left: var(--espaco-4); padding-top: var(--espaco-5); }
+  .perfil { flex-direction: column; text-align: center; }
+  .rodape-grade { grid-template-columns: 1fr; }
+  .lightbox-btn { top: auto; bottom: 3.2rem; }
+  .form-tarefa { flex-direction: column; }
+}
+
+
+/* =====================================================================
+   == 23 ACESSIBILIDADE: MENOS MOVIMENTO
+   Algumas pessoas sentem tontura com animações e ativam "reduzir movimento"
+   no sistema (Windows, celular). Esta media query respeita essa escolha.
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js .revelar { opacity: 1; transform: none; }
+}
+
+
+/* =====================================================================
+   == 24 IMPRESSÃO
+   @media print só vale quando a página é IMPRESSA (ou salva em PDF pelo Ctrl + P).
+   Tiramos o que não faz sentido no papel e usamos fundo branco para economizar tinta.
+   TESTE: aperte Ctrl + P e veja a prévia.
+   ===================================================================== */
+@media print {
+  .cabecalho,
+  .barra-progresso,
+  .voltar-topo,
+  .toast,
+  .heroi-acoes,
+  .incorporado,
+  .iframe-pdf,
+  .player,
+  .quadro,
+  .carrossel {
+    display: none !important;
+  }
+  body {
+    background: #ffffff;
+    color: #000000;
+    font-size: 11pt;          /* pt (pontos) é a unidade de impressão, como no Word */
+  }
+  .heroi,
+  .secao-alternada,
+  .rodape {
+    background: none;
+    color: #000000;
+  }
+  .heroi-titulo { color: #000000; }
+  /* Mostra o endereço dos links externos entre parênteses, já que no papel não dá para clicar */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+  .js .revelar { opacity: 1; transform: none; }
+}
+
+
+/* =====================================================================
+   == 25 PAINÉIS "VER CÓDIGO" E PÁGINA DE CÓDIGOS
+   Estilo dos painéis montados pelo js/painel-codigos.js.
+   Isto é da ferramenta do Catálogo: os alunos não precisam copiar esta seção.
+   ===================================================================== */
+.codigo {
+  margin-block: var(--espaco-3) var(--espaco-4);
+}
+.exemplo .codigo {
+  margin-bottom: 0;
+}
+
+.codigo-painel {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  overflow: hidden;
+}
+.codigo-painel[open] {
+  box-shadow: var(--sombra);
+}
+
+/* A linha clicável */
+.codigo-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-3);
+  padding: 0.7rem var(--espaco-3);
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.95rem;
+}
+.codigo-resumo::-webkit-details-marker { display: none; }
+.codigo-resumo:hover { background-color: var(--cor-superficie-2); }
+
+.codigo-rotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.2em 0.7em;
+  border-radius: 999px;
+  background-color: var(--cor-tinta);
+  color: #ffffff;
+  font-family: var(--fonte-codigo);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+[data-tema="escuro"] .codigo-rotulo { background-color: var(--cor-verde); color: #06201c; }
+/* Setinha que gira quando o painel abre */
+.codigo-rotulo::before {
+  content: "▸";
+  transition: transform var(--transicao);
+}
+.codigo-painel[open] .codigo-rotulo::before {
+  transform: rotate(90deg);
+}
+.codigo-titulo {
+  flex: 1;
+  min-width: 12ch;
+  font-weight: 700;
+  color: var(--cor-titulo);
+}
+.codigo-linguagens {
+  display: flex;
+  gap: 0.3rem;
+}
+.codigo-selo {
+  padding: 0.05em 0.5em;
+  border-radius: 4px;
+  font-family: var(--fonte-codigo);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+/* Uma cor por linguagem, a mesma nas abas */
+.codigo-selo-html { background-color: #fde0d6; color: #8a2c0d; }
+.codigo-selo-css  { background-color: #d9e8fb; color: #0f4a8a; }
+.codigo-selo-js   { background-color: #fff1bf; color: #6b5200; }
+
+.codigo-corpo {
+  padding: 0 var(--espaco-3) var(--espaco-3);
+  border-top: 1px solid var(--cor-borda);
+}
+.codigo-nota {
+  margin: var(--espaco-3) 0;
+  max-width: 80ch;
+  font-size: 0.95rem;
+  color: var(--cor-texto-suave);
+}
+.codigo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2) var(--espaco-4);
+  margin: 0 0 var(--espaco-3);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.codigo-abas {
+  display: flex;
+  gap: var(--espaco-1);
+  overflow-x: auto;
+}
+.codigo-aba {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--cor-borda);
+  border-bottom: 0;
+  border-radius: var(--raio-pequeno) var(--raio-pequeno) 0 0;
+  background-color: var(--cor-superficie-2);
+  color: var(--cor-texto-suave);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.codigo-aba[aria-selected="true"] {
+  background-color: var(--cor-codigo-fundo);
+  border-color: var(--cor-codigo-fundo);
+  color: #ffffff;
+}
+
+.codigo-area {
+  border-radius: 0 var(--raio-pequeno) var(--raio-pequeno) var(--raio-pequeno);
+  background-color: var(--cor-codigo-fundo);
+  overflow: hidden;
+}
+.codigo-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  padding: 0.6rem var(--espaco-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.codigo-onde {
+  margin: 0;
+  max-width: none;
+  font-size: 0.85rem;
+  color: #b9c9d6;
+}
+.codigo-onde strong {
+  font-family: var(--fonte-codigo);
+  color: var(--cor-destaque);
+  margin-right: 0.3em;
+}
+.codigo-copiar {
+  padding: 0.35rem 0.9rem;
+  border: 0;
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-destaque);
+  color: #12324a;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.codigo-copiar.copiado {
+  background-color: #7be0b0;
+}
+.codigo-pre {
+  margin: 0;
+  max-height: 460px;        /* código longo rola dentro da caixa */
+  overflow: auto;
+  padding: var(--espaco-3);
+  color: var(--cor-codigo-texto);
+  font-family: var(--fonte-codigo);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
+.codigo-pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+.codigo-lembrete {
+  margin: var(--espaco-2) 0 0;
+  max-width: none;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+/* Página codigos.html */
+.codigos-como-usar {
+  counter-reset: passo;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaco-3);
+  padding: 0;
+  list-style: none;
+}
+.codigos-como-usar li {
+  counter-increment: passo;
+  padding: var(--espaco-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+.codigos-como-usar li::before {
+  content: counter(passo);
+  display: inline-grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-bottom: var(--espaco-2);
+  border-radius: 50%;
+  background-color: var(--cor-destaque);
+  color: #12324a;
+  font-family: var(--fonte-codigo);
+  font-weight: 600;
+}
+.codigos-busca {
+  position: sticky;
+  top: calc(var(--altura-cabecalho) - 8px);
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-3);
+  padding: var(--espaco-3) 0;
+  background-color: var(--cor-fundo);
+}
+.codigos-busca input {
+  flex: 1;
+  min-width: 220px;
+  max-width: 480px;
+}
+.codigos-busca p { margin: 0; color: var(--cor-texto-suave); }
+.codigo-grupo {
+  display: grid;
+  gap: var(--espaco-2);
+  margin-bottom: var(--espaco-5);
+}
+.codigo-grupo-titulo {
+  font-size: 1.4rem;
+  margin: 0 0 var(--espaco-2);
+}
+
+@media print {
+  .codigo { display: none; }
+}
+
+
+/* =====================================================================
+   == 26 TRILHA "PASSO A PASSO" E VERIFICADOR
+   Estilo das páginas passo-*.html, passo-a-passo.html e verificador.html.
+   Ferramenta do Catálogo: os alunos não precisam copiar esta seção.
+   ===================================================================== */
+.trilha-corpo {
+  display: grid;
+  gap: var(--espaco-5);
+  padding-block: var(--espaco-5) var(--espaco-6);
+  max-width: 900px;
+}
+.trilha-secao {
+  display: grid;
+  gap: var(--espaco-3);
+}
+.trilha-secao > h2 {
+  font-size: clamp(1.45rem, 1.5vw + 1rem, 1.9rem);
+  padding-top: var(--espaco-3);
+  border-top: 2px solid var(--cor-borda);
+}
+.trilha-secao p,
+.trilha-secao li {
+  max-width: 72ch;
+}
+.trilha-secao > * {
+  margin-block: 0;
+}
+/* Itens de grid não encolhem menos que o conteúdo: um comando longo esticaria a página no celular.
+   min-width: 0 deixa a coluna encolher, e o comando rola dentro da própria caixa. */
+.trilha-corpo > *,
+.trilha-secao > *,
+.erro-comum > *,
+details.alternativa > * {
+  min-width: 0;
+}
+
+/* Mapa com os 10 passos, no topo de cada página */
+.trilha-mapa ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trilha-mapa a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem 0.3rem 0.3rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.trilha-mapa a:hover { border-color: var(--cor-verde); }
+.mapa-num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background-color: var(--cor-superficie-2);
+  font-family: var(--fonte-codigo);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.trilha-mapa a[aria-current="step"] {
+  border-color: var(--cor-tinta);
+  background-color: var(--cor-tinta);
+  color: #ffffff;
+}
+[data-tema="escuro"] .trilha-mapa a[aria-current="step"] { border-color: var(--cor-verde); background-color: var(--cor-verde); color: #06201c; }
+.trilha-mapa a[aria-current="step"] .mapa-num { background-color: var(--cor-destaque); color: #12324a; }
+.trilha-mapa a.feito .mapa-num { background-color: var(--cor-verde); color: #ffffff; }
+.trilha-mapa a.feito .mapa-num::after { content: "✓"; }
+.trilha-mapa a.feito .mapa-num { font-size: 0; }
+.trilha-mapa a.feito .mapa-num::after { font-size: 0.8rem; }
+
+/* Passos numerados dentro das seções */
+ol.passos {
+  display: grid;
+  gap: var(--espaco-2);
+  padding-left: 1.4rem;
+}
+ol.passos li::marker {
+  color: var(--cor-verde);
+  font-weight: 700;
+}
+
+/* Caixa de terminal: comandos com botão de copiar */
+.terminal {
+  border-radius: var(--raio);
+  background-color: var(--cor-terminal);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+.terminal-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  padding: 0.45rem var(--espaco-3);
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #9fb3c4;
+  font-family: var(--fonte-codigo);
+  font-size: 0.8rem;
+}
+.terminal-copiar {
+  padding: 0.25rem 0.8rem;
+  border: 0;
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-destaque);
+  color: #12324a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.terminal-copiar.copiado { background-color: #7be0b0; }
+.terminal pre {
+  margin: 0;
+  padding: var(--espaco-3);
+  overflow-x: auto;
+  color: #e8f0f6;
+  font-family: var(--fonte-codigo);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.terminal pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+.t-linha { display: block; white-space: pre; }
+.t-prompt { color: #7be0b0; user-select: none; }
+.t-coment { color: #7f93a5; font-style: italic; }
+.terminal-nota {
+  margin: calc(var(--espaco-2) * -1) 0 0;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+/* "O que deve aparecer" */
+.saida,
+.bloco-exemplo {
+  border: 1px dashed var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  overflow: hidden;
+}
+.saida-titulo {
+  margin: 0;
+  padding: 0.45rem var(--espaco-3);
+  border-bottom: 1px dashed var(--cor-borda);
+  color: var(--cor-texto-suave);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.saida pre {
+  margin: 0;
+  padding: var(--espaco-3);
+  overflow-x: auto;
+  font-family: var(--fonte-codigo);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.saida pre code { background: none; padding: 0; font-size: inherit; }
+.bloco-exemplo .bloco-codigo { margin: 0; border-radius: 0; }
+
+/* As quatro caixas didáticas */
+.confira {
+  padding: var(--espaco-3) var(--espaco-4);
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-confira-fundo);
+  color: var(--cor-confira-texto);
+}
+.confira p { margin: 0; }
+.confira code { background-color: rgba(0, 0, 0, 0.08); color: inherit; }
+.confira details { margin-top: var(--espaco-2); }
+.confira summary {
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.confira details p { margin-top: var(--espaco-2); }
+
+.erro-comum {
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-left: 6px solid var(--cor-erro);
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-erro-fundo);
+}
+.erro-comum > * { margin-block: 0 var(--espaco-2); }
+.erro-comum > *:last-child { margin-bottom: 0; }
+.erro-comum-titulo strong { color: var(--cor-erro); }
+[data-tema="escuro"] .erro-comum-titulo strong { color: #ff8a93; }
+
+.voce-tenta {
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 2px dashed var(--cor-verde);
+  border-radius: var(--raio-pequeno);
+}
+.voce-tenta > * { margin-block: 0 var(--espaco-2); }
+.voce-tenta > *:last-child { margin-bottom: 0; }
+.voce-tenta-titulo {
+  color: var(--cor-verde);
+  font-weight: 700;
+}
+
+.pronto-quando {
+  padding: var(--espaco-4);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  transition: border-color var(--transicao), background-color var(--transicao);
+}
+.pronto-quando h2 { margin: 0 0 var(--espaco-2); font-size: 1.4rem; }
+.pronto-quando > p { color: var(--cor-texto-suave); font-size: 0.92rem; margin: 0 0 var(--espaco-3); }
+.pronto-quando ul {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pronto-quando label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-2);
+  cursor: pointer;
+}
+.pronto-quando input {
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.2rem;
+  accent-color: var(--cor-verde);
+}
+.pronto-quando.completo {
+  border-color: var(--cor-verde);
+  background-color: var(--cor-ok-fundo);
+}
+.pronto-quando.completo h2::after {
+  content: " ✓";
+  color: var(--cor-verde);
+}
+.pronto-exemplo { padding: var(--espaco-3) var(--espaco-4); }
+.pronto-exemplo p { margin: 0; }
+
+/* Anterior / próximo */
+.passo-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaco-3);
+}
+.passo-nav a {
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  color: var(--cor-titulo);
+  font-weight: 700;
+  text-decoration: none;
+}
+.passo-nav a:hover { border-color: var(--cor-verde); }
+.passo-nav span {
+  color: var(--cor-texto-suave);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+.passo-prox { text-align: right; }
+
+/* O prompt do Git Bash com cada parte explicada (Passo 2) */
+.prompt-anotado {
+  padding: var(--espaco-4);
+  border-radius: var(--raio);
+  background-color: var(--cor-terminal);
+  color: #e8f0f6;
+  font-family: var(--fonte-codigo);
+  font-size: 0.95rem;
+  overflow-x: auto;
+}
+.prompt-linha { white-space: pre; }
+.pa { font-weight: 600; }
+.pa-usuario { color: #7be0b0; }
+.pa-sistema { color: #d38cf2; }
+.pa-pasta { color: #ffd166; }
+.pa-repo { color: #7fc8ff; }
+.pa-cifrao { color: #e8f0f6; }
+.cursor { animation: piscar 1s steps(1) infinite; }
+@keyframes piscar { 50% { opacity: 0; } }
+.prompt-legenda {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: var(--espaco-4) 0 0;
+  padding: var(--espaco-3) 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  list-style: none;
+  font-family: var(--fonte-texto);
+  font-size: 0.92rem;
+  white-space: normal;
+}
+.prompt-legenda code { background-color: rgba(255, 255, 255, 0.1); color: #ffffff; }
+.prompt-legenda .pa { font-family: var(--fonte-codigo); margin-right: 0.4rem; }
+
+/* Fluxo do Git (Passo 8) */
+.fluxo-git {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--espaco-2);
+}
+.fluxo-caixa {
+  display: grid;
+  gap: 0.2rem;
+  flex: 1 1 130px;
+  padding: var(--espaco-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-superficie);
+}
+.fluxo-caixa span { color: var(--cor-texto-suave); font-size: 0.85rem; }
+.fluxo-destaque { border: 2px solid var(--cor-verde); }
+.fluxo-seta {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  padding-inline: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}
+.fluxo-seta::after { content: "→"; font-size: 1.2rem; line-height: 1; }
+
+/* Caminho alternativo, recolhido */
+details.alternativa {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-superficie);
+}
+details.alternativa > summary {
+  padding: var(--espaco-3);
+  font-weight: 700;
+  cursor: pointer;
+}
+details.alternativa > *:not(summary) { margin: 0 var(--espaco-3) var(--espaco-3); }
+
+/* Página inicial da trilha */
+.lista-check-trilha { display: grid; gap: var(--espaco-2); padding-left: 1.2rem; }
+.formato-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--espaco-3);
+}
+.trilha-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-4);
+  padding-top: var(--espaco-3);
+  border-top: 2px solid var(--cor-borda);
+}
+.trilha-resumo h2 { margin: 0; font-size: clamp(1.45rem, 1.5vw + 1rem, 1.9rem); }
+.trilha-resumo p { margin: 0; color: var(--cor-texto-suave); font-weight: 700; }
+.trilha-lista {
+  display: grid;
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trilha-card {
+  display: grid;
+  grid-template-columns: auto 1fr 130px;
+  align-items: center;
+  gap: var(--espaco-3) var(--espaco-4);
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+.trilha-card-num {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background-color: var(--cor-superficie-2);
+  color: var(--cor-titulo);
+  font-family: var(--fonte-titulo);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.trilha-card.feito .trilha-card-num { background-color: var(--cor-verde); color: #ffffff; }
+.trilha-card-corpo h3 { margin: 0 0 0.2rem; font-size: 1.15rem; }
+.trilha-card-corpo h3 a { color: var(--cor-titulo); text-decoration: none; }
+.trilha-card-corpo h3 a:hover { text-decoration: underline; }
+.trilha-card-corpo p { margin: 0; font-size: 0.95rem; }
+.trilha-card-tempo { color: var(--cor-texto-suave); font-size: 0.85rem !important; margin-top: 0.2rem !important; }
+.trilha-card-progresso p { margin: 0.3rem 0 0; font-size: 0.82rem; color: var(--cor-texto-suave); text-align: right; font-variant-numeric: tabular-nums; }
+.barrinha {
+  height: 8px;
+  border-radius: 999px;
+  background-color: var(--cor-superficie-2);
+  overflow: hidden;
+}
+.barrinha span {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--cor-verde);
+  transition: width 0.3s ease;
+}
+.ferramentas-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ferramentas-lista li {
+  display: grid;
+  gap: 0.3rem;
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+.ferramentas-lista span { color: var(--cor-texto-suave); font-size: 0.92rem; }
+.tabela-erros td:first-child { min-width: 14rem; }
+.tabela-erros td:first-child code { white-space: normal; }
+
+@media (max-width: 700px) {
+  .trilha-card { grid-template-columns: auto 1fr; }
+  .trilha-card-progresso { grid-column: 1 / -1; }
+  .trilha-card-progresso p { text-align: left; }
+  .passo-nav { grid-template-columns: 1fr; }
+  .passo-prox { text-align: left; }
+  .fluxo-git { flex-direction: column; }
+  .fluxo-seta::after { content: "↓"; }
+}
+@media print {
+  .trilha-mapa, .passo-nav, .terminal-copiar { display: none !important; }
+}
+
+/* ----- Verificador ----- */
+.verif-entrada {
+  display: grid;
+  gap: var(--espaco-2);
+}
+.verif-botao {
+  display: grid;
+  gap: 0.2rem;
+  justify-items: start;
+  padding: var(--espaco-4);
+  border: 2px dashed var(--cor-verde);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  cursor: pointer;
+  transition: background-color var(--transicao);
+}
+.verif-botao:hover { background-color: var(--cor-superficie-2); }
+.verif-botao-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--cor-titulo);
+}
+.verif-botao span:last-child { color: var(--cor-texto-suave); }
+/* O input fica escondido; o foco do teclado aparece no rótulo */
+#pasta-projeto:focus-visible + .verif-estado,
+.verif-entrada:focus-within .verif-botao {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 3px;
+}
+.verif-estado { margin: 0; color: var(--cor-texto-suave); }
+.verif-exemplos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+.verif-resumo {
+  display: grid;
+  gap: var(--espaco-2);
+  padding: var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+}
+.verif-resumo h2 { margin: 0; font-size: 1.4rem; }
+.verif-resumo p { margin: 0; }
+.verif-contagem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+.verif-selo {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+.verif-selo.verif-erro { background-color: #fbdde0; color: #8c1624; }
+.verif-selo.verif-aviso { background-color: #ffefc7; color: #7a4a00; }
+.verif-selo.verif-ok { background-color: #d5f2ea; color: #0d5c50; }
+.verif-conclusao { font-weight: 700; }
+.verif-arquivos { color: var(--cor-texto-suave); font-size: 0.85rem; word-break: break-word; }
+.verif-filtro {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  cursor: pointer;
+}
+.verif-filtro input { width: 1.1rem; height: 1.1rem; accent-color: var(--cor-verde); }
+.verif-grupo { display: grid; gap: var(--espaco-2); margin-bottom: var(--espaco-4); }
+.verif-grupo h3 {
+  margin: 0;
+  font-family: var(--fonte-codigo);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.verif-lista {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.verif-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  border: 1px solid var(--cor-borda);
+  border-left-width: 5px;
+  border-radius: var(--raio-pequeno);
+  background-color: var(--cor-superficie);
+}
+.verif-item p { margin: 0 0 0.3rem; max-width: 75ch; }
+.verif-item > div > *:last-child { margin-bottom: 0; }
+.verif-icone {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.verif-item.verif-erro { border-left-color: var(--cor-erro); }
+.verif-item.verif-erro .verif-icone { background-color: var(--cor-erro); }
+.verif-item.verif-aviso { border-left-color: var(--cor-alerta); }
+.verif-item.verif-aviso .verif-icone { background-color: var(--cor-alerta); }
+.verif-item.verif-ok { border-left-color: var(--cor-verde); }
+.verif-item.verif-ok .verif-icone { background-color: var(--cor-verde); }
+.verif-item.verif-info { border-left-color: var(--cor-link); }
+.verif-item.verif-info .verif-icone { background-color: var(--cor-link); }
+.verif-titulo { font-weight: 700; }
+.verif-itens {
+  margin: 0.3rem 0;
+  padding-left: 1.2rem;
+  font-family: var(--fonte-codigo);
+  font-size: 0.82rem;
+  word-break: break-word;
+}
+.verif-corrigir { font-size: 0.95rem; }
+.verif-vazio { color: var(--cor-texto-suave); }
+/* Código no meio do texto (endereços, comandos longos) pode quebrar a linha no celular */
+.trilha-corpo :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+.trilha-secao .saida-titulo,
+.trilha-secao .terminal-nota,
+.trilha-secao .saida p {
+  max-width: none;
+}
+/* Títulos grandes quebram em linhas de tamanho parecido, sem palavra sozinha no fim */
+.heroi-titulo,
+.secao-titulo,
+.trilha-secao > h2 {
+  text-wrap: balance;
+}
+/* Tabelas da trilha: texto sempre à esquerda (a regra de números do boletim não vale aqui) */
+.trilha-secao .tabela tbody td {
+  text-align: left;
+  vertical-align: top;
+}
+.trilha-secao .tabela:not(.tabela-erros) code {
+  white-space: nowrap;          /* comando inteiro numa linha; a tabela rola no celular */
+  overflow-wrap: normal;
+}
+/* Cartões e itens de lista ocupam a largura toda (o limite de 72ch é só para texto corrido) */
+.trilha-secao li.trilha-card,
+.trilha-secao .ferramentas-lista li,
+.trilha-secao li.verif-item {
+  max-width: none;
+}
+
+
+/* =====================================================================
+   == 27 "ENTENDA ESTE CÓDIGO" E DOCUMENTAÇÃO
+   Código colorido e clicável (js/entenda.js) e as páginas de documentação.
+   Isto é da ferramenta do site: os alunos não precisam copiar esta seção.
+   ===================================================================== */
+:root {
+  --tk-tag: #7fd0e6;      /* tags e objetos globais */
+  --tk-attr: #ffc94d;     /* atributos */
+  --tk-texto: #a8e6a1;    /* valores de atributo e textos entre aspas */
+  --tk-comentario: #93a9bc;
+  --tk-palavra: #f59ac9;  /* palavras-chave do JS e regras @ do CSS */
+  --tk-prop: #9ecbff;     /* propriedades */
+  --tk-seletor: #ffd479;
+  --tk-numero: #f7b27a;
+  --tk-funcao: #c9b3ff;
+  --tk-sinal: #d4dee7;
+  --tk-seu: #ffe9a8;      /* nomes criados por você */
+}
+.codigo-pre .tk-link { cursor: pointer; border-radius: 3px; }
+.codigo-pre .tk-link:hover { background-color: rgba(255, 255, 255, 0.14); }
+.tk-tag, .tk-glob { color: var(--tk-tag); }
+.tk-attr { color: var(--tk-attr); }
+.tk-val, .tk-str { color: var(--tk-texto); }
+.tk-com { color: var(--tk-comentario); font-style: italic; }
+.tk-kw, .tk-at { color: var(--tk-palavra); }
+.tk-prop { color: var(--tk-prop); }
+.tk-sel { color: var(--tk-seletor); }
+.tk-num, .tk-ent { color: var(--tk-numero); }
+.tk-fn, .tk-pseudo { color: var(--tk-funcao); }
+.tk-op, .tk-pun { color: var(--tk-sinal); }
+.tk-ev { color: var(--tk-seletor); }
+/* Nome criado por você: sublinhado tracejado, para diferenciar das palavras da linguagem */
+.tk-usr {
+  color: var(--tk-seu);
+  text-decoration: underline dashed rgba(255, 233, 168, 0.7);
+  text-underline-offset: 3px;
+}
+.codigo-pre .tk-marcado {
+  background-color: rgba(255, 183, 3, 0.38);
+  outline: 1px solid var(--cor-destaque);
+}
+
+/* Legenda das cores, abaixo do código */
+.entenda {
+  margin-top: var(--espaco-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  background-color: var(--cor-superficie);
+}
+.entenda-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-1) var(--espaco-2);
+  padding: var(--espaco-2) var(--espaco-3);
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--cor-titulo);
+}
+.entenda-conta {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+.entenda[open] > .entenda-resumo { border-bottom: 1px solid var(--cor-borda); }
+.entenda-dica,
+.entenda-desc {
+  max-width: none;
+  margin: var(--espaco-2) var(--espaco-3) 0;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+.entenda-subtitulo {
+  margin: var(--espaco-3) var(--espaco-3) 0;
+  font-size: 1rem;
+  color: var(--cor-titulo);
+}
+.entenda-grupo {
+  display: grid;
+  gap: 6px;
+  padding: var(--espaco-2) var(--espaco-3) var(--espaco-3);
+}
+.termo {
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background-color: var(--cor-fundo);
+  min-width: 0;
+}
+.termo-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.termo-nome {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.termo-cat {
+  font-size: 0.8rem;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: var(--cor-superficie-2);
+  color: var(--cor-texto);
+}
+.termo-cat-usr { background-color: var(--cor-confira-fundo); color: var(--cor-confira-texto); }
+.termo-linhas {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}
+.termo-corpo {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 16px;
+  margin: 0;
+  padding: 4px 12px 8px;
+}
+.termo-corpo dt { font-weight: 700; color: var(--cor-titulo); }
+.termo-corpo dd { margin: 0; min-width: 0; }
+.termo-exemplo {
+  margin: 0;
+  padding: 8px 10px;
+  overflow-x: auto;
+  border-radius: 6px;
+  background-color: var(--cor-codigo-fundo);
+  color: var(--cor-codigo-texto);
+  font-family: var(--fonte-codigo);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+}
+.termo-exemplo code { background: none; padding: 0; color: inherit; font-size: inherit; }
+.termo-usos { margin: 0; padding-left: 1.1rem; }
+.termo-usos li { max-width: none; }
+.termo-liga { font-weight: 700; }
+.termo-doc {
+  display: inline-block;
+  margin: 0 12px 10px;
+  font-size: 0.9rem;
+}
+.termo-piscar { animation: termo-piscar 1.2s ease; }
+@keyframes termo-piscar {
+  from { box-shadow: 0 0 0 4px var(--cor-destaque); }
+  to { box-shadow: 0 0 0 0 transparent; }
+}
+@media (max-width: 600px) {
+  .termo-corpo { grid-template-columns: 1fr; gap: 2px; }
+  .termo-corpo dd { margin-bottom: 6px; }
+  .termo-linhas { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .termo-piscar { animation: none; outline: 3px solid var(--cor-destaque); }
+}
+/* Números das linhas: um contador do CSS conta cada <span class="linha"> */
+.codigo-pre code.com-linhas { counter-reset: linha; display: block; }
+.codigo-pre code.com-linhas .linha { counter-increment: linha; }
+.codigo-pre code.com-linhas .linha::before {
+  content: counter(linha);
+  display: inline-block;
+  width: 2.2em;
+  margin-right: 1em;
+  padding-right: 0.5em;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: right;
+  color: #6f879b;
+  user-select: none;       /* o número não vai junto quando alguém seleciona e copia */
+}
+
+/* ---------- Páginas de documentação ---------- */
+.doc-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: var(--espaco-5);
+  align-items: start;
+}
+.doc-corpo { max-width: 860px; }
+.doc-indice {
+  position: sticky;
+  top: 5.5rem;
+  padding-top: var(--espaco-5);
+  max-height: calc(100vh - 6rem);
+  overflow: auto;
+}
+.doc-indice summary { font-weight: 700; cursor: pointer; color: var(--cor-titulo); }
+.doc-indice ol { margin: var(--espaco-2) 0 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.doc-indice a {
+  display: block;
+  padding: 4px 10px;
+  border-left: 3px solid transparent;
+  border-radius: 0 6px 6px 0;
+  color: var(--cor-texto-suave);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+.doc-indice a:hover { color: var(--cor-link); background-color: var(--cor-superficie-2); }
+.doc-indice a[aria-current] { border-left-color: var(--cor-verde); color: var(--cor-titulo); font-weight: 700; }
+@media (max-width: 900px) {
+  .doc-layout { grid-template-columns: 1fr; gap: 0; }
+  .doc-indice { position: static; max-height: none; }
+  .doc-indice-caixa { padding: var(--espaco-2) var(--espaco-3); border: 1px solid var(--cor-borda); border-radius: 8px; background-color: var(--cor-superficie); }
+}
+.doc-secao h3 { margin: var(--espaco-3) 0 0; font-size: 1.2rem; color: var(--cor-titulo); }
+
+/* Exemplo de código */
+.doc-exemplo { margin: 0; min-width: 0; }
+.doc-ex-titulo {
+  padding: 6px 12px;
+  border-radius: 8px 8px 0 0;
+  background-color: var(--cor-tinta);
+  color: #e6f1f8;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+[data-tema="escuro"] .doc-ex-titulo { background-color: #1d3a52; }
+.doc-codigo.codigo-pre {
+  max-height: none;
+  border-radius: 0 0 8px 8px;
+  background-color: var(--cor-codigo-fundo);
+}
+.doc-exemplo > .doc-codigo:first-child { border-radius: 8px; }
+.doc-explica {
+  margin-top: 6px;
+  padding: var(--espaco-2) var(--espaco-3);
+  border-left: 4px solid var(--cor-destaque);
+  border-radius: 0 8px 8px 0;
+  background-color: var(--cor-superficie-2);
+}
+.doc-explica p { margin: 0 0 4px; max-width: none; }
+.doc-explica-nome { font-weight: 700; color: var(--cor-titulo); }
+
+/* Resultado de HTML */
+.doc-resultado { border: 1px solid var(--cor-borda); border-radius: 8px; background-color: var(--cor-superficie); }
+.doc-resultado-titulo { margin: 0; padding: 6px 12px; border-bottom: 1px dashed var(--cor-borda); font-size: 0.82rem; font-weight: 700; color: var(--cor-texto-suave); }
+.doc-resultado-corpo { padding: var(--espaco-3); }
+
+/* Caixa "Guarde isto" */
+.doc-nota {
+  padding: var(--espaco-3) var(--espaco-4);
+  border-left: 6px solid var(--cor-verde);
+  border-radius: 0 8px 8px 0;
+  background-color: var(--cor-ok-fundo);
+}
+.doc-nota > * { margin-block: 0 var(--espaco-2); }
+.doc-nota > *:last-child { margin-bottom: 0; }
+.doc-nota-titulo { font-weight: 700; color: var(--cor-titulo); }
+.doc-tabela td { vertical-align: top; }
+.doc-secao .tabela tbody td { text-align: left; }
+.doc-ok { font-weight: 700; color: var(--cor-verde); }
+
+/* Anatomia (tag e regra desenhadas em cores) */
+.doc-anatomia {
+  padding: var(--espaco-4);
+  overflow-x: auto;
+  border-radius: 8px;
+  background-color: var(--cor-codigo-fundo);
+  color: var(--cor-codigo-texto);
+  font-family: var(--fonte-codigo);
+  font-size: clamp(0.95rem, 2.5vw, 1.3rem);
+  line-height: 2;
+  white-space: nowrap;
+}
+.an { padding: 2px 4px; border-radius: 4px; }
+.an-abre { background-color: rgba(127, 208, 230, 0.25); }
+.an-attr { background-color: rgba(255, 201, 77, 0.3); }
+.an-valor { background-color: rgba(168, 230, 161, 0.3); }
+.an-conteudo { background-color: rgba(255, 255, 255, 0.12); }
+.an-fecha { background-color: rgba(245, 154, 201, 0.3); }
+.doc-legenda-anatomia { display: grid; gap: 6px; padding: 0; list-style: none; }
+.an-cor { display: inline-block; width: 1em; height: 1em; margin-right: 8px; vertical-align: -2px; border-radius: 3px; }
+.an-cor.an-abre { background-color: #7fd0e6; }
+.an-cor.an-attr { background-color: #ffc94d; }
+.an-cor.an-valor { background-color: #a8e6a1; }
+.an-cor.an-conteudo { background-color: #b9c9d6; }
+.an-cor.an-fecha { background-color: #f59ac9; }
+
+/* Experimentos ("brinquedos") */
+.brinquedo {
+  padding: var(--espaco-3) var(--espaco-4) var(--espaco-4);
+  border: 2px solid var(--cor-verde);
+  border-radius: 12px;
+  background-color: var(--cor-superficie);
+  min-width: 0;
+}
+.brinquedo > p { margin: 0 0 var(--espaco-2); max-width: none; }
+.brinquedo-titulo { font-weight: 700; color: var(--cor-verde); }
+.brinquedo-pronto { display: grid; gap: var(--espaco-3); min-width: 0; }
+.brinq-controles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--espaco-2) var(--espaco-3); }
+.brinq-controles-largos { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.brinq-controle { display: grid; gap: 4px; font-family: var(--fonte-codigo); font-size: 0.85rem; }
+.brinq-controle select,
+.brinq-controle input[type="text"] {
+  padding: 6px 8px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font: inherit;
+  min-width: 0;
+}
+.brinq-controle input[type="range"] { accent-color: var(--cor-verde); }
+.brinq-palco {
+  padding: var(--espaco-3);
+  border: 2px dashed var(--cor-borda);
+  border-radius: 8px;
+  background-color: var(--cor-fundo);
+  min-height: 160px;
+  overflow: hidden;
+}
+.brinq-item {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: var(--cor-tinta);
+  color: #ffffff;
+  font-family: var(--fonte-codigo);
+  font-weight: 600;
+  text-align: center;
+}
+[data-tema="escuro"] .brinq-item { background-color: #2a6f8f; }
+.brinq-flex { display: flex; min-height: 220px; }
+.brinq-grid { display: grid; }
+.brinq-codigo {
+  margin: 0;
+  padding: var(--espaco-3);
+  overflow-x: auto;
+  border-radius: 8px;
+  background-color: var(--cor-codigo-fundo);
+  color: var(--cor-codigo-texto);
+  font-family: var(--fonte-codigo);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.brinq-codigo code { background: none; padding: 0; color: inherit; font-size: inherit; }
+.brinq-legenda { margin: 0; max-width: none; font-size: 0.92rem; color: var(--cor-texto-suave); }
+/* modelo de caixa */
+.brinq-caixa-palco { display: grid; place-items: center; overflow: auto; }
+.bx { box-sizing: content-box; }
+.bx-margem { background-color: rgba(247, 178, 122, 0.45); outline: 1px dashed #b86e00; }
+.bx-borda { background-color: #a07000; }
+.bx-padding { background-color: rgba(42, 157, 143, 0.55); }
+.bx-conteudo { padding: 18px 0; background-color: #4d8fc9; color: #ffffff; font-size: 0.85rem; text-align: center; overflow: hidden; }
+/* position */
+.brinq-pos { position: relative; height: 260px; overflow: auto; }
+.brinq-pos-aviso { margin: 0 0 8px; font-size: 0.85rem; color: var(--cor-texto-suave); }
+.brinq-pos-bloco { margin-bottom: 8px; background-color: var(--cor-superficie-2); color: var(--cor-texto); }
+.brinq-pos-alvo { width: 120px; margin-bottom: 8px; background-color: var(--cor-destaque); color: #12324a; z-index: 1; }
+/* especificidade */
+.brinq-espec-linha { margin: 0 0 6px; max-width: none; overflow-wrap: anywhere; }
+.brinq-espec-det { display: block; font-size: 0.85rem; color: var(--cor-texto-suave); }
+.brinq-vencedor { margin: 0; font-weight: 700; color: var(--cor-verde); max-width: none; }
+/* seletores */
+.brinq-sugestoes { display: flex; flex-wrap: wrap; gap: 6px; }
+.brinq-chip {
+  padding: 3px 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background-color: var(--cor-superficie-2);
+  color: var(--cor-texto);
+  font-family: var(--fonte-codigo);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.brinq-chip:hover { border-color: var(--cor-verde); }
+.brinq-linha { display: block; }
+.brinq-achou { background-color: rgba(255, 183, 3, 0.35); outline: 1px solid var(--cor-destaque); }
+/* console */
+.brinq-editor {
+  width: 100%;
+  padding: var(--espaco-3);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background-color: var(--cor-codigo-fundo);
+  color: var(--cor-codigo-texto);
+  font-family: var(--fonte-codigo);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  resize: vertical;
+  tab-size: 2;
+}
+.brinq-botoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.brinq-saida {
+  margin: 0;
+  padding: var(--espaco-2) var(--espaco-3) var(--espaco-2) 2.4rem;
+  min-height: 3rem;
+  border-radius: 8px;
+  background-color: var(--cor-terminal);
+  color: #e8f0f6;
+  font-family: var(--fonte-codigo);
+  font-size: 0.88rem;
+}
+.brinq-saida li { max-width: none; padding: 2px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.brinq-saida li::marker { color: #6f879b; }
+.brinq-erro { color: #ff9aa4; }
+.brinq-aviso { color: #ffd479; }
+.brinq-nada { color: #93a9bc; font-style: italic; }
+/* árvore */
+.brinq-arvore ul { margin: 0; padding-left: 1.4rem; border-left: 1px dashed var(--cor-borda); list-style: none; }
+.brinq-arvore > ul { border-left: 0; padding-left: 0; }
+.brinq-arvore li { max-width: none; padding: 3px 0; }
+.brinq-no { font-weight: 700; }
+.brinq-attr { font-family: var(--fonte-codigo); font-size: 0.82rem; color: var(--cor-alerta); }
+.brinq-texto { font-size: 0.88rem; color: var(--cor-texto-suave); font-style: italic; }
+
+/* Referência */
+.ref-rotulo { font-weight: 700; }
+.ref-busca {
+  width: 100%;
+  max-width: 480px;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--cor-borda);
+  border-radius: 8px;
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  font: inherit;
+}
+.ref-contagem { color: var(--cor-texto-suave); }
+.ref-lang { margin: var(--espaco-4) 0 0; font-size: 1.5rem; }
+.ref-grupo { display: grid; gap: var(--espaco-2); margin-top: var(--espaco-3); }
+.ref-grupo-titulo { margin: 0; font-size: 1.1rem; color: var(--cor-titulo); }
+.ref-lista { display: grid; gap: 6px; }
+.ref-termo {
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background-color: var(--cor-superficie);
+  scroll-margin-top: 6rem;
+  min-width: 0;
+}
+.ref-termo > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.ref-curto { font-size: 0.9rem; color: var(--cor-texto-suave); }
+.ref-termo .termo-corpo { padding-bottom: 12px; }
+
+/* Página inicial da documentação */
+.modulos-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--espaco-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.modulo-card {
+  display: grid;
+  align-content: start;
+  gap: var(--espaco-2);
+  max-width: none;
+  padding: var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: 12px;
+  background-color: var(--cor-superficie);
+}
+.modulo-card > * { margin: 0; max-width: none; }
+.modulo-ativo { border: 2px solid var(--cor-verde); }
+.modulo-num { font-family: var(--fonte-codigo); font-size: 0.8rem; color: var(--cor-texto-suave); }
+.modulo-card h3 { font-size: 1.15rem; }
+.modulo-selo { justify-self: start; padding: 2px 10px; border-radius: 999px; background-color: var(--cor-superficie-2); font-size: 0.78rem; font-weight: 700; }
+.modulo-disponivel { background-color: var(--cor-verde); color: #ffffff; }
+.modulo-ferramentas { font-size: 0.88rem; color: var(--cor-texto-suave); }
+.modulo-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.mapa-sistema {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+.mapa-bloco {
+  padding: var(--espaco-3);
+  border-radius: 12px;
+  border: 2px solid var(--cor-borda);
+  background-color: var(--cor-superficie);
+  min-width: 0;
+}
+.mapa-bloco p { margin: 0 0 6px; }
+.mapa-bloco ul { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; }
+.mapa-titulo { font-weight: 800; color: var(--cor-titulo); }
+.mapa-front { border-color: #7fb8d6; }
+.mapa-back { border-color: var(--cor-verde); }
+.mapa-dados { border-color: var(--cor-destaque); }
+.mapa-seta {
+  display: grid;
+  gap: 4px;
+  font-family: var(--fonte-codigo);
+  font-size: 0.75rem;
+  color: var(--cor-texto-suave);
+  text-align: center;
+}
+.mapa-base { max-width: none; }
+@media (max-width: 800px) {
+  .mapa-sistema { grid-template-columns: 1fr; }
+  .mapa-seta { grid-auto-flow: column; justify-content: center; gap: var(--espaco-3); }
+}
+/* Página inicial da documentação: selos, roteiro */
+.modulo-selos { display: flex; flex-wrap: wrap; gap: 6px; }
+.modulo-aluno { background-color: #d8eefc; color: #0d4f73; }
+.modulo-prof { background-color: #efe3ff; color: #4b2a7a; }
+[data-tema="escuro"] .modulo-aluno { background-color: #123a52; color: #bfe6ff; }
+[data-tema="escuro"] .modulo-prof { background-color: #2e2046; color: #e1cffc; }
+.modulo-opcional { border-style: dashed; }
+.modulos-lista .modulo-card:target { outline: 3px solid var(--cor-destaque); }
+.roteiro-lista { display: grid; gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+.roteiro-passo {
+  max-width: none;
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-left: 6px solid var(--cor-verde);
+  border-radius: 0 10px 10px 0;
+  background-color: var(--cor-superficie);
+}
+.roteiro-passo p { margin: 0 0 4px; max-width: none; }
+.roteiro-titulo { font-weight: 700; color: var(--cor-titulo); }
+.roteiro-num {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: var(--cor-tinta);
+  color: #ffffff;
+  font-family: var(--fonte-codigo);
+  font-size: 0.8rem;
+}
+.roteiro-pronto, .roteiro-mods { font-size: 0.92rem; color: var(--cor-texto-suave); }
+
+/* ---------- Página "Usar IA do jeito certo" ---------- */
+.ia-destaque {
+  max-width: none;
+  margin: 0;
+  padding: var(--espaco-4);
+  border-radius: 12px;
+  background-color: var(--cor-tinta);
+  color: #ffffff;
+  font-family: var(--fonte-titulo, inherit);
+  font-size: clamp(1.15rem, 1vw + 1rem, 1.5rem);
+  line-height: 1.5;
+}
+.ia-destaque strong { color: var(--cor-destaque); }
+.ia-estudos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--espaco-3); }
+.ia-estudo { padding: var(--espaco-3) var(--espaco-4); border: 1px solid var(--cor-borda); border-radius: 12px; background-color: var(--cor-superficie); min-width: 0; }
+.ia-estudo p { margin: 0 0 var(--espaco-2); max-width: none; }
+.ia-numero { font-family: var(--fonte-codigo); font-size: 1.6rem; font-weight: 700; color: var(--cor-erro); }
+[data-tema="escuro"] .ia-numero { color: #ff8a93; }
+.semaforo { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--espaco-3); }
+.sinal { padding: var(--espaco-3) var(--espaco-4); border-radius: 12px; border: 2px solid; min-width: 0; }
+.sinal ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 6px; }
+.sinal li { max-width: none; }
+.sinal-titulo { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--cor-titulo); }
+.sinal-sub { margin: 4px 0 var(--espaco-2); font-size: 0.92rem; color: var(--cor-texto-suave); max-width: none; }
+.sinal-luz { width: 1.1rem; height: 1.1rem; border-radius: 50%; flex-shrink: 0; }
+.sinal-verde { border-color: #2a9d8f; background-color: var(--cor-ok-fundo); }
+.sinal-verde .sinal-luz { background-color: #2a9d8f; box-shadow: 0 0 10px #2a9d8f; }
+.sinal-amarelo { border-color: #e0a800; background-color: var(--cor-confira-fundo); }
+.sinal-amarelo .sinal-luz { background-color: #ffb703; box-shadow: 0 0 10px #ffb703; }
+.sinal-vermelho { border-color: var(--cor-erro); background-color: var(--cor-erro-fundo); }
+.sinal-vermelho .sinal-luz { background-color: var(--cor-erro); box-shadow: 0 0 10px var(--cor-erro); }
+.prompt-caixa { border-radius: 10px; overflow: hidden; background-color: var(--cor-codigo-fundo); min-width: 0; }
+.prompt-topo { display: flex; justify-content: space-between; align-items: center; gap: var(--espaco-2); padding: 0.45rem var(--espaco-3); background-color: rgba(255, 255, 255, 0.07); color: #cfe0ec; font-size: 0.88rem; font-weight: 700; }
+.prompt-copiar { padding: 0.25rem 0.8rem; border: 0; border-radius: var(--raio-pequeno); background-color: var(--cor-destaque); color: #12324a; font: inherit; font-weight: 700; cursor: pointer; }
+.prompt-caixa pre { margin: 0; padding: var(--espaco-3); overflow-x: auto; color: #e8f0f6; font-family: var(--fonte-codigo); font-size: 0.88rem; line-height: 1.6; white-space: pre-wrap; }
+.prompt-caixa pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+/* Caixas da trilha: teoria e IA */
+.trilha-teoria ul { margin: 0; padding-left: 1.2rem; }
+.trilha-ia {
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-left: 6px solid #7b5cd6;
+  border-radius: 0 var(--raio-pequeno) var(--raio-pequeno) 0;
+  background-color: var(--cor-superficie);
+}
+.trilha-ia > * { margin-block: 0 var(--espaco-2); max-width: 72ch; }
+.trilha-ia > *:last-child { margin-bottom: 0; }
+.trilha-ia-titulo { font-weight: 700; color: #6a45c9; }
+[data-tema="escuro"] .trilha-ia-titulo { color: #c4b2ff; }
+.ia-conceitos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--espaco-3); }
+.ia-conceito { padding: var(--espaco-3) var(--espaco-4); border: 1px solid var(--cor-borda); border-top: 4px solid var(--cor-verde); border-radius: 10px; background-color: var(--cor-superficie); min-width: 0; }
+.ia-conceito h3 { margin: 0 0 var(--espaco-2); font-size: 1.05rem; }
+.ia-conceito p { margin: 0; max-width: none; }
+.ia-links { display: grid; gap: var(--espaco-2); padding-left: 1.1rem; }
+.ia-links li { max-width: none; }
+.ia-tipo { display: inline-block; margin-right: 4px; padding: 1px 8px; border-radius: 999px; background-color: var(--cor-superficie-2); font-size: 0.78rem; font-weight: 700; color: var(--cor-texto-suave); }
+
+
+/* =====================================================================
+   == 28 PLATAFORMA: CONTA, PLANOS, PROJETOS E PAINEL (ferramenta do site)
+   ===================================================================== */
+
+/* Links de planos, termos e privacidade no rodapé */
+.rodape-legal { max-width: none; margin: 0; padding: 0 var(--espaco-3) var(--espaco-3); text-align: center; }
+
+/* "Entrar" / "Minha conta" no menu: parece um botão, para ser achado rápido */
+.menu-lista .menu-conta a {
+  margin-left: var(--espaco-2);
+  padding-inline: 0.9rem;
+  border: 2px solid var(--cor-destaque);
+  color: #ffffff;
+  font-weight: 700;
+}
+.menu-lista .menu-conta a:hover { background-color: var(--cor-destaque); color: #12324a; }
+.menu-lista .menu-conta a[aria-current="page"]::after { display: none; }
+.menu-lista .menu-painel a { border-color: rgba(255, 255, 255, 0.45); }
+.menu-lista a { white-space: nowrap; }
+/* Com os botões de conta, o menu fica cheio entre o celular e telas largas: compacta */
+@media (min-width: 901px) and (max-width: 1260px) {
+  .menu-lista a { padding-inline: 0.45rem; font-size: 0.88rem; }
+  .menu-lista .menu-conta a { margin-left: var(--espaco-1); padding-inline: 0.6rem; }
+  .btn-tema-texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* Mensagens de retorno dos formulários */
+.aviso {
+  padding: var(--espaco-3);
+  border-radius: var(--raio-pequeno);
+  border-left: 5px solid var(--cor-link);
+  background-color: var(--cor-superficie-2);
+  max-width: none;
+}
+.aviso:focus { outline: 3px solid var(--cor-destaque); outline-offset: 2px; }
+.aviso-ok { border-left-color: var(--cor-verde); background-color: var(--cor-ok-fundo); }
+.aviso-erro { border-left-color: var(--cor-erro); background-color: var(--cor-erro-fundo); }
+
+/* Telas de entrar e cadastro: um cartão estreito no centro */
+.pagina-acesso main { padding-block: var(--espaco-5); }
+.cartao-acesso {
+  width: min(460px, 100%);
+  margin-inline: auto;
+  padding: var(--espaco-5) var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+.cartao-acesso h1 { font-size: clamp(1.6rem, 4vw, 2rem); margin-bottom: var(--espaco-2); }
+.cartao-acesso .formulario { gap: var(--espaco-3); margin-top: var(--espaco-4); }
+.cartao-acesso .botao { width: 100%; }
+/* O botão "Mostrar" da senha fica do tamanho do texto, ao lado do campo */
+.cartao-acesso .campo-com-botao .botao { width: auto; flex: none; }
+.campo-com-botao input { min-width: 0; }
+.acesso-rodape { margin-top: var(--espaco-4); padding-top: var(--espaco-3); border-top: 1px solid var(--cor-borda); font-size: 0.95rem; }
+.acesso-rodape p { margin: 0 0 var(--espaco-2); }
+.selo-seguro { display: flex; gap: var(--espaco-2); align-items: flex-start; margin-top: var(--espaco-3); color: var(--cor-texto-suave); font-size: 0.85rem; }
+.selo-seguro svg { flex: none; margin-top: 2px; }
+.linha-check { display: flex; gap: var(--espaco-2); align-items: flex-start; font-weight: 400 !important; }
+.linha-check input { margin-top: 0.3rem; width: 1.1rem; height: 1.1rem; flex: none; }
+.forca-senha { height: 6px; border-radius: 3px; background-color: var(--cor-superficie-2); overflow: hidden; }
+.forca-senha span { display: block; height: 100%; width: 0; transition: width var(--transicao), background-color var(--transicao); }
+.campo-codigo { font-family: var(--fonte-codigo); font-size: 1.4rem !important; letter-spacing: 0.3em; text-align: center; }
+
+/* Minha conta */
+.conta-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--espaco-4); align-items: start; }
+.painel-caixa {
+  padding: var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  min-width: 0;
+}
+.painel-caixa > h2 { font-size: 1.25rem; margin: 0 0 var(--espaco-3); }
+.painel-caixa > p { max-width: none; }
+.painel-caixa .formulario { gap: var(--espaco-3); }
+.lista-limpa { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espaco-2); }
+.acesso-item { display: flex; justify-content: space-between; gap: var(--espaco-2); flex-wrap: wrap; padding: var(--espaco-2) var(--espaco-3); border-radius: var(--raio-pequeno); background-color: var(--cor-superficie-2); }
+.acesso-item strong { display: block; }
+.selo { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; background-color: var(--cor-superficie-2); color: var(--cor-texto-suave); white-space: nowrap; }
+.selo-ok { background-color: #d5f2ea; color: #0d5c50; }
+.selo-alerta { background-color: #fff0cc; color: #6b4600; }
+.selo-erro { background-color: #fbe0e3; color: #8c1d2b; }
+[data-tema="escuro"] .selo-ok { background-color: #12392f; color: #9be6cf; }
+[data-tema="escuro"] .selo-alerta { background-color: #3d3110; color: #ffe29a; }
+[data-tema="escuro"] .selo-erro { background-color: #3d1a20; color: #ffb8c1; }
+.codigos-recuperacao { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--espaco-1) var(--espaco-3); padding: var(--espaco-3); font-family: var(--fonte-codigo); background-color: var(--cor-superficie-2); border-radius: var(--raio-pequeno); }
+.qr-2fa { display: grid; place-items: center; padding: var(--espaco-3); background-color: #ffffff; border-radius: var(--raio-pequeno); width: fit-content; margin-inline: auto; }
+.qr-2fa img { width: 200px; height: 200px; image-rendering: pixelated; }
+.chave-2fa { font-family: var(--fonte-codigo); word-break: break-all; }
+.zona-perigo { border-color: var(--cor-erro); }
+.zona-perigo > h2 { color: var(--cor-erro); }
+
+/* Página de planos */
+.planos-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--espaco-4); align-items: stretch; }
+.plano {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-3);
+  padding: var(--espaco-4);
+  background-color: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  min-width: 0;
+}
+.plano-destaque { border-color: var(--cor-destaque); box-shadow: var(--sombra); }
+.plano-faixa { position: absolute; top: -0.9rem; left: var(--espaco-4); padding: 2px 12px; border-radius: 999px; background-color: var(--cor-destaque); color: #12324a; font-weight: 700; font-size: 0.85rem; }
+.plano h3 { margin: 0; font-size: 1.3rem; }
+.plano-preco { font-family: var(--fonte-titulo); font-size: 2rem; font-weight: 800; color: var(--cor-titulo); line-height: 1.1; margin: 0; }
+.plano-preco small { font-family: var(--fonte-texto); font-size: 0.95rem; font-weight: 400; color: var(--cor-texto-suave); }
+.plano-de { text-decoration: line-through; color: var(--cor-texto-suave); margin: 0; }
+.plano ul { margin: 0; padding-left: 1.2rem; display: grid; gap: var(--espaco-1); }
+.plano-acoes { margin-top: auto; display: grid; gap: var(--espaco-2); }
+.plano-acoes .botao { width: 100%; }
+.plano-cupom { display: flex; gap: var(--espaco-2); }
+.plano-cupom input { min-width: 0; }
+.comparativo td:not(:first-child), .comparativo th:not(:first-child) { text-align: center; }
+.sim { color: var(--cor-verde); font-weight: 700; }
+.nao { color: var(--cor-texto-suave); }
+.faixa-confianca { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-3); }
+.faixa-confianca div { padding: var(--espaco-3); border-radius: var(--raio); background-color: var(--cor-superficie); border: 1px solid var(--cor-borda); }
+.faixa-confianca strong { display: block; margin-bottom: var(--espaco-1); color: var(--cor-titulo); }
+.aviso-bloqueado { margin-bottom: var(--espaco-4); }
+
+/* Projetos: mapa e página de cada projeto */
+.projetos-etapa { margin-top: var(--espaco-5); }
+.projetos-etapa > h2 { margin-bottom: var(--espaco-3); }
+.projeto-card { display: flex; flex-direction: column; gap: var(--espaco-2); padding: var(--espaco-4); border: 1px solid var(--cor-borda); border-top: 5px solid var(--cor-verde); border-radius: var(--raio); background-color: var(--cor-superficie); min-width: 0; }
+.projeto-card.bloqueado { border-top-color: var(--cor-borda); }
+.projeto-card h3 { margin: 0; font-size: 1.15rem; }
+.projeto-card p { margin: 0; max-width: none; }
+.projeto-meta { display: flex; flex-wrap: wrap; gap: var(--espaco-1); }
+.projeto-card .botao { margin-top: auto; align-self: flex-start; }
+.projeto-card.feito { border-top-color: var(--cor-destaque); }
+.resultado-esperado { display: grid; gap: var(--espaco-3); }
+.resultado-esperado video, .resultado-esperado img { width: 100%; border-radius: var(--raio); border: 1px solid var(--cor-borda); background-color: #000; }
+.resultado-pendente { padding: var(--espaco-4); border: 2px dashed var(--cor-borda); border-radius: var(--raio); color: var(--cor-texto-suave); text-align: center; }
+.dicas { display: grid; gap: var(--espaco-2); margin-top: var(--espaco-3); }
+.dicas details { border: 1px solid var(--cor-borda); border-radius: var(--raio-pequeno); background-color: var(--cor-superficie); }
+.dicas summary { padding: var(--espaco-2) var(--espaco-3); cursor: pointer; font-weight: 700; color: var(--cor-link); }
+.dicas details > div { padding: 0 var(--espaco-3) var(--espaco-3); }
+.dicas details > div p { margin: 0; max-width: 72ch; }
+.marco { padding: var(--espaco-4); border: 1px solid var(--cor-borda); border-radius: var(--raio); background-color: var(--cor-superficie-2); margin-top: var(--espaco-3); }
+.marco > h3 { margin-top: 0; }
+.marco > p { max-width: 72ch; }
+.casos td:first-child { font-weight: 700; }
+
+/* Painel do administrador */
+.pagina-admin main { padding-block: var(--espaco-4) var(--espaco-6); }
+#area > h2 { margin-top: var(--espaco-5); }
+.admin-abas { display: flex; flex-wrap: wrap; gap: var(--espaco-1); margin-block: var(--espaco-3) var(--espaco-4); border-bottom: 2px solid var(--cor-borda); }
+.admin-abas button { padding: var(--espaco-2) var(--espaco-3); border: 0; border-bottom: 3px solid transparent; margin-bottom: -2px; background: none; font: inherit; font-weight: 700; color: var(--cor-texto-suave); cursor: pointer; }
+.admin-abas button[aria-selected="true"] { color: var(--cor-titulo); border-bottom-color: var(--cor-destaque); }
+.admin-abas button:hover { color: var(--cor-titulo); }
+.admin-numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--espaco-3); }
+.admin-numero { padding: var(--espaco-3); border: 1px solid var(--cor-borda); border-radius: var(--raio); background-color: var(--cor-superficie); }
+.admin-numero strong { display: block; font-family: var(--fonte-titulo); font-size: 1.8rem; color: var(--cor-titulo); line-height: 1.1; }
+.admin-numero span { color: var(--cor-texto-suave); font-size: 0.9rem; }
+.admin-barra { display: flex; flex-wrap: wrap; gap: var(--espaco-2); align-items: flex-end; margin-bottom: var(--espaco-3); }
+.admin-barra .campo { min-width: 180px; flex: 1; }
+.admin-barra .botao { flex: none; }
+.tabela-admin { font-size: 0.92rem; }
+.tabela-admin td, .tabela-admin th { vertical-align: top; }
+.tabela-admin tr.clicavel { cursor: pointer; }
+.tabela-admin tr.clicavel:hover td { background-color: var(--cor-superficie-2); }
+.paginacao { display: flex; gap: var(--espaco-2); align-items: center; justify-content: flex-end; margin-top: var(--espaco-2); }
+.grafico-barras { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding: var(--espaco-2) 0; }
+.grafico-barras .grafico-coluna { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; border-bottom: 1px solid var(--cor-borda); }
+.grafico-barras .grafico-barra { background-color: var(--cor-verde); border-radius: 4px 4px 0 0; }
+.grafico-valor { font-size: 0.72rem; color: var(--cor-texto-suave); text-align: center; white-space: nowrap; overflow: hidden; margin-bottom: 2px; }
+.grafico-legenda { display: flex; gap: 6px; font-size: 0.75rem; color: var(--cor-texto-suave); }
+.grafico-legenda span { flex: 1; text-align: center; min-width: 0; overflow: hidden; }
+.dialogo-admin { width: min(720px, 94vw); max-height: 90vh; padding: 0; border: 0; border-radius: var(--raio); background-color: var(--cor-fundo); color: var(--cor-texto); }
+.dialogo-admin::backdrop { background-color: rgba(8, 18, 28, 0.6); }
+.dialogo-topo { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: var(--espaco-3) var(--espaco-4); background-color: var(--cor-tinta); color: #ffffff; }
+.dialogo-topo h2 { margin: 0; font-size: 1.15rem; color: #ffffff; }
+.dialogo-topo button { border: 0; background: none; color: #ffffff; font-size: 1.5rem; cursor: pointer; }
+.dialogo-corpo { padding: var(--espaco-4); display: grid; gap: var(--espaco-4); }
+.dialogo-corpo pre { max-height: 320px; overflow: auto; padding: var(--espaco-3); background-color: var(--cor-codigo-fundo); color: var(--cor-codigo-texto); border-radius: var(--raio-pequeno); font-size: 0.82rem; white-space: pre-wrap; word-break: break-all; }
+.grade-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-3); }
+.acoes-linha { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+@media (max-width: 700px) {
+  .codigos-recuperacao { grid-template-columns: 1fr; }
+  .plano-cupom { flex-direction: column; }
+}
+/* Janela de detalhe do painel: textos longos quebram e tabelas largas rolam dentro da janela */
+.dialogo-admin .grade-2 > * { min-width: 0; overflow-wrap: anywhere; }
+.dialogo-admin #dialogo-corpo { overflow-x: auto; }
+/* No painel, as tabelas misturam texto e números: tudo alinhado à esquerda */
+.tabela.tabela-admin tbody td:nth-child(n) { text-align: left; }

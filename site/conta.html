@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--
+  PLATAFORMA — Minha conta
+  Página da plataforma (login, conta, planos ou painel). O comportamento está em js/;
+  quem protege os dados de verdade é o servidor (pasta src/ do projeto da plataforma).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/vendor/qrcode.js" defer></script>
+  <script src="js/conta.js" defer></script>
+  <title>Minha conta — Catálogo do HTML</title>
+  <meta name="description" content="Seu plano, pedidos, segurança e dados.">
+  <meta name="robots" content="noindex">
+</head>
+<body class="pagina-conta">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <p class="heroi-antetitulo">Minha conta</p>
+        <h1 class="heroi-titulo">Minha conta</h1>
+        <p class="heroi-texto">Seu plano, seus pedidos e a segurança da sua conta.</p>
+      </div>
+    </section>
+    <div class="container trilha-corpo">
+      <p class="aviso" id="aviso-topo" hidden tabindex="-1" role="status"></p>
+      <div class="conta-grade">
+
+        <section class="painel-caixa" aria-labelledby="ola">
+          <h2 id="ola">Olá!</h2>
+          <p>O que está liberado na sua conta:</p>
+          <ul class="lista-limpa" id="lista-acessos"></ul>
+          <p><a class="botao botao-contorno botao-pequeno" id="link-planos" href="planos.html">Ver os planos</a></p>
+          <div id="caixa-teste" hidden>
+            <h3 id="teste">Teste grátis de 7 dias</h3>
+            <p>Todos os módulos e projetos por 7 dias, sem cartão e sem cobrança no fim. Uma vez por conta.</p>
+            <button class="botao botao-primario" type="button" id="btn-teste">Começar meu teste grátis</button>
+          </div>
+          <p class="aviso" id="aviso-teste" hidden tabindex="-1" role="status"></p>
+        </section>
+
+        <section class="painel-caixa" aria-labelledby="t-codigo">
+          <h2 id="t-codigo">Tenho um código de acesso</h2>
+          <p>Recebeu um código da escola, de um sorteio ou de presente? Digite aqui.</p>
+          <form class="formulario" id="form-codigo">
+            <div class="campo">
+              <label for="codigo-acesso">Código</label>
+              <input type="text" id="codigo-acesso" autocomplete="off" autocapitalize="characters" placeholder="XXXX-XXXX-XXXX" required maxlength="20">
+            </div>
+            <button class="botao" type="submit">Usar código</button>
+          </form>
+          <p class="aviso" id="aviso-codigo" hidden tabindex="-1" role="status"></p>
+        </section>
+
+        <section class="painel-caixa" aria-labelledby="t-pedidos">
+          <h2 id="t-pedidos">Meus pedidos</h2>
+          <p id="sem-pedidos" hidden>Nenhum pedido ainda.</p>
+          <div class="tabela-rolagem" id="tabela-pedidos">
+            <table class="tabela">
+              <thead><tr><th scope="col">Data</th><th scope="col">Produto</th><th scope="col">Canal</th><th scope="col">Valor</th><th scope="col">Situação</th></tr></thead>
+              <tbody id="pedidos"></tbody>
+            </table>
+          </div>
+          <p class="ajuda">Comprou com outro e-mail e não aparece aqui? Fale com a gente pelo contato no fim da página de <a href="planos.html#contato">planos</a>.</p>
+        </section>
+
+        <section class="painel-caixa" aria-labelledby="t-dados">
+          <h2 id="t-dados">Dados da conta</h2>
+          <p>E-mail: <strong id="email-atual"></strong></p>
+          <form class="formulario" id="form-nome">
+            <div class="campo">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" autocomplete="name" required minlength="2" maxlength="120">
+            </div>
+            <button class="botao botao-contorno" type="submit">Salvar nome</button>
+          </form>
+          <p class="aviso" id="aviso-nome" hidden tabindex="-1" role="status"></p>
+        </section>
+
+        <section class="painel-caixa" id="seguranca" aria-labelledby="t-seg">
+          <h2 id="t-seg">Segurança</h2>
+          <form class="formulario" id="form-senha">
+            <h3>Trocar a senha</h3>
+            <div class="campo">
+              <label for="senha-atual">Senha atual</label>
+              <input type="password" id="senha-atual" autocomplete="current-password" required>
+            </div>
+            <div class="campo">
+              <label for="senha-nova">Nova senha</label>
+              <input type="password" id="senha-nova" autocomplete="new-password" required minlength="10">
+            </div>
+            <button class="botao botao-contorno" type="submit">Trocar a senha</button>
+          </form>
+          <p><button class="botao botao-texto" type="button" id="sair-todos">Sair de todos os outros aparelhos</button></p>
+          <p class="aviso" id="aviso-senha" hidden tabindex="-1" role="status"></p>
+
+          <h3>Verificação em duas etapas <span id="estado-2fa"></span></h3>
+          <p>Além da senha, o login pede um código que muda a cada 30 segundos no seu celular. Mesmo que alguém descubra a senha, não entra.</p>
+          <button class="botao" type="button" id="ativar-2fa">Ativar</button>
+          <div id="configurar-2fa" hidden>
+            <ol>
+              <li>Instale um aplicativo autenticador no celular (Google Authenticator, Microsoft Authenticator ou Authy).</li>
+              <li>No aplicativo, toque em adicionar e aponte a câmera para o código abaixo.</li>
+              <li>Digite o código de 6 números que aparece no aplicativo.</li>
+            </ol>
+            <div class="qr-2fa" id="qr"></div>
+            <p class="ajuda">Não consegue ler? Digite esta chave no aplicativo: <code class="chave-2fa" id="chave-2fa"></code></p>
+            <form class="formulario" id="form-2fa">
+              <div class="campo">
+                <label for="codigo-2fa">Código de 6 números</label>
+                <input type="text" id="codigo-2fa" class="campo-codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="7" required>
+              </div>
+              <button class="botao botao-primario" type="submit">Confirmar e ativar</button>
+            </form>
+          </div>
+          <div id="com-2fa" hidden>
+            <form class="formulario" id="form-2fa-senha">
+              <div class="campo">
+                <label for="senha-2fa">Sua senha (para gerar novos códigos ou desligar)</label>
+                <input type="password" id="senha-2fa" autocomplete="current-password">
+              </div>
+              <div class="acoes-linha">
+                <button class="botao botao-contorno botao-pequeno" type="button" id="novos-codigos">Gerar novos códigos de recuperação</button>
+                <button class="botao botao-texto" type="button" id="desativar-2fa">Desligar</button>
+              </div>
+            </form>
+          </div>
+          <div id="caixa-codigos" hidden>
+            <h3>Códigos de recuperação</h3>
+            <p><strong>Guarde agora</strong> (imprima ou anote num lugar seguro). Se perder o celular, cada código deixa entrar uma vez. Eles não aparecem de novo.</p>
+            <div class="codigos-recuperacao" id="codigos-recuperacao"></div>
+          </div>
+          <p class="aviso" id="aviso-2fa" hidden tabindex="-1" role="status"></p>
+        </section>
+
+        <section class="painel-caixa" aria-labelledby="t-lgpd">
+          <h2 id="t-lgpd">Seus dados</h2>
+          <p>Você pode baixar tudo o que o site guarda sobre você, a qualquer momento (Lei Geral de Proteção de Dados, art. 18).</p>
+          <p><a class="botao botao-contorno" href="/api/conta/exportar-dados" download>Baixar meus dados</a></p>
+          <p>Como tratamos seus dados: <a href="privacidade.html">Política de privacidade</a>.</p>
+        </section>
+
+        <section class="painel-caixa zona-perigo" aria-labelledby="t-excluir">
+          <h2 id="t-excluir">Excluir minha conta</h2>
+          <p>Apaga seu nome, e-mail, senha e progresso e encerra o acesso a tudo, <strong>inclusive planos pagos</strong>. Não dá para desfazer. Os registros de venda ficam guardados sem ligação com você, porque a lei exige.</p>
+          <form class="formulario" id="form-excluir">
+            <div class="campo">
+              <label for="senha-excluir">Sua senha</label>
+              <input type="password" id="senha-excluir" autocomplete="current-password" required>
+            </div>
+            <div class="campo">
+              <label for="confirma-excluir">Digite EXCLUIR</label>
+              <input type="text" id="confirma-excluir" autocomplete="off" required>
+            </div>
+            <button class="botao" type="submit">Excluir minha conta para sempre</button>
+          </form>
+          <p class="aviso" id="aviso-excluir" hidden tabindex="-1" role="status"></p>
+        </section>
+      </div>
+      <p><button class="botao botao-contorno" type="button" id="sair">Sair da conta</button></p>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

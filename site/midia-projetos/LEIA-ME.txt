@@ -1,0 +1,5 @@
+Coloque aqui o resultado esperado de cada projeto, gravado por você:
+  projeto-N.mp4             vídeo de 1 a 2 minutos mostrando os casos de teste (sem mostrar o código)
+  projeto-N-01-celular.webp capturas de tela (o texto depois do número vira a descrição da imagem)
+Depois rode o gerador das páginas de projetos para o vídeo e as imagens aparecerem.
+No servidor, só quem tem plano consegue abrir os arquivos dos projetos 2 a 12.

@@ -1,0 +1,10 @@
+.env
+bin/
+obj/
+chaves/
+emails-teste/
+*.user
+.vs/
+.vscode/
+__pycache__/
+capturas/

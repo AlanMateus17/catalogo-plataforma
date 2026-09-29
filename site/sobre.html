@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+  PÁGINA "SOBRE" — a segunda página do site.
+
+  PARA QUE ELA SERVE NESTE PROJETO:
+  mostrar que duas páginas diferentes podem usar os MESMOS arquivos de CSS e JavaScript.
+  Olhe o <head>: as linhas de conexão são iguais às do index.html.
+  Mude uma cor no estilo.css e as DUAS páginas mudam juntas.
+  Essa é a maior vantagem de ter o CSS e o JS em arquivos externos.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre — Catálogo do HTML</title>
+  <meta name="description" content="Sobre o projeto Catálogo do HTML.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+
+  <!-- MESMO CSS e MESMO JS do index.html -->
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <!-- Ferramenta do Catálogo: painéis "Ver código" (os alunos não precisam copiar) -->
+  <script src="js/codigos-dados.js" defer></script>
+  <script src="js/dicionario-dados.js" defer></script>
+  <script src="js/analisador.js" defer></script>
+  <script src="js/entenda.js" defer></script>
+  <script src="js/painel-codigos.js" defer></script>
+</head>
+<body>
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <!--
+        Aqui o logo leva para index.html (outra página), e não para #inicio.
+        POR QUÊ: #inicio procuraria um id="inicio" NESTA página, e ele não existe aqui.
+      -->
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <!-- Breadcrumb ("migalhas de pão"): mostra onde você está no site -->
+        <nav aria-label="Você está em" class="migalhas">
+          <ol>
+            <li><a href="index.html">Início</a></li>
+            <li aria-current="page">Sobre</li>
+          </ol>
+        </nav>
+        <h1 class="heroi-titulo">Sobre este site</h1>
+        <p class="heroi-texto">Um site para aprender a criar sites e sistemas: ver funcionando, entender cada palavra do código, fazer o seu e publicar.</p>
+      </div>
+    </section>
+
+    <section class="secao">
+      <div class="container">
+        <h2 class="secao-titulo">Como o site está organizado</h2>
+        <div class="tabela-rolagem"><table class="tabela tabela-mapa-site">
+          <thead><tr><th scope="col">Parte</th><th scope="col">Para quê</th></tr></thead>
+          <tbody>
+            <tr><td><a href="passo-a-passo.html"><strong>Passo a passo</strong></a></td><td>Fazer o seu site, do computador vazio ao site no ar. É o caminho principal para quem está começando.</td></tr>
+            <tr><td><a href="documentacao.html"><strong>Documentação</strong></a></td><td>Entender a fundo: sintaxe e semântica de HTML, CSS e JavaScript, e o roteiro até a primeira vaga de desenvolvedor.</td></tr>
+            <tr><td><a href="codigos.html"><strong>Códigos</strong></a></td><td>Copiar o HTML, o CSS e o JavaScript de cada parte de um site, com a explicação de cada palavra.</td></tr>
+            <tr><td><a href="index.html"><strong>Catálogo</strong></a></td><td>Ver todos os elementos funcionando numa página só, com o código comentado.</td></tr>
+            <tr><td><a href="verificador.html"><strong>Verificador</strong></a></td><td>Conferir a pasta do seu projeto e descobrir o que corrigir.</td></tr>
+            <tr><td><a href="dicionario.html"><strong>Dicionário</strong></a></td><td>Consultar o que é uma tag, propriedade ou comando.</td></tr>
+            <tr><td><a href="ia.html"><strong>Usar IA do jeito certo</strong></a></td><td>Saber quando a IA ajuda e quando atrapalha o seu aprendizado.</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2 class="secao-titulo">Por que esta segunda página existe?</h2>
+        <p>Para você ver, na prática, três coisas:</p>
+        <ol>
+          <li><strong>Links entre páginas</strong> funcionam com o nome do arquivo: <code>href="sobre.html"</code>.</li>
+          <li><strong>O mesmo CSS</strong> deixa as duas páginas com a mesma cara, sem copiar nenhuma regra.</li>
+          <li><strong>O mesmo JavaScript</strong> funciona nas duas, mesmo que esta página não tenha a maioria dos exemplos. Veja no <code>script.js</code> como cada parte confere se o elemento existe antes de usar.</li>
+        </ol>
+
+        <aside class="dica">
+          <strong>Teste:</strong> ligue o tema escuro aqui e volte para a página inicial. O tema continua escuro,
+          porque o JavaScript guardou a escolha no <code>localStorage</code> do navegador, que é o mesmo para as duas páginas.
+        </aside>
+      </div>
+    </section>
+
+    <!-- id="equipe" é o destino do link "sobre.html#equipe" que está no index.html -->
+    <section class="secao secao-alternada" id="equipe">
+      <div class="container">
+        <h2 class="secao-titulo">Quem fez</h2>
+        <article class="perfil">
+          <img class="perfil-foto" src="img/avatar.jpg" alt="Ilustração de avatar" width="240" height="240">
+          <div>
+            <h3>Prof. Alan Mateus</h3>
+            <p>Professor do curso técnico de informática. Este site acompanha as aulas e reúne o material para os alunos criarem e publicarem os próprios sites e seguirem estudando até a primeira vaga.</p>
+            <p><a href="index.html#links">Voltar aos exemplos de links</a></p>
+          </div>
+        </article>
+
+        <h3>Códigos desta página</h3>
+        <p>O caminho de navegação do topo e este cartão de perfil, prontos para copiar.</p>
+        <div class="codigo" data-codigo="migalhas"></div>
+        <div class="codigo" data-codigo="perfil"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+      <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

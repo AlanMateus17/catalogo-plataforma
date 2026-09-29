@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+  PLATAFORMA — Criar conta grátis
+  Página da plataforma (login, conta, planos ou painel). O comportamento está em js/;
+  quem protege os dados de verdade é o servidor (pasta src/ do projeto da plataforma).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/acesso.js" defer></script>
+  <title>Criar conta grátis — Catálogo do HTML</title>
+  <meta name="description" content="Crie sua conta grátis e libere a trilha completa e o Projeto 1.">
+</head>
+<body class="pagina-acesso" data-tela="cadastro">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="container" id="inicio">
+      <div class="cartao-acesso">
+        <h1>Criar conta grátis</h1>
+        <p>Com a conta grátis você libera a trilha Passo a passo completa, o capítulo de HTML e o progresso salvo em qualquer computador.</p>
+        <p class="aviso" id="aviso" hidden tabindex="-1" role="status"></p>
+        <form class="formulario" id="form-criar-conta" novalidate>
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required minlength="2" maxlength="120">
+          </div>
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="email" required maxlength="254">
+            <span class="ajuda">Você vai receber um link para confirmar. Use um e-mail que você abre.</span>
+          </div>
+          <p class="ajuda">A senha você cria no próximo passo, depois de abrir o link do e-mail. Assim, só quem tem acesso ao e-mail consegue criar a senha da conta.</p>
+          <label class="linha-check"><input type="checkbox" id="termos" required> <span>Li e aceito os <a href="termos.html" target="_blank">Termos de uso</a> e a <a href="privacidade.html" target="_blank">Política de privacidade</a>.</span></label>
+          <p class="ajuda">Menor de 18 anos? Peça para o seu responsável ler os termos com você.</p>
+          <button class="botao botao-primario" type="submit">Criar minha conta</button>
+        </form>
+        <div id="enviado" hidden>
+          <h2>Confira seu e-mail</h2>
+          <p>Enviamos um link para <strong id="enviado-para"></strong>. Abra o e-mail e clique em <strong>Confirmar meu e-mail</strong>. Não chegou em 5 minutos? Olhe a caixa de spam ou a aba Promoções.</p>
+        </div>
+        <div class="acesso-rodape"><p>Já tem conta? <a href="entrar.html">Entrar</a></p></div>
+        <p class="selo-seguro"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3H9Z"/></svg><span>Conexão protegida. Sua senha é guardada embaralhada (com <em>hash</em>): nem o professor consegue vê-la.</span></p>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

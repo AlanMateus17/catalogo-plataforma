@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--
+  PLATAFORMA — Compra segura
+  Página da plataforma (login, conta, planos ou painel). O comportamento está em js/;
+  quem protege os dados de verdade é o servidor (pasta src/ do projeto da plataforma).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <title>Compra segura — Catálogo do HTML</title>
+  <meta name="description" content="Como funcionam o pagamento, a liberação do acesso, o cancelamento e o reembolso.">
+</head>
+<body class="">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <p class="heroi-antetitulo">Compra segura</p>
+        <h1 class="heroi-titulo">Como funcionam pagamento, acesso e reembolso</h1>
+        <p class="heroi-texto">Tudo o que acontece desde o clique em comprar até o acesso liberado, e como desistir se não gostar.</p>
+      </div>
+    </section>
+    <div class="container trilha-corpo">
+      <section class="trilha-secao" id="pagamento"><h2>Onde você paga</h2>
+        <p>O pagamento acontece fora deste site, numa destas plataformas: <strong>Kiwify</strong>, <strong>Hotmart</strong> ou <strong>Mercado Pago</strong>. Elas processam cartão, Pix e boleto, emitem o comprovante e cuidam da segurança dos dados do cartão.</p>
+        <p>Este site <strong>nunca recebe nem guarda o número do seu cartão</strong>. Depois do pagamento, a plataforma avisa o site só do que ele precisa: seu nome, e-mail, o plano comprado, o valor e a situação do pagamento.</p>
+        <p>Antes de digitar dados, confira na barra do navegador o cadeado e o endereço da plataforma (kiwify.com.br, hotmart.com ou mercadopago.com.br).</p>
+      </section>
+      <section class="trilha-secao" id="liberacao"><h2>Quando o acesso é liberado</h2>
+        <ul>
+          <li><strong>Pix e cartão:</strong> em poucos minutos depois da aprovação.</li>
+          <li><strong>Boleto:</strong> quando o banco confirma, em até 3 dias úteis.</li>
+          <li>A liberação é feita pelo <strong>e-mail usado na compra</strong>. Ainda não tem conta? Crie com esse mesmo e-mail e confirme: a compra aparece sozinha em Minha conta.</li>
+        </ul>
+      </section>
+      <section class="trilha-secao" id="cancelar"><h2>Cancelar a assinatura</h2>
+        <p>Cancele quando quiser na plataforma em que comprou. Não há multa nem fidelidade: o acesso continua até o fim do período já pago e depois não há nova cobrança.</p>
+      </section>
+      <section class="trilha-secao" id="reembolso"><h2>Garantia e reembolso</h2>
+        <p>Você pode desistir em até <strong>7 dias</strong> depois da compra, sem precisar dizer o motivo, e receber tudo de volta. É o direito de arrependimento das compras pela internet (Código de Defesa do Consumidor, art. 49).</p>
+        <p>Peça pela própria plataforma (Kiwify ou Hotmart têm o botão de reembolso no e-mail da compra) ou pelo e-mail <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>. Quando o reembolso é feito, o acesso daquela compra é encerrado.</p>
+      </section>
+      <section class="trilha-secao" id="conta"><h2>A segurança da sua conta</h2>
+        <ul>
+          <li>Sua senha é guardada com <em>hash</em> (embaralhada de um jeito que não tem volta): ninguém consegue lê-la, nem o professor.</li>
+          <li>Depois de 5 senhas erradas seguidas, a conta espera 15 minutos. Isso impede que um programa fique tentando senhas.</li>
+          <li>Você pode ativar a <strong>verificação em duas etapas</strong> em Minha conta → Segurança.</li>
+          <li>Trocou a senha? Todos os outros aparelhos conectados saem da conta.</li>
+          <li>A conexão com o site é sempre criptografada (HTTPS).</li>
+        </ul>
+      </section>
+      <section class="trilha-secao" id="golpes"><h2>Cuidado com golpes</h2>
+        <p>Nunca pedimos sua senha por e-mail, WhatsApp ou telefone. Os e-mails do site só levam para este endereço. Recebeu uma cobrança estranha em nosso nome? Não pague e avise: <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>.</p>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

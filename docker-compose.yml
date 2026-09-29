@@ -1,0 +1,50 @@
+# Sobe tudo: banco (PostgreSQL), o sistema e o Caddy (HTTPS automático com Let's Encrypt).
+# Uso:  cp .env.exemplo .env   (preencha)   e depois   docker compose up -d --build
+services:
+  banco:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${BANCO_NOME}
+      POSTGRES_USER: ${BANCO_USUARIO}
+      POSTGRES_PASSWORD: ${BANCO_SENHA}
+    volumes:
+      - dados:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${BANCO_USUARIO} -d ${BANCO_NOME}"]
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+    # Sem "ports": o banco NÃO fica exposto na internet, só o sistema fala com ele.
+
+  sistema:
+    build: .
+    env_file: .env
+    environment:
+      ConnectionStrings__Banco: "Host=banco;Database=${BANCO_NOME};Username=${BANCO_USUARIO};Password=${BANCO_SENHA}"
+    volumes:
+      - chaves:/app/chaves
+    depends_on:
+      banco:
+        condition: service_healthy
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMINIO: ${DOMINIO}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_dados:/data
+      - caddy_config:/config
+    depends_on:
+      - sistema
+    restart: unless-stopped
+
+volumes:
+  dados:
+  chaves:
+  caddy_dados:
+  caddy_config:

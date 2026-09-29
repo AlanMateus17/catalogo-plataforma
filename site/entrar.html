@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+  PLATAFORMA — Entrar
+  Página da plataforma (login, conta, planos ou painel). O comportamento está em js/;
+  quem protege os dados de verdade é o servidor (pasta src/ do projeto da plataforma).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/acesso.js" defer></script>
+  <title>Entrar — Catálogo do HTML</title>
+  <meta name="description" content="Entre na sua conta do Catálogo do HTML.">
+</head>
+<body class="pagina-acesso" data-tela="entrar">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="container" id="inicio">
+      <div class="cartao-acesso">
+        <h1>Entrar</h1>
+        <p>Continue de onde parou: seu progresso fica salvo na conta.</p>
+        <p class="aviso" id="aviso" hidden tabindex="-1" role="status"></p>
+        <form class="formulario" id="form-entrar" novalidate>
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" autocomplete="username" required maxlength="254">
+          </div>
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <div class="campo-com-botao">
+              <input type="password" id="senha" name="senha" autocomplete="current-password" required minlength="10" maxlength="200">
+              <button type="button" class="botao botao-contorno botao-pequeno" data-mostrar="senha" aria-pressed="false">Mostrar</button>
+            </div>
+          </div>
+          <label class="linha-check"><input type="checkbox" id="lembrar"> Manter conectado neste computador (não marque em computador da escola)</label>
+          <button class="botao botao-primario" type="submit">Entrar</button>
+          <button class="botao botao-texto" type="button" id="reenviar" hidden>Reenviar o e-mail de confirmação</button>
+        </form>
+        <form class="formulario" id="form-2fa" hidden>
+          <h2>Verificação em duas etapas</h2>
+          <p>Abra o aplicativo autenticador no celular e digite o código de 6 números que aparece para o Catálogo do HTML.</p>
+          <div class="campo">
+            <label for="codigo" id="rotulo-codigo">Código do aplicativo (6 números)</label>
+            <input type="text" id="codigo" class="campo-codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="7" required>
+          </div>
+          <label class="linha-check"><input type="checkbox" id="lembrar-dispositivo"> Não pedir o código neste computador por 14 dias</label>
+          <button class="botao botao-primario" type="submit">Confirmar</button>
+          <button class="botao botao-texto" type="button" id="usar-recuperacao">Perdi o celular: usar código de recuperação</button>
+        </form>
+        <div class="acesso-rodape"><p><a href="esqueci-senha.html">Esqueci minha senha</a></p>
+          <p>Ainda não tem conta? <a href="cadastro.html">Criar conta grátis</a></p></div>
+        <p class="selo-seguro"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3H9Z"/></svg><span>Conexão protegida. Sua senha é guardada embaralhada (com <em>hash</em>): nem o professor consegue vê-la.</span></p>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Plataforma</RootNamespace>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- Driver do PostgreSQL. No seu computador o NuGet baixa sozinho no "dotnet build". -->
+  <ItemGroup Condition="'$(NpgsqlDll)' == ''">
+    <PackageReference Include="Npgsql" Version="10.0.0" />
+  </ItemGroup>
+  <!-- Só para ambientes sem acesso ao NuGet: dotnet build -p:NpgsqlDll=/caminho/Npgsql.dll -->
+  <ItemGroup Condition="'$(NpgsqlDll)' != ''">
+    <Reference Include="Npgsql"><HintPath>$(NpgsqlDll)</HintPath></Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dados/Migracoes/*.sql" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+  PLATAFORMA — Termos de uso
+  Página da plataforma (login, conta, planos ou painel). O comportamento está em js/;
+  quem protege os dados de verdade é o servidor (pasta src/ do projeto da plataforma).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <title>Termos de uso — Catálogo do HTML</title>
+  <meta name="description" content="Termos de uso do Catálogo do HTML e da formação.">
+</head>
+<body class="">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <p class="heroi-antetitulo">Termos</p>
+        <h1 class="heroi-titulo">Termos de uso</h1>
+        <p class="heroi-texto">As regras da conta, dos planos e do uso do conteúdo, em linguagem direta.</p>
+      </div>
+    </section>
+    <div class="container trilha-corpo">
+      <aside class="doc-nota"><p class="doc-nota-titulo">Para o professor (apague esta caixa antes de publicar)</p><p>Este texto é um modelo. Preencha os campos entre colchetes e peça para um advogado ou contador revisar antes de vender. Ele não substitui orientação jurídica.</p></aside>
+      <section class="trilha-secao"><h2>1. Quem somos</h2>
+        <p>Este site e a formação são oferecidos por [NOME COMPLETO OU RAZÃO SOCIAL], [CPF OU CNPJ], com sede em Barbacena (MG). Contato: <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>.</p></section>
+      <section class="trilha-secao"><h2>2. A conta</h2>
+        <ul>
+          <li>A conta é pessoal: uma pessoa por conta. Não compartilhe sua senha.</li>
+          <li>Você é responsável pelos dados que informa e por manter seu e-mail atualizado.</li>
+          <li>Menores de 18 anos podem ter conta de estudo; compras devem ser feitas por um responsável maior de idade.</li>
+        </ul></section>
+      <section class="trilha-secao"><h2>3. O que você recebe</h2>
+        <ul>
+          <li>Conteúdo grátis: o que está marcado como livre ou de conta grátis na página de <a href="planos.html">planos</a>.</li>
+          <li>Planos pagos: acesso ao conteúdo da formação pelo período do plano, incluindo os módulos lançados durante esse período.</li>
+          <li>O conteúdo é lançado em módulos; a página de planos informa o que está pronto e o que está em produção.</li>
+          <li>Teste grátis: 7 dias de acesso completo, uma vez por conta, sem cobrança no fim.</li>
+          <li>Códigos de acesso: valem uma vez, para uma conta, pelo prazo informado.</li>
+        </ul></section>
+      <section class="trilha-secao"><h2>4. Pagamento, cancelamento e reembolso</h2>
+        <ul>
+          <li>Os pagamentos são processados pela Kiwify, Hotmart ou Mercado Pago, conforme os termos de cada uma.</li>
+          <li>Assinaturas podem ser canceladas a qualquer momento na plataforma da compra; o acesso segue até o fim do período pago.</li>
+          <li>Você pode desistir em até 7 dias da compra e receber o valor de volta (Código de Defesa do Consumidor, art. 49). Com o reembolso, o acesso daquela compra é encerrado.</li>
+          <li>Contestação de compra no cartão (chargeback) encerra o acesso daquela compra.</li>
+        </ul></section>
+      <section class="trilha-secao"><h2>5. Uso do conteúdo</h2>
+        <ul>
+          <li>Os códigos dos exemplos podem ser usados nos seus próprios projetos, inclusive comerciais.</li>
+          <li>Textos, enunciados dos projetos, vídeos e materiais da formação são protegidos por direito autoral: não copie, revenda nem publique em outro lugar.</li>
+          <li>É proibido compartilhar a conta, tentar acessar áreas sem permissão ou atrapalhar o funcionamento do site. Nesses casos a conta pode ser suspensa, com aviso por e-mail.</li>
+        </ul></section>
+      <section class="trilha-secao"><h2>6. Mudanças</h2>
+        <p>Estes termos podem mudar. Mudanças importantes serão avisadas por e-mail com antecedência; a versão em vigor fica sempre nesta página. Versão: 2026-10.</p></section>
+      <section class="trilha-secao"><h2>7. Foro</h2>
+        <p>Fica eleito o foro da comarca de Barbacena (MG), sem prejuízo do direito do consumidor de acionar o foro do seu domicílio.</p></section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

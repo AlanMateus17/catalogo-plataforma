@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--
+  PLATAFORMA — Política de privacidade
+  Página da plataforma (login, conta, planos ou painel). O comportamento está em js/;
+  quem protege os dados de verdade é o servidor (pasta src/ do projeto da plataforma).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <title>Política de privacidade — Catálogo do HTML</title>
+  <meta name="description" content="Como o Catálogo do HTML trata seus dados pessoais, conforme a LGPD.">
+</head>
+<body class="">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <p class="heroi-antetitulo">Privacidade</p>
+        <h1 class="heroi-titulo">Política de privacidade</h1>
+        <p class="heroi-texto">Quais dados guardamos, para quê, com quem compartilhamos e como você controla tudo.</p>
+      </div>
+    </section>
+    <div class="container trilha-corpo">
+      <aside class="doc-nota"><p class="doc-nota-titulo">Para o professor (apague esta caixa antes de publicar)</p><p>Este texto é um modelo. Preencha os campos entre colchetes e peça para um advogado ou contador revisar antes de vender. Ele não substitui orientação jurídica.</p></aside>
+      <section class="trilha-secao"><h2>1. Quem cuida dos seus dados</h2>
+        <p>O controlador dos dados é [NOME COMPLETO OU RAZÃO SOCIAL], [CPF OU CNPJ]. Encarregado de dados (LGPD, art. 41): [NOME COMPLETO OU RAZÃO SOCIAL], pelo e-mail <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>.</p></section>
+      <section class="trilha-secao"><h2>2. Quais dados guardamos e por quê</h2>
+        <div class="tabela-rolagem"><table class="tabela">
+          <thead><tr><th scope="col">Dado</th><th scope="col">Para quê</th><th scope="col">Base legal (LGPD, art. 7º)</th></tr></thead>
+          <tbody>
+            <tr><td>Nome e e-mail</td><td>Criar a conta, entrar, enviar avisos da conta e liberar compras</td><td>Execução de contrato</td></tr>
+            <tr><td>Senha (só o <em>hash</em>)</td><td>Conferir o login. A senha em si não é guardada.</td><td>Execução de contrato</td></tr>
+            <tr><td>Compras: plano, valor, data, situação e e-mail da compra</td><td>Liberar o acesso, atender pedidos de reembolso e cumprir obrigações fiscais</td><td>Execução de contrato e obrigação legal</td></tr>
+            <tr><td>Endereço IP, data e hora de login e de ações da conta</td><td>Segurança (bloquear ataques) e guarda obrigatória de registros de acesso por 6 meses (Marco Civil da Internet, art. 15)</td><td>Obrigação legal e legítimo interesse</td></tr>
+            <tr><td>Progresso nos passos e projetos</td><td>Mostrar seu progresso em qualquer computador</td><td>Execução de contrato</td></tr>
+            <tr><td>Aceite dos termos (versão e data)</td><td>Provar o que foi combinado</td><td>Execução de contrato</td></tr>
+          </tbody>
+        </table></div>
+        <p>Não guardamos dados de cartão, CPF, endereço nem telefone. Não vendemos dados e não usamos anúncios nem rastreadores.</p></section>
+      <section class="trilha-secao"><h2>3. Com quem compartilhamos</h2>
+        <ul>
+          <li>Plataformas de pagamento (Kiwify, Hotmart, Mercado Pago): só quando você compra por elas.</li>
+          <li>Serviço de envio de e-mail: para mandar confirmação de conta, troca de senha e avisos de compra.</li>
+          <li>Hospedagem do site e do banco de dados.</li>
+          <li>Autoridades, só quando a lei obrigar.</li>
+        </ul></section>
+      <section class="trilha-secao"><h2>4. Cookies e armazenamento no navegador</h2>
+        <p>Usamos só o necessário para o site funcionar: o cookie da sessão (manter você logado), o de segurança contra formulários falsos e, se você escolher, o que evita pedir o código de duas etapas de novo. O navegador também guarda o tema claro/escuro e o progresso da trilha. Não usamos cookies de propaganda nem de análise.</p></section>
+      <section class="trilha-secao"><h2>5. Por quanto tempo</h2>
+        <ul>
+          <li>Dados da conta: enquanto a conta existir.</li>
+          <li>Registros de acesso: pelo menos 6 meses, como exige a lei.</li>
+          <li>Registros de compra: pelo prazo exigido pela legislação fiscal, mesmo depois de excluída a conta, sem ligação com ela.</li>
+        </ul></section>
+      <section class="trilha-secao"><h2>6. Seus direitos</h2>
+        <p>Você pode, a qualquer momento: confirmar que tratamos seus dados, acessá-los, corrigi-los, pedir a exclusão, receber uma cópia (portabilidade) e revogar o consentimento (LGPD, art. 18). Em <a href="conta.html">Minha conta</a> você mesmo corrige o nome, baixa todos os seus dados e exclui a conta. Para o resto, escreva para <a href="mailto:contato@seudominio.com.br">contato@seudominio.com.br</a>. Você também pode reclamar na Autoridade Nacional de Proteção de Dados (ANPD).</p></section>
+      <section class="trilha-secao"><h2>7. Segurança</h2>
+        <p>Conexão criptografada (HTTPS), senhas com <em>hash</em>, bloqueio por tentativas, verificação em duas etapas obrigatória para a equipe, acesso ao painel por permissões e registro de todas as ações da equipe. Se houver um incidente que possa prejudicar você, avisaremos você e a ANPD.</p></section>
+      <section class="trilha-secao"><h2>8. Menores de idade</h2>
+        <p>Adolescentes podem usar a conta de estudo; tratamos só os dados necessários, no melhor interesse do estudante (LGPD, art. 14). Compras são feitas por um responsável.</p></section>
+      <section class="trilha-secao"><h2>9. Mudanças</h2>
+        <p>Avisaremos por e-mail mudanças importantes. Versão: 2026-10.</p></section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

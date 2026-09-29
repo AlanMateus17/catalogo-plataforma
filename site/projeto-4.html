@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--
+  PROJETO 4 — Quadro Kanban
+  Enunciado, resultado esperado e dicas em camadas. Sem código pronto: o aluno constrói do zero.
+  As caixas "Pronto quando" guardam o progresso (js/trilha.js, prefixo "projeto:").
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/trilha.js" defer></script>
+  <title>Projeto 4: Quadro Kanban — Catálogo do HTML</title>
+  <meta name="description" content="Um quadro A fazer / Fazendo / Feito com arrastar e soltar, limite de trabalho em andamento e dados salvos no navegador.">
+</head>
+<body class="pagina-trilha" data-prefixo="projeto:">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html" aria-current="page">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <nav aria-label="Você está em" class="migalhas">
+          <ol>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li aria-current="page">Projeto 4</li>
+          </ol>
+        </nav>
+        <p class="heroi-antetitulo">Projeto 4 de 12 · Etapa 2 · 3 a 4 semanas · individual</p>
+        <h1 class="heroi-titulo">Quadro Kanban</h1>
+        <p class="heroi-texto">Uma pequena equipe controla as tarefas num grupo de mensagens e perde o que foi combinado. Ela precisa de um quadro simples, que funcione no navegador, sem login, onde cada pessoa veja o que está parado, o que está andando e o que terminou.</p>
+      </div>
+    </section>
+
+    <div class="container trilha-corpo">
+      <nav class="trilha-mapa" aria-label="Projetos disponíveis"><ol><li><a href="projeto-1.html" data-passo="p1" data-total="4"><span class="mapa-num">1</span><span class="mapa-nome">Caixa Rápido</span></a></li><li><a href="projeto-2.html" data-passo="p2" data-total="6"><span class="mapa-num">2</span><span class="mapa-nome">Linha do Tempo</span></a></li><li><a href="projeto-3.html" data-passo="p3" data-total="5"><span class="mapa-num">3</span><span class="mapa-nome">Portfólio pessoal</span></a></li><li><a href="projeto-4.html" data-passo="p4" data-total="6" aria-current="step"><span class="mapa-num">4</span><span class="mapa-nome">Quadro Kanban</span></a></li></ol></nav>
+      <p><span class="selo">Inspirado no AM Taskoro (gestão de projetos)</span> <span class="selo">JavaScript, DOM, localStorage</span> <span class="selo">Módulo 2</span></p>
+
+<section class="trilha-secao" id="resultado">
+  <h2>1. O resultado esperado</h2>
+  <p>É aqui que você precisa chegar. Não existe código para copiar: você constrói do zero e confere cada linha da tabela no seu projeto.</p>
+  <div class="resultado-esperado"><p class="resultado-pendente">O vídeo do resultado esperado está sendo gravado. Enquanto isso, a tabela de casos de teste abaixo mostra exatamente o que o seu projeto precisa fazer.</p></div>
+  <h3>Casos de teste</h3>
+  <p>Faça exatamente estas entradas. A saída do seu projeto precisa ser igual, número por número.</p>
+  <div class="tabela-rolagem"><table class="tabela casos"><thead><tr><th scope="col">Situação</th><th scope="col">Ação</th><th scope="col">Resultado esperado</th></tr></thead><tbody><tr><td>Fazendo tem 3 cartões</td><td>Arrastar um 4º para Fazendo</td><td>Aviso "Limite de 3 cartões em Fazendo"; o cartão continua na coluna de origem</td></tr><tr><td>Título "   "</td><td>Clicar em Criar</td><td>Nenhum cartão criado; mensagem no campo</td></tr><tr><td>Hoje é 10/05; cartão em A fazer com entrega 09/05</td><td>Abrir o quadro</td><td>Cartão destacado como atrasado</td></tr><tr><td>O mesmo cartão</td><td>Mover para Feito</td><td>O destaque some</td></tr><tr><td>5 cartões criados</td><td>Fechar e reabrir o navegador</td><td>Os 5 cartões, nas mesmas colunas e na mesma ordem</td></tr><tr><td>Arquivo .json com texto qualquer</td><td>Importar</td><td>Mensagem de erro; quadro atual intacto</td></tr><tr><td>Cartões: média 12/05, alta 20/05, alta 15/05</td><td>Ver a coluna</td><td>Ordem: alta 15/05, alta 20/05, média 12/05</td></tr></tbody></table></div>
+</section>
+
+<section class="trilha-secao" id="antes">
+  <h2>2. Antes de começar</h2>
+  <p><strong>O que você vai praticar:</strong> estado da aplicação num array, redesenhar a tela a partir dele, arrastar e soltar com alternativa pelo teclado, ordenação, datas, e salvar, exportar e importar dados.</p>
+  <aside class="doc-nota trilha-teoria">
+  <p class="doc-nota-titulo">O que estudar antes (ou durante)</p>
+  <p>Tudo o que este projeto usa está explicado na Documentação:</p>
+  <ul><li><a href="doc-js.html#listas-objetos">Listas e objetos</a></li><li><a href="doc-js.html#dom">Mudar a página</a></li><li><a href="doc-js.html#eventos">Eventos</a></li><li><a href="doc-js.html#dados">localStorage e JSON</a></li><li><a href="doc-js.html#erros">Tratar erros</a></li></ul>
+</aside>
+  
+</section>
+
+<section class="trilha-secao" id="requisitos">
+  <h2>3. O que o sistema precisa fazer</h2>
+  <h3>Requisitos</h3>
+  <ol><li>RF1 — Três colunas fixas: A fazer, Fazendo e Feito.</li><li>RF2 — Criar cartão com título (obrigatório), descrição, prioridade (baixa, média, alta) e data de entrega (opcional).</li><li>RF3 — Editar e excluir cartão. Excluir pede confirmação.</li><li>RF4 — Mover cartão entre colunas arrastando com o mouse e por botões ou teclado.</li><li>RF5 — Cada coluna mostra quantos cartões tem.</li><li>RF6 — Cartão com data de entrega vencida e fora de Feito aparece destacado.</li><li>RF7 — Filtro por prioridade e busca por texto no título.</li><li>RF8 — Tudo continua lá depois de fechar e abrir o navegador.</li><li>RF9 — Exportar o quadro para um arquivo .json e importar de volta.</li></ol>
+  <h3>Regras de negócio</h3>
+  <ul><li>RN1 — A coluna Fazendo aceita no máximo 3 cartões. O 4º é recusado com um aviso, e o cartão volta para onde estava.</li><li>RN2 — Título vazio ou só com espaços não cria cartão.</li><li>RN3 — Cartão em Feito nunca aparece como atrasado.</li><li>RN4 — Dentro da coluna, a ordem é: prioridade alta primeiro, depois a data de entrega mais próxima.</li><li>RN5 — Importar um arquivo inválido não apaga o quadro atual; mostra o erro.</li></ul>
+  
+</section>
+
+<section class="trilha-secao" id="marcos">
+  <h2>4. Construa em 4 marcos</h2>
+  <p>Não tente fazer tudo de uma vez. Termine um marco, confira que funciona, faça um commit e só então passe para o próximo.</p>
+  <div class="marco" id="marco-1">
+  <h3>Marco 1: Colunas e cartões desenhados a partir dos dados</h3>
+  <p><strong>Funciona quando:</strong> as três colunas aparecem com cartões de exemplo que estão numa lista no JavaScript, e não escritos no HTML.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>O quadro na tela e a lista no JavaScript: qual dos dois é a verdade? Se eles discordarem, qual vale?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>A lista de cartões (cada um com id, coluna, título, prioridade e data) é a verdade. Uma função apaga as colunas e desenha tudo de novo a partir da lista. Toda ação do usuário muda a lista e chama essa função.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-js.html#listas-objetos">Listas e objetos</a></li><li><a href="doc-js.html#dom">Criar e apagar elementos</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-2">
+  <h3>Marco 2: Criar, editar, excluir e salvar</h3>
+  <p><strong>Funciona quando:</strong> os casos 2 e 5 funcionam.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>O localStorage só guarda texto. Como transformar uma lista de objetos em texto, e o texto de volta em lista? E como saber qual cartão editar se dois têm o mesmo título?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p><code>JSON.stringify</code> para salvar e <code>JSON.parse</code> para ler (dentro de <code>try/catch</code>, para o caso de estar vazio ou estragado). Dê a cada cartão um id único na criação, por exemplo <code>crypto.randomUUID()</code>.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-js.html#dados">localStorage e JSON</a></li><li><a href="doc-js.html#erros">try/catch</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-3">
+  <h3>Marco 3: Mover, limitar e ordenar</h3>
+  <p><strong>Funciona quando:</strong> os casos 1 e 7 funcionam com o mouse e com o teclado.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Qual evento avisa "soltaram algo aqui"? E quem não usa mouse, como move um cartão?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p><code>draggable="true"</code> no cartão; <code>dragstart</code> guarda o id; <code>dragover</code> precisa de <code>preventDefault()</code> para permitir soltar; <code>drop</code> muda a coluna na lista. Para o teclado, botões ← e → no cartão. O limite de 3 é conferido antes de mudar a coluna. Para ordenar, <code>sort</code> com uma função que compara a prioridade e, se empatar, a data.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-js.html#eventos">Eventos</a></li><li><a href="doc-js.html#funcoes">Funções que comparam</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-4">
+  <h3>Marco 4: Atrasados, filtros, exportar e importar</h3>
+  <p><strong>Funciona quando:</strong> os casos 3, 4 e 6 funcionam e o quadro está no ar.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Como comparar a data de entrega com hoje sem que o horário (e o fuso) atrapalhe?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>O campo <code>type="date"</code> dá o texto AAAA-MM-DD; monte o "hoje" no mesmo formato com a data local e compare os textos. Cuidado: <code>toISOString()</code> usa o horário de Londres. Exportar: um <code>Blob</code> e um link com <code>download</code>. Importar: <code>input type="file"</code> e <code>FileReader</code>; confira o conteúdo antes de trocar o quadro.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-js.html#dados">Dados e JSON</a></li><li><a href="doc-js.html#erros">Tratar erros</a></li></ul></div></details>
+  </div>
+</div>
+</section>
+
+<section class="trilha-secao" id="pensar">
+  <h2>5. Perguntas para pensar antes de programar</h2>
+  <p>Responda no papel (ou no README). Elas apontam as armadilhas do projeto antes de você cair nelas. As respostas não estão aqui de propósito: é o que o projeto ensina.</p>
+  <ul><li>Onde fica a "verdade" do quadro: no HTML da tela ou num array de objetos no JS? O que acontece se forem duas verdades diferentes?</li><li>Depois de mudar o array, como a tela fica igual a ele? Vale redesenhar tudo ou só o cartão que mudou?</li><li>O localStorage só guarda texto. Como guardar um array de objetos?</li><li>Como comparar a data de entrega com hoje sem errar por causa do horário?</li></ul>
+  <div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> ao recarregar, o quadro volta aos cartões de exemplo.</p>
+  <p>O código salva o exemplo por cima antes de ler o que estava guardado. Ordem certa: ler o localStorage; se não houver nada, usar o exemplo.</p>
+</div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> o cartão não solta na outra coluna.</p>
+  <p>Falta <code>preventDefault()</code> no evento <code>dragover</code> da coluna: sem ele, o navegador não permite soltar.</p>
+</div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> à noite, um cartão com entrega para hoje aparece atrasado.</p>
+  <p>É o fuso horário: <code>toISOString()</code> devolve a data de Londres, que já é amanhã. Monte a data de hoje com <code>getFullYear</code>, <code>getMonth</code> e <code>getDate</code>.</p>
+</div>
+  <aside class="trilha-ia">
+  <p class="trilha-ia-titulo">E a IA, neste passo?</p>
+  <p><strong>Pode:</strong> pedir para explicar a ordem dos eventos de arrastar e soltar, ou por que o <code>sort</code> está ordenando errado, mostrando o seu código.</p>
+  <p><strong>Não:</strong> pedir a função que desenha o quadro ou o arrastar e soltar prontos. Organizar o estado e redesenhar a tela é a habilidade que este projeto treina.</p>
+  <p>Por quê, e prompts prontos para usar do jeito certo: <a href="ia.html">Usar IA do jeito certo</a>.</p>
+</aside>
+</section>
+
+<section class="trilha-secao" id="entrega">
+  <h2>6. Entrega</h2>
+  <ul><li>Repositório no GitHub, com commits ao longo do trabalho (um por marco, pelo menos).</li><li>README com o que o projeto faz, como rodar, as decisões que você tomou e o que ficou de fora.</li><li>Link publicado no GitHub Pages.</li><li>Vídeo de até 2 minutos mostrando os casos de teste funcionando.</li></ul>
+  <p>A avaliação é a mesma nos 12 projetos: funciona como pedido (50%), qualidade do código (20%), documentação (15%) e explicação oral (15%). Detalhes em <a href="projetos.html#avaliacao">Como os projetos funcionam</a>.</p>
+  <div class="voce-tenta">
+  <p class="voce-tenta-titulo">Você tenta</p>
+  <p><strong>Desafio extra:</strong> histórico de cada cartão ("criado em", "movido para Fazendo em") e um botão Desfazer para a última ação.</p>
+</div>
+</section>
+      <section class="pronto-quando" aria-labelledby="pronto-titulo">
+  <h2 id="pronto-titulo">Pronto quando</h2>
+  <p>Marque cada critério de aceite só depois de conferir. O progresso fica salvo e aparece no mapa dos projetos.</p>
+  <ul data-total="6">
+    <li><label><input type="checkbox" data-progresso="passo-p4-1"> Todos os casos de teste passam.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p4-2"> Dá para usar o quadro inteiro só com o teclado.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p4-3"> Funciona no celular sem rolagem horizontal.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p4-4"> Nenhum erro no Console (F12).</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p4-5"> HTML, CSS e JS em arquivos separados; nada de onclick no HTML.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p4-6"> Publicado no GitHub Pages, com README que explica como usar.</label></li>
+  </ul>
+</section>
+      <nav class="passo-nav" aria-label="Navegação entre projetos">
+        <a class="passo-ant" href="projeto-3.html"><span>Projeto anterior</span>3. Portfólio pessoal</a>
+        <a class="passo-prox" href="projetos.html"><span>Próximos</span>Ver todos os projetos</a>
+      </nav>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

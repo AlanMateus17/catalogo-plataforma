@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--
+  PROJETO 3 — Portfólio pessoal
+  Enunciado, resultado esperado e dicas em camadas. Sem código pronto: o aluno constrói do zero.
+  As caixas "Pronto quando" guardam o progresso (js/trilha.js, prefixo "projeto:").
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/trilha.js" defer></script>
+  <title>Projeto 3: Portfólio pessoal — Catálogo do HTML</title>
+  <meta name="description" content="O seu portfólio: projetos montados pelo JavaScript a partir de uma lista, com filtros, janela de detalhes e tema.">
+</head>
+<body class="pagina-trilha" data-prefixo="projeto:">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html">Documentação</a></li>
+          <li><a href="projetos.html" aria-current="page">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <nav aria-label="Você está em" class="migalhas">
+          <ol>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li aria-current="page">Projeto 3</li>
+          </ol>
+        </nav>
+        <p class="heroi-antetitulo">Projeto 3 de 12 · Etapa 2 · 3 a 4 semanas · individual</p>
+        <h1 class="heroi-titulo">Portfólio pessoal</h1>
+        <p class="heroi-texto">Você vai precisar mostrar o que sabe fazer. Um recrutador gasta menos de um minuto num portfólio: precisa ver quem é a pessoa, os projetos e como falar com ela, sem procurar.</p>
+      </div>
+    </section>
+
+    <div class="container trilha-corpo">
+      <nav class="trilha-mapa" aria-label="Projetos disponíveis"><ol><li><a href="projeto-1.html" data-passo="p1" data-total="4"><span class="mapa-num">1</span><span class="mapa-nome">Caixa Rápido</span></a></li><li><a href="projeto-2.html" data-passo="p2" data-total="6"><span class="mapa-num">2</span><span class="mapa-nome">Linha do Tempo</span></a></li><li><a href="projeto-3.html" data-passo="p3" data-total="5" aria-current="step"><span class="mapa-num">3</span><span class="mapa-nome">Portfólio pessoal</span></a></li><li><a href="projeto-4.html" data-passo="p4" data-total="6"><span class="mapa-num">4</span><span class="mapa-nome">Quadro Kanban</span></a></li></ol></nav>
+      <p><span class="selo">Inspirado no o seu site pessoal</span> <span class="selo">HTML, CSS, JavaScript</span> <span class="selo">Módulo 2 e 3</span></p>
+
+<section class="trilha-secao" id="resultado">
+  <h2>1. O resultado esperado</h2>
+  <p>É aqui que você precisa chegar. Não existe código para copiar: você constrói do zero e confere cada linha da tabela no seu projeto.</p>
+  <div class="resultado-esperado"><p class="resultado-pendente">O vídeo do resultado esperado está sendo gravado. Enquanto isso, a tabela de casos de teste abaixo mostra exatamente o que o seu projeto precisa fazer.</p></div>
+  <h3>Casos de teste</h3>
+  <p>Faça exatamente estas entradas. A saída do seu projeto precisa ser igual, número por número.</p>
+  <div class="tabela-rolagem"><table class="tabela casos"><thead><tr><th scope="col">#</th><th scope="col">Ação</th><th scope="col">Resultado esperado</th></tr></thead><tbody><tr><td>1</td><td>Acrescentar um objeto na lista e recarregar</td><td>Um card novo aparece, com a imagem e os links</td></tr><tr><td>2</td><td>Ligar "CSS" e depois "JavaScript"</td><td>Só os projetos que têm as duas</td></tr><tr><td>3</td><td>Ligar um filtro que nenhum projeto tem</td><td>A mensagem de nenhum resultado</td></tr><tr><td>4</td><td>Abrir um card e apertar Esc</td><td>A janela fecha e o foco volta ao card</td></tr><tr><td>5</td><td>Enviar o formulário com e-mail "ana@"</td><td>O erro aparece junto do campo, e nada é enviado</td></tr><tr><td>6</td><td>Ligar o tema escuro e recarregar</td><td>Continua escuro</td></tr></tbody></table></div>
+</section>
+
+<section class="trilha-secao" id="antes">
+  <h2>2. Antes de começar</h2>
+  <p><strong>O que você vai praticar:</strong> montar a página pelo JavaScript a partir de dados, filtros combinados, janela acessível, validação de formulário e lembrar escolhas do visitante.</p>
+  <aside class="doc-nota trilha-teoria">
+  <p class="doc-nota-titulo">O que estudar antes (ou durante)</p>
+  <p>Tudo o que este projeto usa está explicado na Documentação:</p>
+  <ul><li><a href="doc-js.html#listas-objetos">Listas e objetos</a></li><li><a href="doc-js.html#dom">Criar elementos na página</a></li><li><a href="doc-js.html#eventos">Eventos</a></li><li><a href="doc-js.html#dados">Guardar dados no navegador</a></li><li><a href="doc-html.html#formularios">Formulários</a></li><li><a href="doc-html.html#acessibilidade">Acessibilidade</a></li></ul>
+</aside>
+  
+</section>
+
+<section class="trilha-secao" id="requisitos">
+  <h2>3. O que o sistema precisa fazer</h2>
+  <h3>Requisitos</h3>
+  <ol><li>RF01 — Seções: apresentação, projetos, habilidades, contato.</li><li>RF02 — Os cards de projeto são montados pelo JavaScript a partir de uma lista de objetos (nome, descrição, tecnologias, imagem, link do site, link do repositório).</li><li>RF03 — Filtro por tecnologia: clicar em "CSS" mostra só os projetos que usam CSS; dá para combinar dois filtros.</li><li>RF04 — Clicar num card abre uma janela com os detalhes do projeto.</li><li>RF05 — Formulário de contato com validação (nome, e-mail, mensagem de 20 a 500 caracteres) e mensagem de confirmação.</li><li>RF06 — Tema claro e escuro, lembrado na próxima visita.</li></ol>
+  <h3>Regras de negócio</h3>
+  <ul><li>RN01 — Acrescentar um projeto novo = acrescentar um objeto na lista. Nenhum HTML muda.</li><li>RN02 — Com dois filtros ligados, aparecem os projetos que têm as duas tecnologias.</li><li>RN03 — A janela fecha com Esc, com o botão fechar e clicando fora dela; ao fechar, o foco volta ao card.</li><li>RN04 — Nenhum filtro ligado = todos os projetos. Nenhum resultado = mensagem "Nenhum projeto com essas tecnologias".</li></ul>
+  
+</section>
+
+<section class="trilha-secao" id="marcos">
+  <h2>4. Construa em 4 marcos</h2>
+  <p>Não tente fazer tudo de uma vez. Termine um marco, confira que funciona, faça um commit e só então passe para o próximo.</p>
+  <div class="marco" id="marco-1">
+  <h3>Marco 1: A página estática</h3>
+  <p><strong>Funciona quando:</strong> as quatro seções existem, o menu leva a cada uma e dois cards de projeto estão escritos à mão no HTML.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>O recrutador abre o seu site. O que ele precisa ver sem rolar a página?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>Seu nome e o que você faz no <code>h1</code>, um botão para os projetos e outro para o contato. Os dois cards escritos à mão são o molde que o JavaScript vai repetir no próximo marco.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-html.html#semantica">Semântica</a></li><li><a href="doc-css.html#flexbox">Flexbox</a></li><li><a href="doc-css.html#grid">Grid</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-2">
+  <h3>Marco 2: Os cards gerados pela lista</h3>
+  <p><strong>Funciona quando:</strong> você apaga os cards escritos à mão e eles aparecem do mesmo jeito, montados a partir de uma lista no JavaScript.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Compare os dois cards que você escreveu à mão. Quais partes mudam de um projeto para outro? Essas partes são os seus dados.</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>Um array de objetos com essas partes e uma função que recebe um projeto e devolve o elemento do card, criado com <code>createElement</code> e preenchido com <code>textContent</code>. Um laço chama a função para cada projeto e coloca o card na página.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-js.html#listas-objetos">Listas e objetos</a></li><li><a href="doc-js.html#dom">createElement, textContent e append</a></li><li><a href="doc-js.html#funcoes">Funções</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-3">
+  <h3>Marco 3: Filtros e janela de detalhes</h3>
+  <p><strong>Funciona quando:</strong> os casos 2, 3 e 4 funcionam.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Com "CSS" e "JavaScript" ligados, deve aparecer o projeto que tem qualquer um dos dois, ou só o que tem os dois? Qual método de lista pergunta "todos cumprem?"</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p>Guarde os filtros ligados num array e mostre o projeto se <em>todo</em> filtro ligado estiver nas tecnologias dele (<code>every</code> + <code>includes</code>). Para a janela, a tag <code>&lt;dialog&gt;</code> com <code>showModal()</code> já fecha com Esc; guarde qual card abriu para devolver o foco a ele.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-js.html#listas-objetos">Métodos de lista: every, some, includes, filter</a></li><li><a href="doc-js.html#eventos">Eventos</a></li><li><a href="doc-html.html#acessibilidade">Foco e teclado</a></li></ul></div></details>
+  </div>
+</div>
+<div class="marco" id="marco-4">
+  <h3>Marco 4: Formulário, tema e publicação</h3>
+  <p><strong>Funciona quando:</strong> os casos 5 e 6 funcionam e o site está no ar no endereço principal.</p>
+  <p>Travou? Abra uma dica de cada vez, e só depois de tentar de verdade.</p>
+  <div class="dicas">
+    <details><summary>Dica 1: uma pergunta para pensar</summary><div><p>Onde o site guarda uma escolha do visitante para a próxima visita? E o que o HTML já valida sozinho, antes de qualquer JavaScript?</p></div></details>
+    <details><summary>Dica 2: o conceito que resolve</summary><div><p><code>localStorage</code> guarda o tema. No formulário, <code>required</code>, <code>type="email"</code>, <code>minlength</code> e <code>maxlength</code> já validam; o JavaScript chama <code>checkValidity()</code> e mostra a mensagem ao lado do campo. O endereço principal é um repositório chamado exatamente <code>seu-usuario.github.io</code>.</p></div></details>
+    <details><summary>Dica 3: onde estudar isso</summary><div><ul><li><a href="doc-js.html#dados">localStorage</a></li><li><a href="doc-html.html#formularios">Validação de formulários</a></li><li><a href="passo-9-pages.html">Passo 9: GitHub Pages</a></li></ul></div></details>
+  </div>
+</div>
+</section>
+
+<section class="trilha-secao" id="pensar">
+  <h2>5. Perguntas para pensar antes de programar</h2>
+  <p>Responda no papel (ou no README). Elas apontam as armadilhas do projeto antes de você cair nelas. As respostas não estão aqui de propósito: é o que o projeto ensina.</p>
+  <ul><li>Que forma de dado guarda "um projeto" com todas as informações dele? E "todos os projetos"?</li><li>Filtrar é esconder cards que já existem ou montar a lista de novo? Quais são as vantagens de cada jeito?</li><li>Qual elemento do HTML já é uma janela e já fecha com Esc?</li></ul>
+  <div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> o card mostra &lt;strong&gt; escrito, ou um texto do projeto quebra a página.</p>
+  <p>Use <code>textContent</code> para colocar dados na página, nunca <code>innerHTML</code> com texto vindo de uma lista: além de quebrar, é uma porta para código malicioso.</p>
+</div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> com um filtro ligado e depois desligado, não volta a mostrar tudo.</p>
+  <p>Confira o que a sua conta faz com a lista de filtros vazia. <code>every</code> numa lista vazia devolve <code>true</code> (todos aparecem); <code>some</code> devolve <code>false</code> (nenhum aparece).</p>
+</div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> o tema pisca claro antes de ficar escuro.</p>
+  <p>O tema é aplicado depois que a página já apareceu. Leia o <code>localStorage</code> e aplique o tema o mais cedo possível.</p>
+</div>
+  <aside class="trilha-ia">
+  <p class="trilha-ia-titulo">E a IA, neste passo?</p>
+  <p><strong>Pode:</strong> pedir para explicar a diferença entre <code>every</code> e <code>some</code>, ou para revisar a acessibilidade da janela depois de pronta.</p>
+  <p><strong>Não:</strong> pedir a função que monta os cards ou a do filtro. É com elas que você aprende a transformar dados em página.</p>
+  <p>Por quê, e prompts prontos para usar do jeito certo: <a href="ia.html">Usar IA do jeito certo</a>.</p>
+</aside>
+</section>
+
+<section class="trilha-secao" id="entrega">
+  <h2>6. Entrega</h2>
+  <ul><li>Repositório no GitHub, com commits ao longo do trabalho (um por marco, pelo menos).</li><li>README com o que o projeto faz, como rodar, as decisões que você tomou e o que ficou de fora.</li><li>Link publicado no GitHub Pages.</li><li>Vídeo de até 2 minutos mostrando os casos de teste funcionando.</li></ul>
+  <p>A avaliação é a mesma nos 12 projetos: funciona como pedido (50%), qualidade do código (20%), documentação (15%) e explicação oral (15%). Detalhes em <a href="projetos.html#avaliacao">Como os projetos funcionam</a>.</p>
+  <div class="voce-tenta">
+  <p class="voce-tenta-titulo">Você tenta</p>
+  <p><strong>Desafio extra:</strong> a lista de projetos sai de um arquivo <code>projetos.json</code> lido com <code>fetch</code>, e o portfólio mostra quantos commits cada repositório tem, pela API pública do GitHub.</p>
+</div>
+</section>
+      <section class="pronto-quando" aria-labelledby="pronto-titulo">
+  <h2 id="pronto-titulo">Pronto quando</h2>
+  <p>Marque cada critério de aceite só depois de conferir. O progresso fica salvo e aparece no mapa dos projetos.</p>
+  <ul data-total="5">
+    <li><label><input type="checkbox" data-progresso="passo-p3-1"> Os 6 casos de teste funcionam.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p3-2"> Tudo é usável só com o teclado.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p3-3"> Lighthouse 90 ou mais em Acessibilidade e em Boas práticas.</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p3-4"> Publicado no endereço principal (seu-usuario.github.io).</label></li>
+    <li><label><input type="checkbox" data-progresso="passo-p3-5"> Os projetos 1 e 2 já estão no portfólio, com os links funcionando.</label></li>
+  </ul>
+</section>
+      <nav class="passo-nav" aria-label="Navegação entre projetos">
+        <a class="passo-ant" href="projeto-2.html"><span>Projeto anterior</span>2. Linha do Tempo</a>
+        <a class="passo-prox" href="projeto-4.html"><span>Próximo projeto</span>4. Quadro Kanban</a>
+      </nav>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+    <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

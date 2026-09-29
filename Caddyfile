@@ -1,0 +1,5 @@
+# O Caddy pede e renova o certificado HTTPS sozinho. Basta o domínio apontar para o servidor.
+{$DOMINIO} {
+	encode zstd gzip
+	reverse_proxy sistema:8080
+}

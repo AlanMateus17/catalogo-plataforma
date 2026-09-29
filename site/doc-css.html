@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<!--
+  DOCUMENTAÇÃO — CSS: estilo, caixas e layout
+  Página gerada pela ferramenta do professor. Os exemplos ficam coloridos e
+  clicáveis com js/documentacao.js, que usa o dicionário (js/dicionario-dados.js).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/dicionario-dados.js" defer></script>
+  <script src="js/analisador.js" defer></script>
+  <script src="js/documentacao.js" defer></script>
+  <title>CSS: estilo, caixas e layout — Catálogo do HTML</title>
+  <meta name="description" content="Documentação de CSS para alunos: seletores, cascata, modelo de caixa, flexbox, grid, responsivo e referência completa.">
+</head>
+<body class="pagina-trilha pagina-doc">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html" aria-current="page">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <nav aria-label="Você está em" class="migalhas">
+          <ol>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="documentacao.html">Documentação</a></li>
+            <li aria-current="page">CSS: estilo, caixas e layout</li>
+          </ol>
+        </nav>
+        <p class="heroi-antetitulo">Documentação · Módulo 2 · CSS</p>
+        <h1 class="heroi-titulo">CSS: estilo, caixas e layout</h1>
+        <p class="heroi-texto">Como o CSS escolhe os elementos, calcula tamanhos e decide qual regra vence, com experimentos interativos de caixa, flexbox, grid, position e seletores.</p>
+      </div>
+    </section>
+
+    <div class="container doc-layout">
+      <nav class="doc-indice" aria-label="Nesta página">
+        <details class="doc-indice-caixa" open>
+          <summary>Nesta página</summary>
+          <ol><li><a href="#o-que-e">O que é CSS</a></li><li><a href="#anatomia">Anatomia de uma regra</a></li><li><a href="#seletores">Seletores</a></li><li><a href="#cascata">Cascata e especificidade</a></li><li><a href="#caixa">Modelo de caixa</a></li><li><a href="#unidades">Unidades e cores</a></li><li><a href="#display">display e fluxo</a></li><li><a href="#flexbox">Flexbox</a></li><li><a href="#grid">Grid</a></li><li><a href="#position">Position</a></li><li><a href="#responsivo">Responsivo</a></li><li><a href="#variaveis">Variáveis e tema</a></li><li><a href="#animacao">Transições e animações</a></li><li><a href="#ferramentas">F12 e erros comuns</a></li><li><a href="#referencia">Referência</a></li></ol>
+        </details>
+      </nav>
+      <div class="trilha-corpo doc-corpo">
+<section class="trilha-secao doc-secao" id="o-que-e">
+  <h2>1. O que é CSS e como ligar ao HTML</h2>
+  
+<p>CSS quer dizer <strong>Cascading Style Sheets</strong>: folhas de estilo em cascata. O HTML diz o que cada coisa é; o CSS diz como ela aparece: cor, tamanho, espaço, posição, animação. "Em cascata" porque várias regras podem valer para o mesmo elemento, e existe uma ordem para decidir qual vence (capítulo 4).</p><p>Existem três jeitos de colocar CSS numa página. Use o primeiro:</p>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Jeito</th><th scope="col">Como</th><th scope="col">Quando</th></tr></thead><tbody><tr><td><strong>Arquivo externo</strong> (recomendado)</td><td><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/estilo.css&quot;&gt;</code> no head</td><td>Sempre. Um arquivo serve a todas as páginas: mudou uma vez, muda o site todo.</td></tr><tr><td>Tag style</td><td><code>&lt;style&gt; p { color: red; } &lt;/style&gt;</code> no head</td><td>Testes rápidos, ou CSS que só vale para uma página.</td></tr><tr><td>Atributo style</td><td><code>&lt;p style=&quot;color: red&quot;&gt;</code></td><td>Quase nunca. Mistura aparência com conteúdo e é difícil de mudar.</td></tr></tbody></table></div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> escrever <code>&lt;style&gt;</code> dentro do arquivo .css</p>
+  <p>Dentro do estilo.css só existe CSS. As tags <code>&lt;style&gt;</code> e <code>&lt;/style&gt;</code> são HTML e, no .css, fazem a primeira regra ser ignorada.</p>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="anatomia">
+  <h2>2. Anatomia de uma regra</h2>
+  
+<div class="doc-anatomia" aria-label="Partes de uma regra CSS">
+  <span class="an an-abre">.card</span> <span class="an an-fecha">{</span><br>
+  &nbsp;&nbsp;<span class="an an-attr">background-color</span>: <span class="an an-valor">white</span>;<br>
+  &nbsp;&nbsp;<span class="an an-attr">padding</span>: <span class="an an-valor">1rem</span>;<br>
+  <span class="an an-fecha">}</span>
+</div>
+<ul class="doc-legenda-anatomia">
+  <li><span class="an-cor an-abre"></span><strong>Seletor</strong>: QUEM vai mudar. Aqui, todo elemento com class="card".</li>
+  <li><span class="an-cor an-fecha"></span><strong>Chaves</strong>: o bloco de declarações começa em { e termina em }.</li>
+  <li><span class="an-cor an-attr"></span><strong>Propriedade</strong>: O QUE muda (a cor de fundo, o espaço interno).</li>
+  <li><span class="an-cor an-valor"></span><strong>Valor</strong>: COMO fica. Depois dos dois-pontos; termina com ponto e vírgula.</li>
+</ul>
+<p>Uma propriedade + valor é uma <strong>declaração</strong>. O conjunto seletor + bloco é uma <strong>regra</strong>. O arquivo CSS é só uma lista de regras.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Três regras</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>/* Comentário: o navegador ignora */
+body {
+  font-family: Arial, sans-serif;
+  color: #1b2a38;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  color: #12324a;
+}
+
+.botao {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+}</code></pre></figure>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> esquecer o ponto e vírgula ou os dois-pontos</p>
+  <p>Sem ; a declaração seguinte "gruda" na anterior e as duas são ignoradas. O navegador não avisa: a regra só não funciona. No F12, a declaração aparece riscada ou com um ícone de aviso.</p>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="seletores">
+  <h2>3. Seletores: escolher quem muda</h2>
+  
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Seletor</th><th scope="col">Escolhe</th><th scope="col">Exemplo</th></tr></thead><tbody><tr><td><code>p</code></td><td>todos os elementos daquela tag</td><td><code>p { line-height: 1.6; }</code></td></tr><tr><td><code>.card</code></td><td>todos com class="card"</td><td><code>.card { padding: 1rem; }</code></td></tr><tr><td><code>#topo</code></td><td>o único com id="topo"</td><td><code>#topo { background: navy; }</code></td></tr><tr><td><code>nav a</code></td><td>a dentro de nav (em qualquer nível)</td><td><code>nav a { color: white; }</code></td></tr><tr><td><code>.menu &gt; li</code></td><td>li filho DIRETO de .menu</td><td><code>.menu &gt; li { display: inline; }</code></td></tr><tr><td><code>h2 + p</code></td><td>o p logo depois de um h2</td><td><code>h2 + p { margin-top: 0; }</code></td></tr><tr><td><code>a.ativo</code></td><td>a que TAMBÉM tem a classe ativo</td><td><code>a.ativo { font-weight: 700; }</code></td></tr><tr><td><code>a[target]</code></td><td>a que tem o atributo target</td><td><code>a[target]::after { content: &quot; ↗&quot;; }</code></td></tr><tr><td><code>h1, h2, h3</code></td><td>vários seletores com a mesma regra</td><td><code>h1, h2, h3 { font-family: serif; }</code></td></tr><tr><td><code>a:hover</code></td><td>o a com o mouse em cima (pseudo-classe)</td><td><code>a:hover { text-decoration: underline; }</code></td></tr><tr><td><code>li::marker</code></td><td>uma parte do elemento (pseudo-elemento)</td><td><code>li::marker { color: gold; }</code></td></tr><tr><td><code>*</code></td><td>todos os elementos</td><td><code>* { box-sizing: border-box; }</code></td></tr></tbody></table></div>
+<aside class="doc-nota"><p class="doc-nota-titulo">Na prática</p><p>Prefira <strong>classes</strong> para estilizar. Tag sozinha é boa para o estilo básico (todo p, todo a). id é forte demais no CSS (difícil de sobrescrever): deixe os ids para os links #âncora e para o JavaScript.</p></aside>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: teste seletores num HTML de verdade</p><p>Escreva um seletor e veja quais elementos ele escolhe. Use os botões para exemplos prontos.</p><div data-brinquedo="seletores"><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<div class="confira">
+  <p><strong>Confira:</strong> Qual seletor escolhe só os links do menu, e não os links do texto: <code>a</code>, <code>.menu a</code> ou <code>.menu</code>?</p>
+  <details><summary>Ver a resposta</summary><p><code>.menu a</code>: os a que estão dentro do elemento com class="menu". <code>a</code> pega todos os links; <code>.menu</code> pega a caixa do menu, não os links.</p></details>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="cascata">
+  <h2>4. Cascata, especificidade e herança</h2>
+  
+<p>Quando duas regras mudam a mesma propriedade do mesmo elemento, qual vence? O navegador decide nesta ordem:</p>
+<ol><li><strong>!important</strong> vence tudo (evite: é um atalho que depois ninguém consegue sobrescrever).</li><li><strong>Atributo style</strong> escrito na própria tag vence qualquer seletor do arquivo CSS (por isso o CSS fica melhor no arquivo).</li><li><strong>Especificidade</strong>: o seletor mais específico vence. Conte (ids, classes, tags): id vale mais que qualquer quantidade de classes, e classe vale mais que qualquer quantidade de tags.</li><li><strong>Ordem</strong>: empatou? Vence a que está mais para baixo no arquivo.</li></ol>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Quem vence num <p id="alerta" class="aviso">?</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>p { color: black; }          /* (0, 0, 1) */
+.aviso { color: orange; }    /* (0, 1, 0)  vence o p */
+p.aviso { color: red; }      /* (0, 1, 1)  vence .aviso */
+#alerta { color: purple; }   /* (1, 0, 0)  vence todos acima */</code></pre></figure>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: calcule a especificidade</p><p>Escreva dois seletores e veja qual vence.</p><div data-brinquedo="especificidade"><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<h3>Herança</h3>
+<p>Algumas propriedades passam do pai para os filhos sozinhas: as de <strong>texto</strong> (color, font-family, font-size, line-height, text-align). Por isso basta definir a fonte no body. As de <strong>caixa</strong> (margin, padding, border, background, width) não passam.</p>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> "mudei o CSS e não aconteceu nada"</p>
+  <p>Aperte F12, clique no elemento (aba Elements) e olhe o painel Styles: as declarações riscadas perderam para outra regra, e o painel mostra qual venceu e em que linha ela está.</p>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="caixa">
+  <h2>5. O modelo de caixa (box model)</h2>
+  
+<p>Para o CSS, todo elemento é uma caixa com quatro camadas, de dentro para fora: <strong>conteúdo</strong>, <strong>padding</strong> (espaço interno), <strong>border</strong> (borda) e <strong>margin</strong> (espaço externo, que afasta os vizinhos).</p>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: mexa nas camadas da caixa</p><p>Laranja = margin, amarelo escuro = border, verde = padding, azul = conteúdo. Troque o box-sizing e veja a conta mudar.</p><div data-brinquedo="caixa"><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">A primeira regra de quase todo CSS moderno</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.card {
+  width: 300px;
+  padding: 1rem;
+  border: 1px solid #cfd9e3;
+  margin: 0 auto 2rem;
+}</code></pre></figure>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Quantos valores</th><th scope="col">Significa</th><th scope="col">Exemplo</th></tr></thead><tbody><tr><td>1</td><td>os 4 lados iguais</td><td><code>padding: 1rem;</code></td></tr><tr><td>2</td><td>vertical | horizontal</td><td><code>margin: 0 auto;</code> (centraliza)</td></tr><tr><td>3</td><td>topo | laterais | baixo</td><td><code>margin: 0 auto 2rem;</code></td></tr><tr><td>4</td><td>topo | direita | baixo | esquerda (sentido do relógio)</td><td><code>padding: 4px 8px 4px 16px;</code></td></tr></tbody></table></div>
+<aside class="doc-nota"><p class="doc-nota-titulo">Curiosidade que confunde</p><p>Duas margens verticais que se encontram não somam: a maior vence (margin collapse). Entre um h2 com margin-bottom de 20px e um p com margin-top de 10px, a distância fica em 20px, não em 30px. Isso só acontece entre blocos comuns; entre itens de flex e de grid, as margens somam.</p></aside>
+
+</section>
+<section class="trilha-secao doc-secao" id="unidades">
+  <h2>6. Unidades e cores</h2>
+  
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Unidade</th><th scope="col">É relativa a</th><th scope="col">Use em</th></tr></thead><tbody><tr><td><code>px</code></td><td>nada: tamanho fixo</td><td>bordas, sombras, detalhes</td></tr><tr><td><code>rem</code></td><td>o tamanho de letra da página (normalmente 16px)</td><td>fontes, espaços (a mais recomendada)</td></tr><tr><td><code>em</code></td><td>o tamanho de letra do próprio elemento (no font-size, o do elemento pai)</td><td>padding de botões</td></tr><tr><td><code>%</code></td><td>o elemento pai</td><td>larguras flexíveis</td></tr><tr><td><code>vw</code> / <code>vh</code></td><td>a largura / altura da janela</td><td>seções de tela cheia, títulos que crescem</td></tr><tr><td><code>fr</code></td><td>o espaço livre do grid</td><td>colunas do grid</td></tr><tr><td><code>ch</code></td><td>a largura do caractere 0</td><td>max-width de textos (60 a 75ch)</td></tr></tbody></table></div>
+<p>Por que rem para fontes? Quem enxerga pouco aumenta a letra nas configurações do navegador. Com rem, o site inteiro acompanha. Com px, não.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Unidades e cores na prática</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);  /* cresce com a tela, entre 2rem e 3.5rem */
+}
+.texto {
+  max-width: 65ch;
+}
+.faixa {
+  color: #ffffff;
+  background-color: rgba(18, 50, 74, 0.9);
+}</code></pre></figure>
+<p>Cores podem ser escritas com nome (white), hexadecimal (#12324a: vermelho 12, verde 32, azul 4a) ou rgb/rgba (o quarto número é a opacidade: 1 é totalmente visível, 0 é invisível). Para escolher, use um seletor de cores e confira o <strong>contraste</strong> entre texto e fundo (procure "contrast checker"): o mínimo recomendado é 4,5 para 1.</p>
+
+</section>
+<section class="trilha-secao doc-secao" id="display">
+  <h2>7. display: como a caixa se comporta</h2>
+  
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Valor</th><th scope="col">Comportamento</th></tr></thead><tbody><tr><td><code>block</code></td><td>ocupa a linha inteira; aceita width, height, margin (p, div, section, h1...)</td></tr><tr><td><code>inline</code></td><td>fica no meio do texto; ignora width e height (a, span, strong)</td></tr><tr><td><code>inline-block</code></td><td>fica na linha, mas aceita width, height e padding</td></tr><tr><td><code>flex</code></td><td>os filhos viram itens flexíveis, alinhados numa direção (capítulo 8)</td></tr><tr><td><code>grid</code></td><td>os filhos são arrumados em linhas e colunas (capítulo 9)</td></tr><tr><td><code>none</code></td><td>some da página, como se não existisse</td></tr></tbody></table></div>
+<p>Esconder: <code>display: none</code> tira o elemento e o espaço dele. <code>visibility: hidden</code> e <code>opacity: 0</code> escondem, mas mantêm o espaço. O atributo <code>hidden</code> do HTML equivale a display: none, com um cuidado: se o CSS der outro display ao elemento (por exemplo, <code>.caixa { display: flex; }</code>), o hidden para de funcionar. A solução é acrescentar <code>[hidden] { display: none !important; }</code> no CSS.</p>
+
+</section>
+<section class="trilha-secao doc-secao" id="flexbox">
+  <h2>8. Flexbox: alinhar numa direção</h2>
+  
+<p>Flexbox arruma os filhos de uma caixa em <strong>uma direção</strong> (linha ou coluna) e resolve os alinhamentos que antes eram difíceis: centralizar, espaçar igualmente, mandar um item para o canto. É o que se usa em menus, cabeçalhos, barras de botões e cards lado a lado.</p>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: mude as propriedades do flex</p><p>As propriedades vão no PAI (a caixa). Os números são os filhos.</p><div data-brinquedo="flex"><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Os usos mais comuns</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>/* Cabeçalho: logo à esquerda, menu à direita, tudo centralizado na vertical */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Um item que ocupa todo o espaço que sobra */
+.busca {
+  flex: 1;
+}</code></pre></figure>
+<aside class="doc-nota"><p class="doc-nota-titulo">Para não confundir</p><p><strong>justify-content</strong> alinha na direção principal (na horizontal, se flex-direction for row). <strong>align-items</strong> alinha na direção cruzada (na vertical). Com flex-direction: column, os dois trocam de papel.</p></aside>
+
+</section>
+<section class="trilha-secao doc-secao" id="grid">
+  <h2>9. Grid: linhas e colunas</h2>
+  
+<p>Grid arruma os filhos em <strong>duas direções</strong> ao mesmo tempo: linhas e colunas. Use para grades de cards, galerias e o layout da página inteira.</p>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: mude as colunas</p><p>Escolha a opção auto-fit e diminua a largura da caixa com o último controle: as colunas se reorganizam sozinhas, sem @media.</p><div data-brinquedo="grid"><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Grade automática e layout com áreas</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>/* Cards que se ajustam sozinhos: quantos de 250px couberem */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Layout de página desenhado com nomes */
+.pagina {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-areas:
+    &quot;topo topo&quot;
+    &quot;lateral principal&quot;;
+}
+.pagina &gt; header { grid-area: topo; }
+.pagina &gt; aside { grid-area: lateral; }
+.pagina &gt; main { grid-area: principal; }</code></pre></figure>
+<p>Flex ou grid? Flex quando o conteúdo manda (uma fila de itens de tamanhos diferentes). Grid quando o layout manda (colunas definidas). Os dois convivem: um card de um grid pode ter flex dentro.</p>
+
+</section>
+<section class="trilha-secao doc-secao" id="position">
+  <h2>10. position: tirar do lugar</h2>
+  
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: compare os valores de position</p><div data-brinquedo="posicao"><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Valor</th><th scope="col">Uso típico</th></tr></thead><tbody><tr><td><code>static</code></td><td>o normal (não precisa escrever)</td></tr><tr><td><code>relative</code></td><td>no elemento que serve de referência para algo absolute (normalmente o pai)</td></tr><tr><td><code>absolute</code></td><td>etiqueta sobre uma foto, botão X no canto de um card</td></tr><tr><td><code>fixed</code></td><td>botão "voltar ao topo", aviso fixo na tela</td></tr><tr><td><code>sticky</code></td><td>cabeçalho que gruda no topo ao rolar</td></tr></tbody></table></div>
+<p>Com position diferente de static, use <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> para posicionar e <code>z-index</code> para decidir quem fica na frente.</p>
+
+</section>
+<section class="trilha-secao doc-secao" id="responsivo">
+  <h2>11. Site responsivo: celular primeiro</h2>
+  
+<p>Responsivo é o site que se adapta a qualquer tela. A maior parte dos seus visitantes vai estar no celular. Receita:</p>
+<ol><li>Tenha o meta viewport no HTML (sem ele, nada funciona no celular).</li><li>Use larguras flexíveis (%, max-width, fr, auto-fit) em vez de width fixo em px.</li><li>Imagens com <code>max-width: 100%</code> e <code>height: auto</code>.</li><li>Escreva o CSS pensando no celular primeiro. Depois acrescente @media (min-width: ...) para telas maiores.</li><li>Teste no F12: o ícone de celular (Ctrl + Shift + M) simula várias telas.</li></ol>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Celular primeiro, depois telas maiores</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>img {
+  max-width: 100%;
+  height: auto;
+}
+
+.colunas {
+  display: grid;
+  gap: 1rem;                     /* no celular: uma coluna */
+}
+
+@media (min-width: 800px) {
+  .colunas {
+    grid-template-columns: 1fr 1fr;   /* telas maiores: duas colunas */
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}</code></pre></figure>
+
+</section>
+<section class="trilha-secao doc-secao" id="variaveis">
+  <h2>12. Variáveis CSS e tema escuro</h2>
+  
+<p>Variáveis guardam valores que se repetem. Você cria no :root com um nome começando por --, e usa com var(). Para um tema escuro, basta trocar o valor das variáveis.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Variáveis e tema escuro</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>/* Variáveis: nomes inventados por você */
+:root {
+  --cor-fundo: #ffffff;
+  --cor-texto: #1b2a38;
+  --espaco: 1rem;
+}
+
+/* Tema escuro: o JavaScript coloca data-tema=&quot;escuro&quot; no &lt;html&gt; */
+[data-tema=&quot;escuro&quot;] {
+  --cor-fundo: #0c1720;
+  --cor-texto: #e4ecf2;
+}
+
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  padding: var(--espaco);
+}</code></pre></figure>
+<p>É exatamente assim que funciona o botão de tema escuro deste site. O código completo está em <a href="codigos.html">Códigos</a>, no grupo Interatividade, em "Tema escuro".</p>
+
+</section>
+<section class="trilha-secao doc-secao" id="animacao">
+  <h2>13. Transições e animações</h2>
+  
+<p><code>transition</code> anima a mudança de um estado para outro (normal → hover). <code>@keyframes</code> + <code>animation</code> criam animações que rodam sozinhas.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Transição no hover e animação que se repete</figcaption><pre class="doc-codigo codigo-pre" data-lang="css" tabindex="0"><code>.botao {
+  background-color: #12324a;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.botao:hover {
+  background-color: #2a9d8f;
+  transform: translateY(-2px);
+}
+
+@keyframes pulsar {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.alerta {
+  animation: pulsar 0.8s ease infinite alternate;
+}</code></pre></figure>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> colocar o transition no :hover</p>
+  <p>O transition vai no estado NORMAL. Se estiver só no :hover, a animação acontece ao entrar, mas ao sair o elemento volta de uma vez.</p>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="ferramentas">
+  <h2>14. Descobrir o problema com o F12</h2>
+  
+<ol><li>Clique com o botão direito no elemento → <strong>Inspecionar</strong>.</li><li>No painel <strong>Styles</strong> aparecem todas as regras que valem para ele, a mais forte em cima. Riscado = perdeu. Com triângulo amarelo = propriedade ou valor escrito errado.</li><li>Clique num valor e mude com as setas do teclado: você vê o resultado na hora (e depois copia para o arquivo, porque o F12 não salva).</li><li>Na aba <strong>Computed</strong>, o desenho do modelo de caixa mostra margin, border e padding de verdade.</li></ol>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Sintoma</th><th scope="col">Causa provável</th></tr></thead><tbody><tr><td>Nenhum estilo funciona</td><td>Caminho do link errado, ou <code>&lt;style&gt;</code> dentro do .css</td></tr><tr><td>Uma regra não funciona</td><td>Seletor escrito diferente do HTML (classe com letra trocada), ; faltando, ou perdeu na especificidade</td></tr><tr><td>Imagem de fundo não aparece</td><td>O caminho do url() parte da pasta do CSS: use ../img/foto.jpg</td></tr><tr><td>Página com rolagem para o lado no celular</td><td>Algum elemento com width fixo maior que a tela</td></tr><tr><td>z-index não funciona</td><td>O elemento está com position: static (itens de flex e grid são exceção: aceitam z-index assim mesmo)</td></tr></tbody></table></div>
+
+</section>
+<section class="trilha-secao doc-secao" id="referencia">
+  <h2>Referência de CSS</h2>
+  <p>Todas as palavras de CSS usadas nos códigos do site, com o que é, quando usar, onde e um exemplo. Clique para abrir. Nos exemplos acima, clicar numa palavra também leva até aqui.</p>
+  <div data-referencia="css"><noscript><p>A referência precisa de JavaScript.</p></noscript></div>
+</section>
+      <nav class="passo-nav" aria-label="Navegação entre páginas da documentação"><a class="passo-ant" href="doc-html.html"><span>Anterior</span>Módulo 2: HTML</a><a class="passo-prox" href="doc-js.html"><span>Próximo</span>Módulo 2: JavaScript</a></nav>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+      <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>

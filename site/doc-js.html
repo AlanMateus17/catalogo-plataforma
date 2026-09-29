@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!--
+  DOCUMENTAÇÃO — JavaScript: lógica e interação
+  Página gerada pela ferramenta do professor. Os exemplos ficam coloridos e
+  clicáveis com js/documentacao.js, que usa o dicionário (js/dicionario-dados.js).
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/plataforma.js" defer></script>
+  <script src="js/dicionario-dados.js" defer></script>
+  <script src="js/analisador.js" defer></script>
+  <script src="js/documentacao.js" defer></script>
+  <title>JavaScript: lógica e interação — Catálogo do HTML</title>
+  <meta name="description" content="Documentação de JavaScript para alunos: variáveis, condições, laços, funções, DOM, eventos, fetch e referência completa.">
+</head>
+<body class="pagina-trilha pagina-doc">
+  <a class="pular-para-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <div class="barra-progresso" id="barra-progresso" aria-hidden="true"></div>
+
+  <header class="cabecalho" id="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo" aria-label="Catálogo do HTML, página inicial">
+        <svg class="logo-icone" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+          <rect width="40" height="40" rx="9" fill="currentColor" />
+          <path d="M16 12 L8 20 L16 28" class="logo-traco" />
+          <path d="M24 12 L32 20 L24 28" class="logo-traco" />
+        </svg>
+        <span class="logo-texto">Catálogo<br>do HTML</span>
+      </a>
+
+      <button class="btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="btn-menu-linhas" aria-hidden="true"></span>
+        <span class="visualmente-escondido">Abrir menu</span>
+      </button>
+
+      <nav class="menu" aria-label="Menu principal">
+        <ul class="menu-lista" id="menu-principal">
+          <li><a href="index.html">Catálogo</a></li>
+          <li><a href="passo-a-passo.html">Passo a passo</a></li>
+          <li><a href="documentacao.html" aria-current="page">Documentação</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="codigos.html">Códigos</a></li>
+          <li><a href="verificador.html">Verificador</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn-tema" id="btn-tema" type="button" aria-pressed="false">
+        <span class="btn-tema-icone" aria-hidden="true">◐</span>
+        <span class="btn-tema-texto">Tema escuro</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="heroi heroi-curto" id="inicio">
+      <div class="container heroi-conteudo">
+        <nav aria-label="Você está em" class="migalhas">
+          <ol>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="documentacao.html">Documentação</a></li>
+            <li aria-current="page">JavaScript: lógica e interação</li>
+          </ol>
+        </nav>
+        <p class="heroi-antetitulo">Documentação · Módulo 2 · JavaScript</p>
+        <h1 class="heroi-titulo">JavaScript: lógica e interação</h1>
+        <p class="heroi-texto">A linguagem de programação da web: variáveis, decisões, repetições, funções, listas, o DOM, eventos e o fetch que liga o seu site a uma API. Com um console para rodar código aqui mesmo.</p>
+      </div>
+    </section>
+
+    <div class="container doc-layout">
+      <nav class="doc-indice" aria-label="Nesta página">
+        <details class="doc-indice-caixa" open>
+          <summary>Nesta página</summary>
+          <ol><li><a href="#o-que-e">O que é JavaScript</a></li><li><a href="#sintaxe">Sintaxe básica</a></li><li><a href="#variaveis">Variáveis e tipos</a></li><li><a href="#operadores">Operadores e condições</a></li><li><a href="#lacos">Laços</a></li><li><a href="#funcoes">Funções</a></li><li><a href="#listas-objetos">Listas e objetos</a></li><li><a href="#dom">DOM: mexer na página</a></li><li><a href="#eventos">Eventos</a></li><li><a href="#dados">Guardar dados e tempo</a></li><li><a href="#async">Assíncrono e fetch</a></li><li><a href="#erros">Erros e depuração</a></li><li><a href="#referencia">Referência</a></li></ol>
+        </details>
+      </nav>
+      <div class="trilha-corpo doc-corpo">
+<section class="trilha-secao doc-secao" id="o-que-e">
+  <h2>1. O que é JavaScript e onde ele roda</h2>
+  
+<p>JavaScript é uma <strong>linguagem de programação</strong>: ao contrário do HTML e do CSS, ela guarda valores, faz contas, toma decisões, repete tarefas e reage ao que a pessoa faz. No navegador, ela lê e muda o HTML e o CSS da página enquanto a página está aberta.</p><p>O mesmo JavaScript também roda fora do navegador, no <strong>Node.js</strong> (servidores, ferramentas), e é a base do <strong>TypeScript</strong> e do <strong>Next.js</strong>, que você vai ver nos próximos módulos. Tudo o que você aprender aqui continua valendo lá.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Ligar o JavaScript ao HTML (no head)</figcaption><pre class="doc-codigo codigo-pre" data-lang="html" tabindex="0"><code>&lt;script src=&quot;js/script.js&quot; defer&gt;&lt;/script&gt;</code></pre></figure>
+<p>O <code>defer</code> faz o script esperar o HTML inteiro ser lido. Sem ele, o JavaScript procura elementos que ainda não existem.</p>
+<h3>O Console: onde o JavaScript fala com você</h3>
+<p>Aperte F12 e abra a aba <strong>Console</strong>. Ali aparecem os erros (em vermelho, com o arquivo e a linha) e tudo o que você mandar mostrar com console.log. É a ferramenta número 1 para entender o que o código está fazendo.</p>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: o seu primeiro programa</p><p>Clique em Rodar. Depois mude o texto e rode de novo.</p><div data-brinquedo="console"><textarea hidden>console.log(&quot;Olá, turma!&quot;);
+console.log(2 + 3);
+console.log(&quot;2&quot; + &quot;3&quot;);</textarea><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<div class="confira">
+  <p><strong>Confira:</strong> Por que <code>2 + 3</code> deu 5 e <code>"2" + "3"</code> deu 23?</p>
+  <details><summary>Ver a resposta</summary><p>Com números, + soma. Com textos (entre aspas), + junta. "2" é um texto que parece número.</p></details>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="sintaxe">
+  <h2>2. Sintaxe básica: como se escreve</h2>
+  
+<ul><li>O código é uma sequência de <strong>instruções</strong>, lidas de cima para baixo. Cada uma termina com <strong>;</strong>.</li><li><strong>Maiúsculas e minúsculas fazem diferença</strong>: querySelector funciona, queryselector dá erro.</li><li>Textos (strings) ficam <strong>entre aspas</strong>. Sem aspas, o JavaScript acha que é um nome.</li><li>Números <strong>sem aspas</strong>, com ponto no decimal: 1.75.</li><li><strong>{ }</strong> agrupam instruções (o corpo de um if, de uma função). <strong>( )</strong> chamam funções e guardam condições. <strong>[ ]</strong> fazem listas.</li><li>Comentários: // até o fim da linha, ou /* várias linhas */.</li><li>Nomes criados por você usam <strong>camelCase</strong>: botaoMenu, calcularImc. Sem acento, sem espaço, sem começar com número.</li></ul>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Instruções, textos, números e comentários</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>// Comentário de uma linha
+/* Comentário
+   de várias linhas */
+const nomeDoAluno = &quot;Ana&quot;;
+const nota = 8.5;
+console.log(nomeDoAluno, nota);</code></pre></figure>
+
+</section>
+<section class="trilha-secao doc-secao" id="variaveis">
+  <h2>3. Variáveis e tipos de dados</h2>
+  
+<p>Variável é uma caixa com nome que guarda um valor. Você cria com <strong>const</strong> (o nome não pode receber outro valor) ou <strong>let</strong> (o valor vai mudar). Regra prática: comece sempre com const; troque para let só se precisar dar outro valor depois.</p><p>Atenção: const impede trocar o valor inteiro (<code>notas = []</code> dá erro), mas deixa mexer no que está <em>dentro</em> de uma lista ou objeto (<code>notas.push(9)</code> funciona).</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Os tipos que você mais vai usar</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>const escola = &quot;EMTI Barbacena&quot;;  // texto (string)
+let pontos = 0;                    // número (number)
+const aprovado = true;             // verdadeiro ou falso (boolean)
+const notas = [7, 8.5, 10];        // lista (array)
+const aluno = {                    // objeto: dados com nome
+  nome: &quot;Ana&quot;,
+  idade: 16,
+};
+pontos = pontos + 10;              // let pode mudar
+console.log(aluno.nome, notas[0], pontos);</code></pre></figure>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Tipo</th><th scope="col">Exemplo</th><th scope="col">Para quê</th></tr></thead><tbody><tr><td>string (texto)</td><td><code>&quot;Olá&quot;</code></td><td>nomes, mensagens, valores de campos</td></tr><tr><td>number (número)</td><td><code>42</code>, <code>3.14</code></td><td>contas, contadores</td></tr><tr><td>boolean</td><td><code>true</code> / <code>false</code></td><td>sim ou não: aberto, feito, aprovado</td></tr><tr><td>array (lista)</td><td><code>[&quot;a&quot;, &quot;b&quot;]</code></td><td>vários itens em ordem (o primeiro é o [0])</td></tr><tr><td>object (objeto)</td><td><code>{ nome: &quot;Ana&quot; }</code></td><td>vários dados de uma mesma coisa</td></tr><tr><td>null / undefined</td><td><code>null</code></td><td>"nada": não achou, ainda não tem valor</td></tr></tbody></table></div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> somar o valor de um campo</p>
+  <p>O que vem de um campo de formulário (.value) é SEMPRE texto. "2" + "3" dá "23". Converta antes: <code>Number(campo.value)</code>.</p>
+</div>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: variáveis e tipos</p><div data-brinquedo="console"><textarea hidden>const nome = &quot;Ana&quot;;
+let idade = 16;
+idade = idade + 1;
+const valorDoCampo = &quot;10&quot;;
+console.log(nome + &quot; tem &quot; + idade + &quot; anos&quot;);
+console.log(valorDoCampo + 5);
+console.log(Number(valorDoCampo) + 5);
+console.log(typeof nome, typeof idade);</textarea><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+
+</section>
+<section class="trilha-secao doc-secao" id="operadores">
+  <h2>4. Operadores e condições (if)</h2>
+  
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Operador</th><th scope="col">Faz</th><th scope="col">Exemplo → resultado</th></tr></thead><tbody><tr><td><code>+ - * /</code></td><td>contas</td><td><code>10 / 4</code> → 2.5</td></tr><tr><td><code>%</code></td><td>resto da divisão</td><td><code>7 % 2</code> → 1 (ímpar)</td></tr><tr><td><code>===</code></td><td>é igual? (valor e tipo)</td><td><code>5 === &quot;5&quot;</code> → false</td></tr><tr><td><code>!==</code></td><td>é diferente?</td><td><code>3 !== 4</code> → true</td></tr><tr><td><code>&gt; &lt; &gt;= &lt;=</code></td><td>maior, menor...</td><td><code>nota &gt;= 6</code></td></tr><tr><td><code>&amp;&amp;</code></td><td>E: as duas verdadeiras</td><td><code>idade &gt;= 16 &amp;&amp; temTitulo</code></td></tr><tr><td><code>||</code></td><td>OU: pelo menos uma</td><td><code>dia === &quot;sab&quot; || dia === &quot;dom&quot;</code></td></tr><tr><td><code>!</code></td><td>NÃO: inverte</td><td><code>!aberto</code></td></tr></tbody></table></div>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Decidir com if, else if e else</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>const nota = 7.5;
+
+if (nota &gt;= 6) {
+  console.log(&quot;Aprovado&quot;);
+} else if (nota &gt;= 4) {
+  console.log(&quot;Recuperação&quot;);
+} else {
+  console.log(&quot;Reprovado&quot;);
+}
+
+// ternário: um if curto que devolve um valor
+const situacao = nota &gt;= 6 ? &quot;aprovado&quot; : &quot;reprovado&quot;;</code></pre></figure>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> usar = no lugar de ===</p>
+  <p><code>if (nota = 10)</code> não compara: tenta GUARDAR 10 na nota. Se nota for const, dá erro; se for let, a nota vira 10 e o if passa sempre. Para comparar, sempre <code>===</code>.</p>
+</div>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: teste condições</p><p>Mude a nota e rode de novo.</p><div data-brinquedo="console"><textarea hidden>const nota = 5;
+if (nota &gt;= 6) {
+  console.log(&quot;Aprovado&quot;);
+} else if (nota &gt;= 4) {
+  console.log(&quot;Recuperação&quot;);
+} else {
+  console.log(&quot;Reprovado&quot;);
+}</textarea><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+
+</section>
+<section class="trilha-secao doc-secao" id="lacos">
+  <h2>5. Laços: repetir</h2>
+  
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Três jeitos de repetir</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>// for clássico: início; condição; passo
+for (let i = 1; i &lt;= 5; i++) {
+  console.log(&quot;Volta número &quot; + i);
+}
+
+// for...of: um item de cada vez
+const frutas = [&quot;maçã&quot;, &quot;banana&quot;, &quot;uva&quot;];
+for (const fruta of frutas) {
+  console.log(fruta);
+}
+
+// forEach: o mesmo, com uma função
+frutas.forEach(function (fruta, posicao) {
+  console.log(posicao, fruta);
+});</code></pre></figure>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: tabuada</p><p>Troque o 7 por outro número.</p><div data-brinquedo="console"><textarea hidden>const numero = 7;
+for (let i = 1; i &lt;= 10; i++) {
+  console.log(numero + &quot; x &quot; + i + &quot; = &quot; + numero * i);
+}</textarea><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> laço que nunca termina</p>
+  <p>Se a condição nunca ficar falsa (<code>for (let i = 1; i > 0; i++)</code>), a página trava. Feche a aba e confira a condição.</p>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="funcoes">
+  <h2>6. Funções: dar nome a um bloco de código</h2>
+  
+<p>Uma função é um bloco de código com nome, que só roda quando é <strong>chamado</strong>. Ela pode receber valores (<strong>parâmetros</strong>) e devolver um resultado (<strong>return</strong>). Use funções para não repetir código e para dar nome ao que o código faz.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Criar, chamar e devolver</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>function calcularMedia(nota1, nota2) {
+  const media = (nota1 + nota2) / 2;
+  return media;
+}
+
+const resultado = calcularMedia(7, 9);
+console.log(resultado); // 8
+
+// Arrow function: o mesmo, escrito curto
+const dobro = (n) =&gt; n * 2;
+console.log(dobro(21)); // 42</code></pre></figure>
+<aside class="doc-nota"><p class="doc-nota-titulo">Com e sem parênteses</p><p><code>calcularMedia(7, 9)</code> com parênteses <strong>roda</strong> a função agora. <code>calcularMedia</code> sem parênteses é só o nome dela: é assim que se entrega uma função para o addEventListener rodar depois, no clique.</p></aside>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: crie a sua função</p><div data-brinquedo="console"><textarea hidden>function saudar(nome) {
+  return &quot;Olá, &quot; + nome + &quot;!&quot;;
+}
+console.log(saudar(&quot;Ana&quot;));
+console.log(saudar(&quot;Bruno&quot;));</textarea><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+
+</section>
+<section class="trilha-secao doc-secao" id="listas-objetos">
+  <h2>7. Listas (arrays) e objetos</h2>
+  
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Uma lista de objetos: o formato de quase todo dado de sistema</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>const tarefas = [
+  { texto: &quot;Estudar HTML&quot;, feita: true },
+  { texto: &quot;Fazer o CSS&quot;, feita: false },
+];
+
+tarefas.push({ texto: &quot;Publicar no GitHub&quot;, feita: false }); // acrescenta no fim
+console.log(tarefas.length);                                // 3
+
+const pendentes = tarefas.filter((t) =&gt; !t.feita);          // só as não feitas
+const nomes = tarefas.map((t) =&gt; t.texto);                  // só os textos
+console.log(pendentes.length, nomes.join(&quot;, &quot;));</code></pre></figure>
+<p>Esse formato (lista de objetos) é o mesmo que as APIs devolvem em JSON. Quando você buscar dados de um servidor, eles vão chegar assim.</p>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Método</th><th scope="col">Faz</th><th scope="col">Muda a lista original?</th></tr></thead><tbody><tr><td><code>push()</code></td><td>acrescenta no fim</td><td>sim</td></tr><tr><td><code>splice(i, 1)</code></td><td>remove 1 item na posição i</td><td>sim</td></tr><tr><td><code>filter()</code></td><td>nova lista só com os que passam no teste</td><td>não</td></tr><tr><td><code>map()</code></td><td>nova lista transformando cada item</td><td>não</td></tr><tr><td><code>forEach()</code></td><td>roda algo para cada item</td><td>não</td></tr><tr><td><code>includes()</code></td><td>tem este item?</td><td>não</td></tr><tr><td><code>join()</code></td><td>junta tudo num texto</td><td>não</td></tr></tbody></table></div>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: listas</p><div data-brinquedo="console"><textarea hidden>const notas = [7, 4.5, 9, 6, 3];
+const aprovadas = notas.filter((n) =&gt; n &gt;= 6);
+const soma = notas.reduce((total, n) =&gt; total + n, 0);
+console.log(&quot;Aprovadas:&quot;, aprovadas);
+console.log(&quot;Média:&quot;, (soma / notas.length).toFixed(1));</textarea><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+
+</section>
+<section class="trilha-secao doc-secao" id="dom">
+  <h2>8. DOM: achar e mudar elementos da página</h2>
+  
+<p>DOM é a árvore de elementos que o navegador montou a partir do HTML. O JavaScript mexe na página em três passos: <strong>achar</strong> o elemento, <strong>ler ou mudar</strong> alguma coisa, e (às vezes) <strong>criar</strong> elementos novos.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Achar, mudar e criar</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>// 1. Achar (seletor igual ao do CSS)
+const titulo = document.querySelector(&quot;h1&quot;);
+const cards = document.querySelectorAll(&quot;.card&quot;);
+const menu = document.getElementById(&quot;menu&quot;);
+
+// 2. Mudar
+titulo.textContent = &quot;Novo título&quot;;
+menu.classList.add(&quot;aberto&quot;);         // o CSS de .aberto faz o resto
+menu.setAttribute(&quot;aria-expanded&quot;, &quot;true&quot;);
+menu.hidden = false;
+
+// 3. Criar e colocar na página
+const item = document.createElement(&quot;li&quot;);
+item.textContent = &quot;Item novo&quot;;
+document.querySelector(&quot;ul&quot;).appendChild(item);</code></pre></figure>
+<aside class="doc-nota"><p class="doc-nota-titulo">Divisão de tarefas</p><p>Prefira mudar a aparência <strong>trocando classes</strong> (classList) e deixar as cores e tamanhos no CSS. Assim, o JavaScript cuida do comportamento e o CSS da aparência, cada um no seu arquivo.</p></aside>
+<div class="erro-comum">
+  <p class="erro-comum-titulo"><strong>Erro comum:</strong> Cannot read properties of null</p>
+  <p>O querySelector não achou o elemento e devolveu null. Confira: o seletor está igual ao HTML (ponto para classe, # para id)? O script tem defer?</p>
+</div>
+
+</section>
+<section class="trilha-secao doc-secao" id="eventos">
+  <h2>9. Eventos: reagir ao usuário</h2>
+  
+<p>Evento é algo que acontece na página: um clique, uma tecla, um envio de formulário, a rolagem. Você liga uma função a um evento com <strong>addEventListener</strong>: "quando acontecer isto, rode aquilo".</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Clique e envio de formulário</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>const botao = document.querySelector(&quot;#curtir&quot;);
+let curtidas = 0;
+
+botao.addEventListener(&quot;click&quot;, function () {
+  curtidas++;
+  botao.textContent = &quot;Curtir (&quot; + curtidas + &quot;)&quot;;
+});
+
+const formulario = document.querySelector(&quot;form&quot;);
+formulario.addEventListener(&quot;submit&quot;, function (evento) {
+  evento.preventDefault();          // não recarrega a página
+  const dados = new FormData(formulario);
+  console.log(&quot;Nome:&quot;, dados.get(&quot;nome&quot;));
+});</code></pre></figure>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Evento</th><th scope="col">Quando acontece</th></tr></thead><tbody><tr><td><code>&quot;click&quot;</code></td><td>clique, toque, ou Enter/Espaço num botão</td></tr><tr><td><code>&quot;input&quot;</code></td><td>a cada letra digitada</td></tr><tr><td><code>&quot;change&quot;</code></td><td>terminou de mudar (select, checkbox)</td></tr><tr><td><code>&quot;submit&quot;</code></td><td>envio do formulário (no form, não no botão)</td></tr><tr><td><code>&quot;keydown&quot;</code></td><td>tecla apertada (evento.key diz qual)</td></tr><tr><td><code>&quot;scroll&quot;</code></td><td>a página rolou</td></tr></tbody></table></div>
+
+</section>
+<section class="trilha-secao doc-secao" id="dados">
+  <h2>10. Guardar dados (localStorage) e controlar o tempo</h2>
+  
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">localStorage, JSON e tempo</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>// Guardar (só texto: listas e objetos passam pelo JSON)
+const tarefas = [{ texto: &quot;Estudar&quot;, feita: false }];
+try {
+  localStorage.setItem(&quot;tarefas&quot;, JSON.stringify(tarefas));
+  const salvas = JSON.parse(localStorage.getItem(&quot;tarefas&quot;)) || [];
+  console.log(salvas);
+} catch (erro) {
+  console.log(&quot;O navegador bloqueou o armazenamento&quot;);
+}
+
+// Tempo
+setTimeout(function () { console.log(&quot;3 segundos depois&quot;); }, 3000);
+const relogio = setInterval(function () { console.log(new Date().toLocaleTimeString(&quot;pt-BR&quot;)); }, 1000);
+setTimeout(function () { clearInterval(relogio); }, 5000);  // para o relógio depois de 5 segundos</code></pre></figure>
+<p>O localStorage guarda no navegador de cada pessoa: não é um banco de dados. Se o aluno abrir o site em outro computador, os dados não estão lá. Para guardar de verdade, compartilhado entre pessoas, é preciso um servidor com banco de dados: é o assunto dos módulos 9 (API) e 10 (PostgreSQL).</p>
+
+</section>
+<section class="trilha-secao doc-secao" id="async">
+  <h2>11. Código assíncrono e fetch: a ponte para as APIs</h2>
+  
+<p>Algumas tarefas demoram: buscar dados na internet, ler um arquivo. O JavaScript não trava a página esperando: ele recebe uma <strong>Promise</strong> (promessa de um valor que vai chegar). Com <strong>async/await</strong>, você escreve como se fosse em ordem, e a página continua respondendo.</p>
+<figure class="doc-exemplo"><figcaption class="doc-ex-titulo">Buscar dados de uma API</figcaption><pre class="doc-codigo codigo-pre" data-lang="js" tabindex="0"><code>async function carregarAlunos() {
+  try {
+    const resposta = await fetch(&quot;https://api.exemplo.com/alunos&quot;);
+    if (!resposta.ok) {
+      throw new Error(&quot;O servidor respondeu &quot; + resposta.status);
+    }
+    const alunos = await resposta.json();   // JSON → lista de objetos
+    alunos.forEach(function (aluno) {
+      console.log(aluno.nome);
+    });
+  } catch (erro) {
+    console.log(&quot;Não deu para carregar:&quot;, erro.message);
+  }
+}
+
+carregarAlunos();</code></pre></figure>
+<aside class="doc-nota"><p class="doc-nota-titulo">Onde isso leva</p><p>fetch é como o front-end conversa com o back-end. No módulo 9 você vai criar, em C# com ASP.NET Core, a API que responde a esse fetch, e no módulo 10 guardar os dados no PostgreSQL.</p></aside>
+
+</section>
+<section class="trilha-secao doc-secao" id="erros">
+  <h2>12. Erros: ler, entender e consertar</h2>
+  
+<p>Erro não é fracasso: é o computador dizendo exatamente o que não entendeu. Todo erro no Console tem <strong>tipo</strong>, <strong>mensagem</strong> e <strong>arquivo:linha</strong>. Leia os três antes de mexer no código.</p>
+<div class="tabela-rolagem"><table class="tabela doc-tabela"><thead><tr><th scope="col">Mensagem</th><th scope="col">O que quer dizer</th><th scope="col">O que conferir</th></tr></thead><tbody><tr><td><code>Uncaught SyntaxError: Unexpected token</code></td><td>Erro de escrita: sobrou ou faltou um sinal</td><td>Parênteses, chaves e aspas fechados? Vírgula a mais?</td></tr><tr><td><code>ReferenceError: x is not defined</code></td><td>Usou um nome que não existe</td><td>Escreveu igual (maiúsculas)? Criou com const/let?</td></tr><tr><td><code>TypeError: Cannot read properties of null</code></td><td>Tentou usar um elemento que não foi achado</td><td>O seletor bate com o HTML? O script tem defer?</td></tr><tr><td><code>TypeError: x is not a function</code></td><td>Chamou com () algo que não é função</td><td>Nome do método certo? (addEventlistener ≠ addEventListener)</td></tr><tr><td><code>TypeError: Assignment to constant variable</code></td><td>Deu outro valor a uma const</td><td>Troque para let</td></tr></tbody></table></div>
+<div class="brinquedo"><p class="brinquedo-titulo">Experimente: provoque e leia erros</p><p>Rode, leia o erro e a dica. Depois conserte o código.</p><div data-brinquedo="console"><textarea hidden>const nome = &quot;Ana&quot;;
+console.log(Nome);</textarea><noscript><p>Este experimento precisa de JavaScript.</p></noscript></div></div>
+<ol><li>Leia o erro e clique no arquivo:linha: o navegador mostra a linha.</li><li>Coloque console.log antes da linha com problema para ver os valores.</li><li>Mude uma coisa de cada vez e teste.</li><li>Ainda travado? Explique o problema em voz alta (ou para um colega). Muitas vezes a resposta aparece no meio da explicação.</li></ol>
+
+</section>
+<section class="trilha-secao doc-secao" id="referencia">
+  <h2>Referência de JavaScript</h2>
+  <p>Todas as palavras de JavaScript usadas nos códigos do site, com o que é, quando usar, onde e um exemplo. Clique para abrir. Nos exemplos acima, clicar numa palavra também leva até aqui.</p>
+  <div data-referencia="js"><noscript><p>A referência precisa de JavaScript.</p></noscript></div>
+</section>
+      <nav class="passo-nav" aria-label="Navegação entre páginas da documentação"><a class="passo-ant" href="doc-css.html"><span>Anterior</span>Módulo 2: CSS</a><a class="passo-prox" href="passo-a-passo.html"><span>Próximo</span>Praticar: Passo a passo</a></nav>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <a href="#inicio" class="voltar-topo" id="voltar-topo" aria-label="Voltar ao topo">↑</a>
+
+  <footer class="rodape">
+    <p class="rodape-direitos"><small>&copy; <span id="ano-atual">2026</span> Prof. Alan Mateus. <a href="passo-a-passo.html">Passo a passo</a>, <a href="documentacao.html">Documentação</a>, <a href="dicionario.html">Dicionário</a>, <a href="ia.html">Usar IA do jeito certo</a>, <a href="codigos.html">Códigos</a> e <a href="verificador.html">Verificador</a>.</small></p>
+      <p class="rodape-legal"><small><a href="planos.html">Planos</a> · <a href="compra-segura.html">Compra segura</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Privacidade</a></small></p>
+  </footer>
+</body>
+</html>
