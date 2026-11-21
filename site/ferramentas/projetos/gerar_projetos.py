@@ -15,18 +15,18 @@ SAIDA = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 # (n, titulo, inspirado, etapa, modulos, tecnologias, duracao, formato, disponivel, libera_apos)
 MAPA = [
-    (1, "Caixa Rápido", "AM Kaixara (PDV)", 1, "1", "JavaScript puro", "2 a 3 semanas", "Individual", True, None),
+    (1, "Caixa Rápido", "AM Gestão · Caixa (PDV)", 1, "1", "JavaScript puro", "2 a 3 semanas", "Individual", True, None),
     (2, "Linha do Tempo", "AM Vynla (histórias e linha do tempo)", 2, "2", "HTML, CSS, GitHub Pages", "2 a 3 semanas", "Individual", True, None),
     (3, "Portfólio pessoal", "o seu site pessoal", 2, "2 e 3", "HTML, CSS, JavaScript", "3 a 4 semanas", "Individual", True, None),
     (4, "Quadro Kanban", "AM Taskoro (gestão de projetos)", 2, "2", "JavaScript, DOM, localStorage", "3 a 4 semanas", "Individual", True, None),
-    (5, "Finanças em dupla", "AM Rendara (finanças e rebalanceamento)", 3, "3", "JavaScript, CSV, Git em equipe", "4 semanas", "Dupla", False, "o módulo 3 (Git em equipe)"),
+    (5, "Finanças em dupla", "AM Gestão · Financeiro (finanças e rebalanceamento)", 3, "3", "JavaScript, CSV, Git em equipe", "4 semanas", "Dupla", False, "o módulo 3 (Git em equipe)"),
     (6, "Agenda com API", "AM Horaria (agendamentos)", 3, "4", "fetch, HTTP, API falsa (json-server)", "3 a 4 semanas", "Individual", False, "o módulo 4 (Como a web funciona)"),
-    (7, "Loja virtual", "AM Vendra (e-commerce)", 4, "5 e 6", "TypeScript, React, Next.js, Tailwind, Zustand", "5 a 6 semanas", "Individual", False, "os módulos 5 e 6 (TypeScript, React e Next.js)"),
+    (7, "Loja virtual", "AM Gestão · Loja online (e-commerce)", 4, "5 e 6", "TypeScript, React, Next.js, Tailwind, Zustand", "5 a 6 semanas", "Individual", False, "os módulos 5 e 6 (TypeScript, React e Next.js)"),
     (8, "Ordens de serviço", "AM Consertta (assistência técnica)", 5, "7 e 8", "C#, POO, LINQ, JSON", "4 a 5 semanas", "Individual", False, "os módulos 7 e 8 (C# e POO, SOLID)"),
-    (9, "Banco de dados do PDV", "AM Kaixara (PDV)", 6, "10", "SQL, PostgreSQL, Docker Compose", "4 semanas", "Individual", False, "o módulo 10 (SQL e PostgreSQL)"),
+    (9, "Banco de dados do PDV", "AM Gestão · Caixa (PDV)", 6, "10", "SQL, PostgreSQL, Docker Compose", "4 semanas", "Individual", False, "o módulo 10 (SQL e PostgreSQL)"),
     (10, "API da clínica veterinária", "AM Petara (veterinária)", 7, "9, 10 e 12", "ASP.NET Core, EF Core, JWT, PostgreSQL", "6 a 8 semanas", "Individual", False, "os módulos 9, 10 e 12 (API, banco e segurança)"),
     (11, "Reservas do condomínio com TDD", "AM Predara (condomínios)", 8, "14", "xUnit, testes de integração, Playwright", "4 a 5 semanas", "Individual", False, "o módulo 14 (Testes automatizados)"),
-    (12, "Sistema completo (1 de 3)", "AM Kaixara, AM Rotara ou AM Mentor", 9, "todos", "A stack inteira, Docker, GitHub Actions, deploy", "8 a 12 semanas", "Individual ou dupla", False, "o módulo 17 (Projeto final)"),
+    (12, "Sistema completo (1 de 3)", "AM Gestão · Caixa, AM Gestão · Pedidos ou AM Mentor", 9, "todos", "A stack inteira, Docker, GitHub Actions, deploy", "8 a 12 semanas", "Individual ou dupla", False, "o módulo 17 (Projeto final)"),
 ]
 RESUMOS = {
     1: "O caixa de uma padaria: soma a venda, aplica o desconto certo e diz quais cédulas e moedas devolver de troco.",
